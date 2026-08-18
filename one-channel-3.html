@@ -1,0 +1,1921 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MILWAUKEE® ONE-CHANNEL™</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --red:#DB011C; --red-dk:#A80016; --red-lt:#FDEFF1; --red-md:#F7CDD3;
+  --ink:#0A0A0A; --char:#141416; --grey:#58585A; --grey2:#8A8A8D;
+  --line:#DCDCDC; --line2:#EEEEEE; --bg:#FFFFFF; --bg2:#F4F4F4;
+  --amber:#B87400; --amber-bg:#FFF6E0; --ok:#1E7F45; --ok-bg:#E8F5ED;
+  --disp:'Barlow Condensed',sans-serif; --body:'Inter',sans-serif; --mono:'JetBrains Mono',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg2);color:var(--ink);font-family:var(--body);font-size:14px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.topbar{position:sticky;top:0;z-index:50;height:52px;background:var(--red);display:flex;align-items:center;gap:14px;padding:0 16px;color:#fff}
+.wordmark{font-family:var(--disp);font-weight:700;font-size:21px;font-style:italic;white-space:nowrap}
+.slash{width:1px;height:24px;background:rgba(255,255,255,.35);flex-shrink:0}
+.appname{font-family:var(--disp);font-weight:600;font-size:14px;letter-spacing:2.4px;color:rgba(255,255,255,.88);white-space:nowrap}
+.topbar .spacer{flex:1}
+.who{font-family:var(--mono);font-size:10px;color:rgba(255,255,255,.8);text-align:right;line-height:1.35;white-space:nowrap}
+.pill{font-family:var(--mono);font-size:10px;letter-spacing:.9px;text-transform:uppercase;padding:4px 8px;border:1px solid rgba(255,255,255,.45);color:#fff;white-space:nowrap;background:rgba(0,0,0,.12)}
+.pill.ok{border-color:#8BE8AF;color:#B6F5CE}.pill.warn{border-color:#FFD98A;color:#FFE7B0}
+.pill.bad{border-color:#fff;background:#fff;color:var(--red)}
+.pill.link{cursor:pointer}.pill.link:hover{background:rgba(0,0,0,.3)}
+.shell{display:flex;min-height:calc(100vh - 52px)}
+.rail{width:78px;flex-shrink:0;background:var(--char);display:flex;flex-direction:column;align-items:center;padding:6px 0;position:sticky;top:52px;height:calc(100vh - 52px);overflow-y:auto}
+.rail nav{display:flex;flex-direction:column;gap:1px;width:100%}
+.rbtn{background:none;border:0;color:#8A8A8D;padding:10px 0;cursor:pointer;font-family:var(--disp);font-weight:600;font-size:11px;letter-spacing:1.2px;writing-mode:vertical-rl;height:92px;display:flex;align-items:center;justify-content:center;transition:.15s;width:100%;position:relative}
+.rbtn:hover{color:#fff;background:#232326}
+.rbtn.on{color:#fff;background:var(--red)}.rbtn.on .n{color:#fff}
+.rbtn .n{font-family:var(--mono);font-size:9px;color:var(--red);margin-bottom:6px}
+.rbadge{position:absolute;top:8px;right:9px;min-width:16px;height:16px;background:var(--red);color:#fff;border-radius:8px;font-family:var(--mono);font-size:9px;display:grid;place-items:center;writing-mode:horizontal-tb;padding:0 4px;border:1.5px solid var(--char)}
+.rbtn.on .rbadge{background:#fff;color:var(--red);border-color:var(--red)}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,.kbdoc:focus-visible,.inbox-item:focus-visible{outline:3px solid var(--red);outline-offset:2px}
+main{flex:1;min-width:0;padding:0 0 70px;max-width:1280px}
+.pad{padding:0 26px}
+.modhead{background:var(--ink);color:#fff;padding:13px 26px;display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:18px;flex-wrap:wrap}
+.modnum{font-family:var(--mono);font-size:10px;letter-spacing:2.2px;color:var(--red);display:block;margin-bottom:1px}
+.modhead h1{font-family:var(--disp);font-weight:700;font-size:29px;line-height:1;text-transform:uppercase;color:#fff}
+.modmeta{font-family:var(--mono);font-size:10.5px;color:#9A9A9E;text-align:right;line-height:1.5}
+.modmeta b{color:#fff;font-weight:500}
+h2{font-family:var(--disp);font-weight:700;font-size:19px;text-transform:uppercase;letter-spacing:.3px}
+h3{font-family:var(--disp);font-weight:600;font-size:13px;letter-spacing:1.3px;text-transform:uppercase;color:var(--grey)}
+.view{display:none}.view.on{display:block}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.panel{background:var(--bg);border:1px solid var(--line);padding:17px}
+.panel.hd{border-top:3px solid var(--red)}
+.panel.dark{background:var(--ink);border-color:var(--ink);color:#fff}
+.panel.dark h2,.panel.dark h3{color:#fff}
+.grid{display:grid;gap:12px}.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}.g5{grid-template-columns:repeat(5,1fr)}
+.stack{margin-top:18px}
+.kpi{background:var(--bg);border:1px solid var(--line);border-left:4px solid var(--red);padding:13px 15px}
+.kpi.solid{background:var(--red);border-color:var(--red);color:#fff}.kpi.solid .l{color:rgba(255,255,255,.85)}
+.kpi.dark{background:var(--ink);border-color:var(--ink);color:#fff}.kpi.dark .l{color:#8A8A8D}
+.kpi .v{font-family:var(--disp);font-weight:700;font-size:33px;line-height:1}
+.kpi .v.red{color:var(--red)}.kpi .v.ok{color:var(--ok)}.kpi .v.am{color:var(--amber)}
+.kpi .l{font-family:var(--mono);font-size:9px;letter-spacing:1.1px;color:var(--grey2);text-transform:uppercase;margin-top:6px}
+.kpi .sub{font-family:var(--mono);font-size:9.5px;color:var(--grey2);margin-top:3px}
+.tag{display:inline-block;font-family:var(--mono);font-size:9px;letter-spacing:1px;text-transform:uppercase;padding:3px 7px;border:1px solid var(--line);color:var(--grey)}
+.tag.am{border-color:#E5C36A;background:var(--amber-bg);color:var(--amber)}
+.tag.ok{border-color:#9AD1B0;background:var(--ok-bg);color:var(--ok)}
+.tag.red{border-color:var(--red);background:var(--red);color:#fff}
+.tag.rout{border-color:var(--red);background:var(--red-lt);color:var(--red)}
+.mono{font-family:var(--mono);font-size:11.5px}
+button.act{font-family:var(--disp);font-weight:600;font-size:13px;letter-spacing:1.5px;text-transform:uppercase;background:var(--red);color:#fff;border:0;padding:11px 19px;cursor:pointer;transition:.15s}
+button.act:hover{background:var(--red-dk)}button.act:disabled{background:#E9BCC1;cursor:not-allowed}
+button.act.dark{background:var(--ink)}button.act.dark:hover{background:#333}
+button.ghost{font-family:var(--disp);font-weight:600;font-size:11.5px;letter-spacing:1.2px;text-transform:uppercase;background:var(--bg);color:var(--ink);border:1px solid var(--line);padding:8px 13px;cursor:pointer}
+button.ghost:hover{border-color:var(--red);color:var(--red)}
+button.ghost.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+button.mini{background:none;border:1px solid var(--line);color:var(--grey2);font-family:var(--mono);font-size:10px;padding:3px 6px;cursor:pointer}
+button.mini:hover{color:var(--red);border-color:var(--red)}
+textarea,input,select{font-family:var(--mono);font-size:12.5px;background:var(--bg);color:var(--ink);border:1px solid var(--line);padding:10px;width:100%;resize:vertical}
+textarea:focus,input:focus,select:focus{outline:none;border-color:var(--red)}
+input.qty{width:62px;padding:5px 6px;text-align:right}
+.note{font-size:11.5px;color:var(--grey2);margin-top:8px}
+.err{color:var(--red);font-size:12px;margin-top:8px;font-weight:500}
+.divider{height:1px;background:var(--line);margin:13px 0}
+.thread{background:var(--bg2);border:1px solid var(--line);padding:12px;max-height:400px;overflow-y:auto}
+.bub{background:var(--bg);border:1px solid var(--line);border-left:3px solid var(--ink);padding:10px 12px;font-size:13px;margin-bottom:7px}
+.bub.me{border-left-color:var(--red);background:var(--red-lt)}
+.bub .lbl2{font-family:var(--mono);font-size:9px;letter-spacing:1px;color:var(--grey2);text-transform:uppercase;margin-bottom:4px}
+.cites{margin-top:8px;padding-top:7px;border-top:1px solid var(--line2);font-family:var(--mono);font-size:9.5px;color:var(--grey2)}
+.cites b{color:var(--red);font-weight:500}
+table{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:11.5px}
+th{text-align:left;font-size:9px;letter-spacing:1.1px;color:#fff;text-transform:uppercase;padding:8px 9px;background:var(--ink);font-weight:500}
+td{padding:8px 9px;border-bottom:1px solid var(--line2)}
+tr.clickable{cursor:pointer}tr.clickable:hover td{background:var(--red-lt)}
+tr.sel td{background:var(--red-lt);box-shadow:inset 3px 0 0 var(--red)}
+tr.row-in{animation:slide .28s ease backwards}
+@keyframes slide{from{opacity:0;transform:translateX(-7px)}to{opacity:1;transform:none}}
+.flag{color:var(--amber)}
+.legend{display:flex;gap:16px;flex-wrap:wrap;font-family:var(--mono);font-size:10px;color:var(--grey2)}
+.legend i{display:inline-block;width:16px;height:2px;vertical-align:middle;margin-right:5px}
+.bar{height:6px;background:#E8E8E8;overflow:hidden}
+.bar span{display:block;height:100%;background:var(--red);transition:width .3s}
+.rowline{display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mono);font-size:11px;padding:6px 0;border-bottom:1px solid var(--line2);gap:11px}
+.rowline b{font-weight:500;text-align:right}
+.big{font-family:var(--disp);font-weight:700;font-size:52px;line-height:1;color:var(--red)}
+.banner{background:var(--amber-bg);border:1px solid #E5C36A;border-left:4px solid var(--amber);padding:9px 13px;font-size:11.5px;color:#6B4A00;margin-bottom:16px}
+.banner.info{background:#EEF4FB;border-color:#B9D3EE;border-left-color:#2C6DAF;color:#1E4670}
+.spin{display:inline-block;width:10px;height:10px;border:2px solid rgba(255,255,255,.35);border-top-color:#fff;border-radius:50%;animation:sp .7s linear infinite;vertical-align:-1px;margin-right:6px}
+.spin.d{border-color:rgba(0,0,0,.2);border-top-color:var(--ink)}
+@keyframes sp{to{transform:rotate(360deg)}}
+.hidden{display:none}
+input[type=range]{-webkit-appearance:none;appearance:none;background:transparent;padding:0;border:0;height:20px}
+input[type=range]::-webkit-slider-runnable-track{height:4px;background:var(--line)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:15px;height:15px;background:var(--red);margin-top:-6px;cursor:pointer}
+input[type=range]::-moz-range-track{height:4px;background:var(--line)}
+input[type=range]::-moz-range-thumb{width:15px;height:15px;background:var(--red);border:0;cursor:pointer}
+.kbdoc{border:1px solid var(--line);border-left:3px solid var(--red);background:var(--bg);padding:11px;margin-bottom:8px;cursor:pointer}
+.kbdoc:hover{background:var(--red-lt)}
+.kbdoc h4{font-family:var(--disp);font-size:14px;font-weight:600;text-transform:uppercase}
+.kbdoc p{font-size:12px;color:var(--grey);margin-top:5px;max-height:42px;overflow:hidden}
+.kbdoc.expanded p{max-height:none}
+.toggle{display:flex;align-items:center;gap:8px;cursor:pointer;user-select:none;font-family:var(--mono);font-size:11px}
+.tt{width:34px;height:19px;background:#C8C8C8;position:relative;flex-shrink:0;transition:.2s}
+.tt::after{content:'';position:absolute;top:2px;left:2px;width:15px;height:15px;background:#fff;transition:.2s}
+.toggle input{display:none}
+.toggle input:checked + .tt{background:var(--red)}
+.toggle input:checked + .tt::after{transform:translateX(15px)}
+/* alerts */
+.alert{display:flex;gap:11px;align-items:center;padding:10px 12px;border:1px solid var(--line);border-left:4px solid var(--i);background:var(--bg);margin-bottom:7px}
+.alert .ic{font-family:var(--disp);font-weight:700;font-size:20px;color:var(--i);min-width:26px;text-align:center}
+.alert .tx{flex:1;font-size:12.5px}
+.alert .tx b{display:block;font-size:13px}
+.alert .go{flex-shrink:0}
+/* channel bits */
+.chcard{border:1px solid var(--line);padding:10px 11px;background:var(--bg);position:relative;overflow:hidden}
+.chcard::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--c)}
+.chcard .nm{font-family:var(--disp);font-weight:600;font-size:14px;text-transform:uppercase;letter-spacing:.3px}
+.chcard .rg{font-family:var(--mono);font-size:9px;color:var(--grey2);margin-top:2px;text-transform:uppercase;letter-spacing:.7px}
+.chcard .hd{font-family:var(--mono);font-size:10px;color:var(--grey);margin-top:5px}
+.chdot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--ok);margin-right:4px;vertical-align:1px}
+.chdot.off{background:#C8C8C8}
+.inbox{border:1px solid var(--line);max-height:410px;overflow-y:auto;background:var(--bg2)}
+.inbox-item{padding:10px 11px;border-bottom:1px solid var(--line);cursor:pointer;background:var(--bg);position:relative;animation:pop .3s ease}
+@keyframes pop{from{opacity:0;transform:translateY(-7px);background:#FFF3F4}to{opacity:1;transform:none}}
+.inbox-item:hover{background:var(--red-lt)}
+.inbox-item.sel{background:var(--red-lt);box-shadow:inset 3px 0 0 var(--red)}
+.inbox-item .hdr{display:flex;justify-content:space-between;align-items:center;gap:7px;font-family:var(--mono);font-size:9px;color:var(--grey2);text-transform:uppercase;letter-spacing:.7px}
+.inbox-item .orig{font-size:13px;margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.inbox-item .tr{font-size:11.5px;color:var(--grey);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-style:italic}
+.chip{display:inline-block;width:8px;height:8px;border-radius:2px;margin-right:4px;vertical-align:-1px}
+.unread{position:absolute;right:9px;top:9px;width:7px;height:7px;background:var(--red);border-radius:50%}
+.tpane{border:1px solid var(--line);padding:11px;background:var(--bg)}
+.tpane.orig{border-left:3px solid var(--ink)}
+.tpane.eng{border-left:3px solid var(--red)}
+.tpane .lbl{font-family:var(--mono);font-size:9px;color:var(--grey2);text-transform:uppercase;letter-spacing:1px;margin-bottom:5px}
+.tpane .txt{font-size:13.5px;white-space:pre-wrap}
+.roomcode{font-family:var(--disp);font-weight:700;font-size:38px;letter-spacing:7px;color:var(--red);line-height:1}
+.ibadge{display:inline-flex;align-items:center;gap:4px;font-family:var(--mono);font-size:8.5px;letter-spacing:.8px;text-transform:uppercase;padding:2px 6px;border:1px solid var(--i);color:var(--i);background:#fff;white-space:nowrap}
+.ibadge.solid{background:var(--i);color:#fff}
+.ibadge .idot{width:5px;height:5px;border-radius:50%;background:currentColor}
+.routerow{display:flex;align-items:center;gap:9px;padding:8px 0;border-bottom:1px solid var(--line2);font-size:12px}
+.routerow .cnt{font-family:var(--disp);font-weight:700;font-size:20px;min-width:30px;color:var(--i)}
+.routerow .sla{font-family:var(--mono);font-size:10px;color:var(--grey2);margin-left:auto;text-align:right}
+.voice{border:1px solid var(--line);border-left:3px solid var(--red);background:#FBFBFB;padding:10px 11px}
+.vrow{display:flex;align-items:center;gap:10px}
+.vplay{width:32px;height:32px;border-radius:50%;background:var(--red);color:#fff;border:0;cursor:pointer;display:grid;place-items:center;flex-shrink:0;font-size:12px}
+.vplay:hover{background:var(--red-dk)}
+.wave{flex:1;height:32px;position:relative;overflow:hidden}
+.wave svg{width:100%;height:100%;display:block}
+.wave .play-ov{position:absolute;left:0;top:0;bottom:0;width:0;background:rgba(219,1,28,.16);border-right:2px solid var(--red);pointer-events:none}
+.vdur{font-family:var(--mono);font-size:10.5px;color:var(--grey2);flex-shrink:0}
+.vstate{font-family:var(--mono);font-size:9.5px;letter-spacing:.8px;color:var(--grey2);text-transform:uppercase;margin-top:7px}
+.spark{display:inline-flex;align-items:flex-end;gap:2px;height:20px;vertical-align:middle}
+.spark i{width:5px;background:var(--grey2);display:block}
+.spark.dn i{background:var(--red)}
+.risk{font-family:var(--mono);font-size:9px;letter-spacing:.9px;text-transform:uppercase;padding:2px 6px;border:1px solid}
+.risk.hi{border-color:var(--red);background:var(--red);color:#fff}
+.risk.md{border-color:#E5C36A;background:var(--amber-bg);color:var(--amber)}
+.risk.lo{border-color:#9AD1B0;background:var(--ok-bg);color:var(--ok)}
+.senti{display:inline-block;width:52px;height:6px;background:#E8E8E8;position:relative;vertical-align:middle}
+.senti i{position:absolute;top:-3px;width:3px;height:12px;background:var(--ink)}
+/* phone */
+.phone-body{background:#EDEDED;min-height:100vh;display:flex;flex-direction:column;font-family:var(--body)}
+.ph-top{background:#2C2C2C;color:#fff;padding:11px 13px;display:flex;align-items:center;gap:9px;position:sticky;top:0;z-index:5}
+.ph-top .av{width:33px;height:33px;background:var(--red);display:grid;place-items:center;font-family:var(--disp);font-weight:700;font-size:14px;flex-shrink:0}
+.ph-top .nm{font-weight:600;font-size:14.5px}
+.ph-top .st{font-size:10.5px;color:#B9B9B9;font-family:var(--mono)}
+.ph-thread{flex:1;padding:13px;overflow-y:auto;display:flex;flex-direction:column;gap:9px}
+.ph-msg{max-width:82%;padding:9px 11px;border-radius:4px;font-size:14.5px;line-height:1.42;white-space:pre-wrap;animation:pop .3s ease}
+.ph-msg.out{align-self:flex-end;background:#95EC69;color:#111}
+.ph-msg.in{align-self:flex-start;background:#fff;color:#111;border:1px solid #E0E0E0}
+.ph-msg .meta{font-family:var(--mono);font-size:9px;color:#8A8A8D;margin-top:4px}
+.ph-sys{align-self:center;font-family:var(--mono);font-size:10px;color:#8A8A8D;background:#DCDCDC;padding:3px 8px;border-radius:3px}
+.ph-bar{background:#F7F7F7;border-top:1px solid #D6D6D6;padding:9px;display:flex;gap:7px;align-items:flex-end;position:sticky;bottom:0}
+.ph-bar textarea{flex:1;font-family:var(--body);font-size:15px;border-radius:4px;min-height:40px;max-height:100px;padding:9px}
+.ph-send{background:#07C160;color:#fff;border:0;padding:11px 15px;font-weight:600;font-size:14px;border-radius:4px;cursor:pointer;flex-shrink:0}
+.ph-send:disabled{background:#B7E3C9}
+.ph-quick{display:flex;gap:5px;flex-wrap:wrap;padding:0 9px 9px;background:#F7F7F7}
+.ph-quick button{font-size:11px;padding:6px 9px;border:1px solid #D0D0D0;background:#fff;border-radius:14px;cursor:pointer;font-family:var(--body)}
+.ph-setup{padding:18px;max-width:420px;margin:0 auto}
+.ph-setup h2{font-size:22px}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:200;display:flex;align-items:flex-end;justify-content:center}
+.modal.hidden{display:none}
+.sheet{background:#fff;width:100%;max-width:460px;max-height:88vh;display:flex;flex-direction:column}
+.sheet-top{padding:12px 14px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:9px}
+.sheet-top h3{color:var(--ink);font-size:16px;margin:0}
+.sheet-body{overflow-y:auto;padding:9px 14px;flex:1}
+.sheet-foot{border-top:1px solid var(--line);padding:10px 14px;background:#FAFAFA}
+.prod{display:flex;gap:10px;align-items:center;padding:9px 0;border-bottom:1px solid var(--line2)}
+.prod .info{flex:1;min-width:0}
+.prod .pn{font-size:13px;font-weight:500;line-height:1.3}
+.prod .ps{font-family:var(--mono);font-size:10px;color:var(--grey2);margin-top:2px}
+.stockdot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:3px}
+.stepper{display:flex;flex-shrink:0}
+.stepper button{width:27px;height:27px;border:1px solid var(--line);background:#fff;cursor:pointer;font-size:14px;line-height:1}
+.stepper input{width:42px;height:27px;text-align:center;border:1px solid var(--line);border-left:0;border-right:0;padding:0;font-size:12.5px}
+.tray{font-family:var(--mono);font-size:11px;color:var(--grey)}
+@media(max-width:940px){.g2,.g3,.g4,.g5{grid-template-columns:1fr}.pad{padding:0 13px}.modhead{padding:12px 13px}
+ .modhead h1{font-size:23px}.rail{width:56px}.rbtn{height:84px;font-size:10px}.appname,.who{display:none}}
+</style>
+
+<!-- ═══════ PHONE ═══════ -->
+<div id="phoneApp" class="hidden">
+  <div id="phSetup" class="phone-body"><div class="ph-setup">
+    <h2 style="font-family:var(--disp);text-transform:uppercase;margin-top:22px">Distributor channel</h2>
+    <p class="note">Enter the room code from the ONE-CHANNEL desk.</p>
+    <div style="margin-top:14px"><h3>Room code</h3><input id="phRoom" placeholder="ABCD" maxlength="6" style="margin-top:6px;text-transform:uppercase;font-size:21px;letter-spacing:6px;text-align:center" aria-label="Room code"></div>
+    <div style="margin-top:11px"><h3>Platform</h3><select id="phCh" style="margin-top:6px" aria-label="Platform"></select></div>
+    <div style="margin-top:11px"><h3>Shop</h3><input id="phName" value="大成工具 / Daesung Tools" style="margin-top:6px" aria-label="Shop name"></div>
+    <button class="act" style="margin-top:16px;width:100%" onclick="phJoin()">Join</button>
+    <div id="phErr" class="err hidden"></div>
+  </div></div>
+  <div id="phChat" class="phone-body hidden">
+    <div class="ph-top">
+      <div class="av" id="phAv">微</div>
+      <div style="flex:1"><div class="nm" id="phTitle">MILWAUKEE</div><div class="st" id="phStatus">connecting…</div></div>
+      <button class="mini" style="color:#fff;border-color:#555" onclick="phLeave()">Leave</button>
+    </div>
+    <div class="ph-thread" id="phThread"></div>
+    <div class="ph-quick" id="phQuick"></div>
+    <div class="ph-quick" style="padding-top:0">
+      <button onclick="openCatalog()" style="border-color:#07C160;color:#07C160;font-weight:600">&#128722; Catalogue</button>
+      <button onclick="phRestock()" style="border-color:var(--red);color:var(--red);font-weight:600">&#9889; Urgent restock</button>
+      <button onclick="phVoice(0)">&#127908; KO</button>
+      <button onclick="phVoice(1)">&#127908; 中文</button>
+      <button onclick="phVoice(2)">&#127908; ID</button>
+    </div>
+    <div class="ph-bar">
+      <textarea id="phInput" rows="1" placeholder="Type a message…" aria-label="Message"></textarea>
+      <button class="ph-send" id="phSend" onclick="phSend()">Send</button>
+    </div>
+  </div>
+  <div class="modal hidden" id="catModal"><div class="sheet">
+    <div class="sheet-top"><h3 style="flex:1">Catalogue</h3>
+      <span class="mono" style="font-size:10px;color:var(--grey2)" id="catRegion">Korea</span>
+      <button class="mini" onclick="closeCatalog()">Close</button></div>
+    <div style="padding:9px 14px 0"><input id="catSearch" placeholder="Search product or SKU…" oninput="renderCatalog()" aria-label="Search"></div>
+    <div class="sheet-body" id="catBody"></div>
+    <div class="sheet-foot">
+      <div class="tray" id="catTray">Nothing selected</div>
+      <div style="display:flex;gap:7px;margin-top:8px">
+        <button class="ghost" style="flex:1" onclick="clearCart()">Clear</button>
+        <button class="ph-send" style="flex:2" id="catSendBtn" onclick="sendCart()">Attach to order</button>
+      </div></div>
+  </div></div>
+</div>
+
+<!-- ═══════ DESK ═══════ -->
+<div id="deskApp">
+<div class="topbar">
+  <div class="wordmark">MILWAUKEE®</div><div class="slash"></div>
+  <div class="appname">ONE-CHANNEL™</div>
+  <div class="spacer"></div>
+  <span class="pill link" id="pillBus" onclick="go(1)">Channel off</span>
+  <span class="pill link" id="pillConn" onclick="go(6)">—</span>
+  <span class="pill link" id="pillUse" onclick="go(6)">0 calls</span>
+  <div class="slash"></div>
+  <div class="who">J. Park · Channel Ops<br>MILWAUKEE Korea</div>
+</div>
+
+<div class="shell">
+<div class="rail"><nav id="nav"></nav></div>
+<main>
+
+<!-- 01 DASHBOARD -->
+<section class="view on" id="v-dash">
+  <div class="modhead">
+    <div><span class="modnum">01</span><h1>Operations dashboard</h1></div>
+    <div class="modmeta">Region <b>Korea</b> · <span id="dashClock">—</span><br><span id="dashData">Demo dataset</span></div>
+  </div>
+  <div class="pad">
+    <div class="grid g5">
+      <div class="kpi solid"><div class="v" id="kMsgs">0</div><div class="l">Messages awaiting action</div><div class="sub" id="kMsgsSub">&nbsp;</div></div>
+      <div class="kpi"><div class="v red" id="kOrders">0</div><div class="l">Orders captured today</div><div class="sub" id="kOrdersSub">&nbsp;</div></div>
+      <div class="kpi"><div class="v" id="kLive">0</div><div class="l">Units in inbound signal</div><div class="sub">Not yet in the plan</div></div>
+      <div class="kpi" style="border-left-color:var(--amber)"><div class="v am" id="kRisk">0</div><div class="l">Accounts at churn risk</div><div class="sub" id="kRiskSub">&nbsp;</div></div>
+      <div class="kpi dark"><div class="v" id="kCover">0%</div><div class="l">Sell-through coverage</div><div class="sub" id="kCoverSub">&nbsp;</div></div>
+    </div>
+
+    <div class="grid g2 stack" style="gap:12px">
+      <div class="panel hd">
+        <h2>Action required</h2>
+        <div id="alertList" style="margin-top:12px"></div>
+      </div>
+      <div class="panel">
+        <h2>Queue by owner</h2>
+        <div id="routeList" style="margin-top:12px"></div>
+      </div>
+    </div>
+
+    <div class="panel stack">
+      <h2>Account health</h2>
+      <table style="margin-top:11px"><thead><tr><th>Account</th><th>City</th><th>7-day volume</th><th style="text-align:right">Msgs</th><th>Tone</th><th style="text-align:right">Churn</th><th>Next action</th></tr></thead><tbody id="churnRows"></tbody></table>
+    </div>
+
+    <div class="panel stack">
+      <h2>Distributor network</h2>
+      <table style="margin-top:11px"><thead><tr><th>Code</th><th>Account</th><th>City</th><th>Health</th><th style="text-align:right">Cover</th><th style="text-align:right">Data shared</th></tr></thead><tbody id="netRows"></tbody></table>
+    </div>
+  </div>
+</section>
+
+<!-- 02 CHANNEL DESK -->
+<section class="view" id="v-channel">
+  <div class="modhead">
+    <div><span class="modnum">02</span><h1>Channel desk</h1></div>
+    <div class="modmeta">Inbound <b id="hdInbound">0</b> · Bridge <b id="hdBridge">simulator</b><br>WeChat · KakaoTalk · LINE · WhatsApp · Zalo</div>
+  </div>
+  <div class="pad">
+  <div class="grid g5">
+    <div class="chcard" style="--c:#07C160"><div class="nm">WeChat 微信</div><div class="rg">Mainland China</div><div class="hd"><span class="chdot" id="d-wechat"></span>MilwaukeeCN</div></div>
+    <div class="chcard" style="--c:#FEE500"><div class="nm">KakaoTalk</div><div class="rg">Korea</div><div class="hd"><span class="chdot" id="d-kakao"></span>@milwaukee_kr</div></div>
+    <div class="chcard" style="--c:#06C755"><div class="nm">LINE</div><div class="rg">JP · TH · TW</div><div class="hd"><span class="chdot" id="d-line"></span>@milwaukee</div></div>
+    <div class="chcard" style="--c:#25D366"><div class="nm">WhatsApp</div><div class="rg">India · SEA</div><div class="hd"><span class="chdot" id="d-whatsapp"></span>+82 10 5512 0119</div></div>
+    <div class="chcard" style="--c:#0068FF"><div class="nm">Zalo</div><div class="rg">Vietnam</div><div class="hd"><span class="chdot" id="d-zalo"></span>Milwaukee VN</div></div>
+  </div>
+
+  <div class="panel stack">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
+      <h2>Bridge</h2>
+      <div style="display:flex;gap:6px;flex-wrap:wrap">
+        <button class="ghost" id="bm-sim" onclick="busSetMode('sim')">Simulator</button>
+        <button class="ghost" id="bm-paired" onclick="busSetMode('paired')">Paired device</button>
+        <button class="ghost" id="bm-local" onclick="busSetMode('local')">Same browser</button>
+      </div>
+    </div>
+    <div id="busBody" style="margin-top:13px"></div>
+    <div id="busErr" class="err hidden"></div>
+  </div>
+
+  <div class="grid g2 stack" style="gap:12px">
+    <div class="panel hd">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:9px;flex-wrap:wrap">
+        <h2 style="margin:0">Inbox</h2>
+        <div style="display:flex;gap:9px;align-items:center;flex-wrap:wrap">
+          <label class="toggle"><input type="checkbox" id="autoTr" checked><span class="tt"></span>Auto-translate</label>
+          <label class="toggle"><input type="checkbox" id="followNew" checked onchange="FOLLOW=this.checked"><span class="tt"></span>Follow newest</label>
+          <button class="mini" onclick="clearInbox()">Clear</button>
+        </div>
+      </div>
+      <div class="inbox" id="inbox" style="margin-top:11px"></div>
+    </div>
+
+    <div class="panel">
+      <h2>Message</h2>
+      <div id="msgEmpty" style="margin-top:14px;color:var(--grey2);font-size:13px">Nothing selected.</div>
+      <div id="msgDetail" class="hidden">
+        <div style="display:flex;gap:6px;flex-wrap:wrap;margin:11px 0 12px">
+          <span class="tag rout" id="mdCh"></span><span class="tag" id="mdLang"></span>
+          <span class="tag" id="mdIntent"></span><span class="tag ok hidden" id="mdCache">Cached</span>
+        </div>
+        <div id="mdIntentBadge" style="display:flex;gap:9px;align-items:center;flex-wrap:wrap;margin-bottom:11px"></div>
+        <div class="grid g2" style="gap:9px">
+          <div class="tpane orig"><div class="lbl">As received</div><div class="txt" id="mdOrig"></div></div>
+          <div class="tpane eng"><div class="lbl">English</div><div class="txt" id="mdEng">…</div></div>
+        </div>
+        <div class="divider"></div>
+        <h3>Purchase order</h3>
+        <table style="margin-top:8px"><thead><tr><th>#</th><th>SKU</th><th>Description</th><th style="text-align:right">Qty</th><th></th></tr></thead><tbody id="poRows"></tbody></table>
+        <div id="poFlags" style="margin-top:10px"></div>
+        <div class="divider"></div>
+        <h3>Reply</h3>
+        <div class="bub me" style="margin-top:8px"><div class="lbl2" id="mdReplyWho">Outbound</div><div id="mdReply"></div></div>
+        <div style="display:flex;gap:8px;margin-top:11px;flex-wrap:wrap">
+          <button class="act" onclick="sendReply()">Send reply</button>
+          <button class="act dark" onclick="approvePO()">Approve and capture</button>
+        </div>
+        <div id="replyMsg" class="note"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid g2 stack" style="gap:12px">
+    <div class="panel">
+      <h2>Live demand sync</h2>
+      <div class="grid g2" style="margin-top:12px;gap:9px">
+        <div class="kpi solid"><div class="v" id="liveUnits">0</div><div class="l">Units inbound</div></div>
+        <div class="kpi"><div class="v red" id="liveSkus">0</div><div class="l">SKU–account pairs</div></div>
+      </div>
+      <div id="liveList" style="margin-top:12px"></div>
+    </div>
+    <div class="panel">
+      <h2>Captured orders</h2>
+      <div id="ledger" style="margin-top:12px"></div>
+    </div>
+  </div>
+  </div>
+</section>
+
+<!-- 03 FORECAST -->
+<section class="view" id="v-forecast">
+  <div class="modhead">
+    <div><span class="modnum">03</span><h1>Demand forecast</h1></div>
+    <div class="modmeta">90-day horizon · per account, per SKU<br><span class="tag am" style="border-color:#8A6100;background:#2A1F00;color:#F2B93B">Demo dataset</span></div>
+  </div>
+  <div class="pad">
+  <div class="panel hd">
+    <div class="grid g2" style="gap:14px">
+      <div><h3>Account</h3><select id="selDist" onchange="drawChart()" style="margin-top:7px"></select></div>
+      <div><h3>Product line</h3><select id="selSku" onchange="drawChart()" style="margin-top:7px"></select></div>
+    </div>
+    <div id="chartWrap" style="margin-top:16px"></div>
+    <div class="legend" style="margin-top:9px">
+      <span><i style="background:#58585A"></i>Actual</span><span><i style="background:var(--red)"></i>Forecast</span>
+      <span><i style="background:var(--ink)"></i>Scenario</span><span><i style="background:#F7CDD3"></i>80% band</span>
+    </div>
+  </div>
+  <div class="grid g2 stack" style="gap:12px">
+    <div class="panel">
+      <h2>Scenario</h2>
+      <div style="margin-top:12px">
+        <div class="rowline" style="border:0;padding-bottom:3px"><span>Trade price change</span><b id="lPrice">0%</b></div>
+        <input type="range" id="sPrice" min="-15" max="15" value="0" oninput="drawChart()" aria-label="Price change">
+        <div class="rowline" style="border:0;padding:8px 0 3px"><span>Marketing and demo push</span><b id="lMkt">None</b></div>
+        <input type="range" id="sMkt" min="0" max="3" value="0" oninput="drawChart()" aria-label="Marketing">
+        <div class="rowline" style="border:0;padding:8px 0 3px"><span>Counter staff trained</span><b id="lTrain">0%</b></div>
+        <input type="range" id="sTrain" min="0" max="100" value="0" step="10" oninput="drawChart()" aria-label="Training">
+        <label class="toggle" style="margin-top:13px"><input type="checkbox" id="sBuy" onchange="drawChart()"><span class="tt"></span>90-day buy-back offered</label>
+      </div>
+      <div class="divider"></div>
+      <div class="rowline"><span>Change vs baseline</span><b id="scDelta">—</b></div>
+      <div class="rowline"><span>Trade revenue impact</span><b id="scRev">—</b></div>
+      <button class="ghost" style="margin-top:10px" onclick="resetSim()">Reset</button>
+      <p class="note">Elasticities are modelling assumptions.</p>
+    </div>
+    <div>
+      <div class="panel"><h3>Signal weighting</h3><div id="signals" style="margin-top:12px"></div></div>
+      <div class="panel" style="margin-top:12px"><h3>Output</h3><div id="fcStats" style="margin-top:7px"></div></div>
+    </div>
+  </div>
+  </div>
+</section>
+
+<!-- 04 STOCKING OFFER -->
+<section class="view" id="v-offer">
+  <div class="modhead">
+    <div><span class="modnum">04</span><h1>Stocking offer</h1></div>
+    <div class="modmeta">Buy-back window <b>90 days</b> · Gate <b>78%</b><br>Programme cap 1,500 units</div>
+  </div>
+  <div class="pad">
+  <div class="panel hd">
+    <div class="grid g2" style="gap:26px;align-items:start">
+      <div>
+        <h3>Recommended placement</h3>
+        <div class="big" id="offUnits" style="margin:8px 0 3px">—</div>
+        <div class="mono" style="color:var(--grey2)" id="offSub">—</div>
+        <div style="margin-top:16px">
+          <div class="rowline"><span>Forecast, 90 days</span><b id="offFc">—</b></div>
+          <div class="rowline"><span>Model confidence</span><b id="offConf">—</b></div>
+          <div class="rowline"><span>Worst-case exposure</span><b id="offRisk">—</b></div>
+          <div class="rowline"><span>Expected unsold at close</span><b id="offUnsold">—</b></div>
+          <div class="rowline"><span>Shelf facings bought</span><b id="offShelf">—</b></div>
+          <div class="rowline"><span>Decision</span><b id="offDec">—</b></div>
+        </div>
+      </div>
+      <div>
+        <h3>Terms</h3>
+        <div style="margin-top:10px;font-size:12.5px;color:var(--grey)">
+          <div class="rowline"><span>Buy-back on unsold stock</span><b>100% at trade price</b></div>
+          <div class="rowline"><span>Window</span><b>90 days from delivery</b></div>
+          <div class="rowline"><span>Eligibility</span><b>POS data shared via channel</b></div>
+          <div class="rowline"><span>In return</span><b>Priority allocation + terms</b></div>
+          <div class="rowline"><span>Per-account exposure cap</span><b>400 units</b></div>
+        </div>
+        <div class="divider"></div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <button class="act" id="offerBtn" onclick="writeOffer()">Draft offer</button>
+          <button class="ghost" onclick="acceptOffer()">Mark accepted</button>
+        </div>
+        <div id="offerErr" class="err hidden"></div>
+        <div id="offerOut" class="bub me hidden" style="margin-top:12px"><div class="lbl2">Outbound — KakaoTalk</div><div id="offerText"></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="panel stack">
+    <h2>Programme exposure</h2>
+    <div class="grid g4" style="margin-top:12px">
+      <div class="kpi solid"><div class="v" id="expUnits">0</div><div class="l">Units placed</div></div>
+      <div class="kpi"><div class="v" id="expRisk">0</div><div class="l">Units at risk</div></div>
+      <div class="kpi"><div class="v ok" id="expDists">0</div><div class="l">Accounts enrolled</div></div>
+      <div class="kpi"><div class="v red" id="expShelf">0</div><div class="l">Shelf facings gained</div></div>
+    </div>
+    <div style="margin-top:13px">
+      <div class="rowline" style="border:0"><span>Against 1,500-unit cap</span><b id="expPct">0%</b></div>
+      <div class="bar" style="height:10px"><span id="expBar" style="width:0%"></span></div>
+    </div>
+    <div id="expList" style="margin-top:13px"></div>
+  </div>
+  </div>
+</section>
+
+<!-- 05 COUNTER -->
+<section class="view" id="v-counter">
+  <div class="modhead">
+    <div><span class="modnum">05</span><h1>Counter assistant</h1></div>
+    <div class="modmeta">Retrieval-grounded · cites its sources<br>Answers in the language asked</div>
+  </div>
+  <div class="pad">
+  <div class="panel hd">
+    <div id="chat" class="thread" style="min-height:220px"></div>
+    <div style="display:flex;gap:8px;margin-top:12px;flex-wrap:wrap">
+      <input id="q" placeholder="Ask in any language…" onkeydown="if(event.key==='Enter')askCounter()" aria-label="Question" style="flex:1;min-width:210px">
+      <button class="act" id="askBtn" onclick="askCounter()">Ask</button>
+      <button class="ghost" onclick="clearChat()">Clear</button>
+    </div>
+    <div id="chatErr" class="err hidden"></div>
+    <div style="display:flex;gap:5px;flex-wrap:wrap;margin-top:10px">
+      <button class="ghost" onclick="quick(0)">KO — competitor swap</button>
+      <button class="ghost" onclick="quick(1)">KO — warranty fault</button>
+      <button class="ghost" onclick="quick(2)">ZH — platform choice</button>
+      <button class="ghost" onclick="quick(3)">EN — ONE-KEY™</button>
+    </div>
+  </div>
+  </div>
+</section>
+
+<!-- 06 KNOWLEDGE -->
+<section class="view" id="v-kb">
+  <div class="modhead">
+    <div><span class="modnum">06</span><h1>Knowledge base</h1></div>
+    <div class="modmeta"><b id="kbCount">0</b> documents · <b id="kbWords">0</b> words<br>Source of truth for the assistant</div>
+  </div>
+  <div class="pad">
+  <div class="grid g3">
+    <div class="kpi solid"><div class="v" id="kbPub">0</div><div class="l">Verified public sources</div></div>
+    <div class="kpi"><div class="v am" id="kbAssum">0</div><div class="l">Project assumptions</div></div>
+    <div class="kpi"><div class="v red" id="kbOwn">0</div><div class="l">Internal documents</div></div>
+  </div>
+  <div class="panel hd stack">
+    <h2>Add document</h2>
+    <input id="kbTitle" placeholder="Title" style="margin-top:10px" aria-label="Title">
+    <textarea id="kbBody" rows="5" placeholder="Paste document text…" style="margin-top:8px" aria-label="Body"></textarea>
+    <div style="display:flex;gap:9px;align-items:center;margin-top:10px;flex-wrap:wrap">
+      <button class="act" onclick="addDoc()">Index</button>
+      <span class="mono" style="color:var(--grey2)">Stored locally in this browser</span>
+    </div>
+    <div id="kbErr" class="err hidden"></div>
+  </div>
+  <div class="panel stack">
+    <h2>Retrieval test</h2>
+    <div style="display:flex;gap:9px;margin-top:10px;flex-wrap:wrap">
+      <input id="kbQ" placeholder="e.g. 배터리 보증" onkeydown="if(event.key==='Enter')testRetrieve()" style="flex:1;min-width:190px" aria-label="Query">
+      <button class="ghost" onclick="testRetrieve()">Search</button>
+    </div>
+    <div id="kbTest" style="margin-top:12px"></div>
+  </div>
+  <div class="panel stack"><h2>Indexed</h2><div id="kbList" style="margin-top:12px"></div></div>
+  </div>
+</section>
+
+<!-- 07 SETUP -->
+<section class="view" id="v-setup">
+  <div class="modhead">
+    <div><span class="modnum">07</span><h1>Setup</h1></div>
+    <div class="modmeta">Model connection · quota · diagnostics</div>
+  </div>
+  <div class="pad">
+  <div class="panel hd">
+    <h2>Connection</h2>
+    <div id="connStatus" style="margin-top:10px"></div>
+    <div style="display:flex;gap:9px;margin-top:12px;flex-wrap:wrap">
+      <button class="act" id="testBtn" onclick="testConn()">Test connection</button>
+      <button class="ghost" onclick="setMode('offline')">Force offline mode</button>
+    </div>
+  </div>
+  <div class="panel stack">
+    <h2>Quota</h2>
+    <div class="grid g4" style="margin-top:12px">
+      <div class="kpi"><div class="v" id="uCalls">0</div><div class="l">Calls today</div></div>
+      <div class="kpi"><div class="v ok" id="uCached">0</div><div class="l">From cache</div></div>
+      <div class="kpi"><div class="v am" id="uSaved">0%</div><div class="l">Calls avoided</div></div>
+      <div class="kpi solid"><div class="v" id="uLeft">—</div><div class="l">Budget remaining</div></div>
+    </div>
+    <div style="margin-top:13px">
+      <div class="rowline" style="border:0"><span>Daily budget</span><b id="lBudget">200</b></div>
+      <input type="range" id="sBudget" min="25" max="1000" step="25" value="200" oninput="setBudget()" aria-label="Budget">
+      <div class="bar" style="height:10px;margin-top:5px"><span id="uBar" style="width:0%"></span></div>
+    </div>
+    <div class="divider"></div>
+    <div style="display:flex;gap:9px;flex-wrap:wrap;align-items:center">
+      <button class="act dark" id="warmBtn" onclick="prewarm()">Pre-warm cache</button>
+      <button class="ghost" onclick="clearCache()">Clear cache</button>
+    </div>
+    <div id="warmMsg" class="note">Runs each scripted step once and stores the result.</div>
+  </div>
+  <div class="panel stack">
+    <h2>Provider</h2>
+    <div style="margin-top:12px"><h3>Mode</h3>
+      <select id="cfgMode" onchange="setMode(this.value)" style="margin-top:7px">
+        <option value="auto">Auto</option><option value="proxy">Claude sandbox</option>
+        <option value="anthropic">Anthropic key</option><option value="gemini">Google AI Studio key</option>
+        <option value="offline">Offline</option>
+      </select></div>
+    <div class="divider"></div>
+    <h3>Google AI Studio key</h3>
+    <input id="cfgGkey" type="password" placeholder="AQ.Ab… or AIza…" style="margin-top:7px" aria-label="Google key" oninput="saveCfg()">
+    <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;align-items:center">
+      <input id="cfgGmodel" placeholder="gemini-2.5-flash" style="flex:1;min-width:160px" aria-label="Model" oninput="saveCfg()">
+      <button class="ghost" id="fetchBtn" onclick="fetchModels()">Fetch models</button>
+      <button class="act" id="fixBtn" onclick="autoFix()">Find one that works</button>
+    </div>
+    <select id="cfgGlist" class="hidden" style="margin-top:8px" onchange="pickModel(this.value)" aria-label="Models"></select>
+    <div id="modelMsg" class="note">Prefer a pinned Flash model over an alias.</div>
+    <div class="divider"></div>
+    <h3>Anthropic key</h3>
+    <input id="cfgAkey" type="password" placeholder="sk-ant-…" style="margin-top:7px" aria-label="Anthropic key" oninput="saveCfg()">
+  </div>
+  <div class="panel stack">
+    <h2>Diagnostics</h2>
+    <button class="ghost" style="margin-top:10px" onclick="selfTest()">Run self-test</button>
+    <div id="testOut" style="margin-top:12px"></div>
+  </div>
+  </div>
+</section>
+
+</main></div>
+</div>
+
+<script>
+const MEM={};
+async function sget(k){try{const r=await window.storage.get(k);return r?JSON.parse(r.value):(MEM[k]??null)}catch(e){return MEM[k]??null}}
+async function sset(k,v){MEM[k]=v;try{await window.storage.set(k,JSON.stringify(v))}catch(e){}}
+function esc(s){const d=document.createElement('div');d.textContent=s==null?'':s;return d.innerHTML;}
+function sleep(ms){return new Promise(r=>setTimeout(r,ms));}
+function setTxt(id,v){const e=document.getElementById(id);if(e)e.textContent=v;}
+function nowHM(){const d=new Date();return String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');}
+function loadScript(src){return new Promise((res,rej)=>{
+  if(document.querySelector('script[data-src="'+src+'"]'))return res();
+  const s=document.createElement('script');s.src=src;s.setAttribute('data-src',src);
+  s.onload=()=>res();s.onerror=()=>rej(new Error('Could not load '+src));document.head.appendChild(s);});}
+
+const CHANNELS={
+ wechat:{name:'WeChat 微信',short:'微',colour:'#07C160',region:'China'},
+ kakao:{name:'KakaoTalk',short:'K',colour:'#FEE500',region:'Korea'},
+ line:{name:'LINE',short:'L',colour:'#06C755',region:'Japan / Thailand'},
+ whatsapp:{name:'WhatsApp',short:'W',colour:'#25D366',region:'India / SEA'},
+ zalo:{name:'Zalo',short:'Z',colour:'#0068FF',region:'Vietnam'}
+};
+const VIEWS=[['dash','Dashboard'],['channel','Channel desk'],['forecast','Forecast'],['offer','Offer'],['counter','Counter'],['kb','Knowledge'],['setup','Setup']];
+const nav=document.getElementById('nav');
+VIEWS.forEach((v,i)=>{const b=document.createElement('button');b.className='rbtn'+(i===0?' on':'');b.id='nav'+i;
+  b.innerHTML='<span class="n">0'+(i+1)+'</span>'+v[1]+'<span class="rbadge hidden" id="rb'+i+'"></span>';
+  b.onclick=()=>go(i);nav.appendChild(b);});
+function go(i){document.querySelectorAll('.rbtn').forEach((b,j)=>b.classList.toggle('on',j===i));
+  document.querySelectorAll('.view').forEach(s=>s.classList.remove('on'));
+  document.getElementById('v-'+VIEWS[i][0]).classList.add('on');window.scrollTo(0,0);
+  if(i===1){UNSEEN=0;renderBusPill();}}
+function railBadge(i,n){const e=document.getElementById('rb'+i);if(!e)return;
+  e.textContent=n;e.classList.toggle('hidden',!n);}
+
+let CFG={mode:'auto',akey:'',gkey:'',gmodel:'gemini-2.5-flash',gver:'auto',gpool:[],budget:200};
+let USE={date:today(),calls:0,cached:0};
+let CACHE={},CACHEKEYS=[],GMODELS=[],LASTOK='',CALLTIMES=[],DEGRADED=false,DEGRADE_REASON='';
+function today(){return new Date().toISOString().slice(0,10);}
+function hash(s){let h=5381;for(let i=0;i<s.length;i++)h=((h*33)^s.charCodeAt(i))>>>0;return h.toString(36)+s.length.toString(36);}
+function budgetLeft(){return Math.max(0,CFG.budget-USE.calls);}
+function renderUsage(){
+  const tot=USE.calls+USE.cached;
+  setTxt('uCalls',USE.calls);setTxt('uCached',USE.cached);
+  setTxt('uSaved',tot?Math.round(USE.cached/tot*100)+'%':'0%');
+  setTxt('uLeft',budgetLeft());setTxt('lBudget',CFG.budget);
+  const b=document.getElementById('uBar');if(b)b.style.width=Math.min(100,Math.round(USE.calls/Math.max(1,CFG.budget)*100))+'%';
+  const p=document.getElementById('pillUse');
+  if(p){p.textContent=USE.calls+' calls · '+USE.cached+' cached';
+    p.className='pill link'+(budgetLeft()===0?' bad':budgetLeft()<15?' warn':'');}
+  const s=document.getElementById('sBudget');if(s)s.value=CFG.budget;
+}
+function setBudget(){CFG.budget=+document.getElementById('sBudget').value;sset('cfg',CFG);renderUsage();}
+async function bumpCalls(){USE.calls++;await sset('use',USE);renderUsage();}
+async function bumpCached(){USE.cached++;await sset('use',USE);renderUsage();}
+function cacheGet(k){return CACHE[k];}
+function cacheSet(k,v){if(!(k in CACHE))CACHEKEYS.push(k);CACHE[k]=v;
+  while(CACHEKEYS.length>80)delete CACHE[CACHEKEYS.shift()];sset('cache',{k:CACHEKEYS,v:CACHE});}
+async function clearCache(){CACHE={};CACHEKEYS=[];await sset('cache',{k:[],v:{}});
+  setTxt('warmMsg','Cache cleared.');}
+
+const RETRYABLE=new Set([429,500,502,503,504]);
+function anthBody(m,s,mx){const b={model:"claude-sonnet-4-6",max_tokens:mx||800,messages:m};if(s)b.system=s;return b;}
+function anthText(d){return d.content.filter(c=>c.type==="text").map(c=>c.text).join("\n").trim();}
+async function viaProxy(m,s,mx){
+  const r=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(anthBody(m,s,mx))});
+  if(!r.ok){const e=new Error("sandbox proxy unavailable ("+r.status+")");e.status=r.status;throw e;}
+  return anthText(await r.json());
+}
+async function viaAnthropic(m,s,mx){
+  if(!CFG.akey)throw new Error("no Anthropic key set");
+  const r=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",
+    headers:{"Content-Type":"application/json","x-api-key":CFG.akey,"anthropic-version":"2023-06-01","anthropic-dangerous-direct-browser-access":"true"},
+    body:JSON.stringify(anthBody(m,s,mx))});
+  if(!r.ok){let t='';try{const j=await r.json();t=(j.error&&j.error.message)||'';}catch(e){}
+    const e2=new Error("Anthropic "+r.status+(t?" — "+t:""));e2.status=r.status;throw e2;}
+  return anthText(await r.json());
+}
+async function geminiCall(ver,model,messages,system,max){
+  const body={contents:messages.map(m=>({role:m.role==='assistant'?'model':'user',parts:[{text:m.content}]})),
+    generationConfig:{maxOutputTokens:max||800}};
+  if(system)body.system_instruction={parts:[{text:system}]};
+  const r=await fetch("https://generativelanguage.googleapis.com/"+ver+"/models/"+model+":generateContent",
+    {method:"POST",headers:{"Content-Type":"application/json","x-goog-api-key":CFG.gkey},body:JSON.stringify(body)});
+  if(!r.ok){let t='';try{const j=await r.json();t=(j.error&&j.error.message)||'';}catch(e){}
+    const err=new Error("Google "+r.status+(t?" — "+t:""));err.status=r.status;throw err;}
+  const d=await r.json(),c=d.candidates&&d.candidates[0];
+  if(!c||!c.content)throw new Error("Google returned no text. Try another model.");
+  return (c.content.parts||[]).map(p=>p.text||'').join("\n").trim();
+}
+async function tryModel(m,messages,system,max){
+  const vers=(CFG.gver&&CFG.gver!=='auto')?[CFG.gver,'v1beta','v1','v1alpha']:['v1beta','v1','v1alpha'];
+  const seen=new Set();let last=null;
+  for(const v of vers){if(seen.has(v))continue;seen.add(v);
+    try{return{out:await geminiCall(v,m,messages,system,max),v};}
+    catch(e){last=e;if(e.status!==404)throw e;}}
+  throw last||new Error("no API version accepted this model");
+}
+async function viaGemini(messages,system,max){
+  if(!CFG.gkey)throw new Error("no Google AI Studio key set");
+  const primary=CFG.gmodel||'gemini-2.5-flash';
+  const pool=[primary,...(CFG.gpool||[]).filter(n=>n!==primary)].slice(0,4);
+  let last=null;
+  for(let mi=0;mi<pool.length;mi++){
+    const tries=mi===0?3:2;
+    for(let a=0;a<tries;a++){
+      try{const r=await tryModel(pool[mi],messages,system,max);
+        if(CFG.gver!==r.v||CFG.gmodel!==pool[mi]){CFG.gver=r.v;CFG.gmodel=pool[mi];sset('cfg',CFG);syncModelUI();}
+        return r.out;}
+      catch(e){last=e;if(!RETRYABLE.has(e.status))break;if(a<tries-1)await sleep(600*Math.pow(2,a));}
+    }
+    if(last&&last.status&&!RETRYABLE.has(last.status)&&last.status!==404)throw last;
+  }
+  throw new Error((last&&RETRYABLE.has(last.status))?"Google is busy — tried "+pool.length+" model(s) with retries.":(last?last.message:"Google request failed"));
+}
+async function rateGuard(){
+  const now=Date.now();
+  CALLTIMES=CALLTIMES.filter(t=>now-t<60000);
+  if(CALLTIMES.length>=8){await sleep(Math.min(60000-(now-CALLTIMES[0])+300,20000));
+    CALLTIMES=CALLTIMES.filter(t=>Date.now()-t<60000);}
+  CALLTIMES.push(Date.now());
+}
+async function callModel(messages,system,max){
+  if(budgetLeft()===0)throw new Error("Daily budget of "+CFG.budget+" calls reached.");
+  await rateGuard();
+  const order=CFG.mode==='auto'?['proxy','anthropic','gemini']:[CFG.mode];
+  let last=null;
+  for(const p of order){
+    try{
+      let out;
+      if(p==='proxy')out=await viaProxy(messages,system,max);
+      else if(p==='anthropic')out=await viaAnthropic(messages,system,max);
+      else if(p==='gemini')out=await viaGemini(messages,system,max);
+      else continue;
+      LASTOK=p;await bumpCalls();renderConn();return out;
+    }catch(e){last=e;}
+  }
+  throw new Error("No model connection ("+(last?last.message:"nothing configured")+").");
+}
+async function cachedCall(kind,keySrc,messages,system,max){
+  const k=kind+':'+hash(keySrc),hit=cacheGet(k);
+  if(hit!==undefined){await bumpCached();return{out:hit,cached:true};}
+  const out=await callModel(messages,system,max);
+  cacheSet(k,out);return{out,cached:false};
+}
+function classifyErr(m){
+  if(/api key not valid|invalid.*key|unauthor|401|403|no .*key set|nothing configured/i.test(m))return'config';
+  if(/budget/i.test(m))return'budget';
+  if(/busy|capacity|high demand|overload|503|429|5\d\d/i.test(m))return'busy';
+  return'other';
+}
+async function withFallback(live,offline,tag){
+  try{const r=await live();DEGRADED=false;DEGRADE_REASON='';return r;}
+  catch(e){
+    const c=classifyErr(e.message);DEGRADED=true;
+    DEGRADE_REASON=c==='config'?'Model connection not working — check Setup. Handled locally.'
+      :c==='budget'?'Daily call budget reached. Handled locally.'
+      :c==='busy'?'Provider at capacity. Handled locally.'
+      :'Live model unavailable. Handled locally.';
+    if(c==='config'){const p=document.getElementById('pillConn');if(p){p.className='pill link bad';p.textContent='Check setup';}}
+    console.warn('ONE-CHANNEL '+tag+' → local ['+c+']:',e.message);
+    return offline();
+  }
+}
+function degradedNote(){return DEGRADED?'<p class="note" style="color:var(--red)">⚠ '+esc(DEGRADE_REASON)+'</p>':'';}
+
+/* ── language engines ── */
+function detectLang(s){
+  if(/[\uAC00-\uD7AF]/.test(s))return"Korean";
+  if(/[\u0E00-\u0E7F]/.test(s))return"Thai";
+  if(/[\u3040-\u30FF]/.test(s))return"Japanese";
+  if(/[\u4E00-\u9FFF]/.test(s))return"Chinese";
+  if(/[\u01A0\u01A1\u1EA0-\u1EF9]/.test(s))return"Vietnamese";
+  return"English";
+}
+const OFFMAP=[
+ {re:/임팩트|冲击|扳手|impact|กระแทก/i,sku:"M18 FIW2F12",d:"M18 FUEL™ impact wrench"},
+ {re:/배터리|电池|แบตเตอรี่|batter|pin\b/i,sku:"M18 B5",d:"M18™ REDLITHIUM™ 5.0Ah battery"},
+ {re:/작은 드릴|起子|드라이버|driver|subcompact|m12/i,sku:"M12 FID2",d:"M12 FUEL™ impact driver"},
+ {re:/드릴|钻|สว่าน|khoan|drill|bor/i,sku:"M18 FPD3",d:"M18 FUEL™ percussion drill"},
+ {re:/작업등|工作灯|light|랜턴|đèn/i,sku:"M18 HAL",d:"M18™ site light"},
+ {re:/one-?key|원키|tracker|asset/i,sku:"48-21-0004",d:"ONE-KEY™ Asset ID tag"},
+ {re:/packout|팩아웃|storage/i,sku:"4932464244",d:"PACKOUT™ storage box"}
+];
+const OFFREPLY={
+ Korean:"안녕하세요, 주문 확인했습니다. 총 {n}개 품목 접수되었으며 재고 확인 후 배송 일정 회신드리겠습니다. 감사합니다.",
+ Chinese:"您好，订单已收到，共 {n} 个品项。我们确认库存后会回复发货时间。谢谢。",
+ Thai:"สวัสดีครับ รับออร์เดอร์แล้ว รวม {n} รายการ จะตรวจสอบสต็อกและแจ้งกำหนดส่งกลับไปครับ",
+ Japanese:"ご注文を承りました。全{n}品目です。在庫を確認のうえ、納期をご連絡いたします。",
+ Vietnamese:"Đã nhận đơn hàng gồm {n} mặt hàng. Chúng tôi sẽ kiểm tra tồn kho và phản hồi lịch giao hàng.",
+ English:"Thanks — order received, {n} line items. We'll confirm stock and come back with a delivery date."
+};
+const GLOSS=[
+ [/임팩트\s*렌치/g,'impact wrench'],[/임팩트/g,'impact'],[/배터리/g,'battery'],[/드릴/g,'drill'],
+ [/개(?=\s|$|,|\.)/g,' units'],[/부탁드립니다/g,'please'],[/안녕하세요/g,'hello'],[/사장님/g,'boss'],
+ [/다음주/g,'next week'],[/화요일/g,'Tuesday'],[/가능할까요/g,'is it possible'],[/그리고/g,'and'],
+ [/재고/g,'stock'],[/보증/g,'warranty'],[/충전/g,'charging'],[/작은/g,'small'],[/급합니다/g,'urgent'],
+ [/冲击扳手/g,'impact wrench'],[/电池/g,'battery'],[/起子机/g,'impact driver'],[/工作灯/g,'work light'],
+ [/补货/g,'restock'],[/你好/g,'hello'],[/台(?=\s|$|,)/g,' units'],[/个(?=\s|$|,)/g,' units'],
+ [/还有货吗/g,'still in stock?'],[/要/g,'need'],[/我们/g,'we'],[/另外/g,'also'],
+ [/สว่านกระแทก/g,'hammer drill'],[/แบตเตอรี่/g,'battery'],[/จำนวน/g,'quantity'],[/ตัว/g,' units'],
+ [/ก้อน/g,' units'],[/สวัสดีครับ/g,'hello'],[/ต้องการสั่ง/g,'would like to order'],
+ [/สัปดาห์หน้า/g,'next week'],[/ได้ไหมครับ/g,'is that possible'],[/ส่งภายใน/g,'deliver within']
+];
+const DEMO_TR={};
+function regDemo(orig,eng){DEMO_TR[hash(orig.replace(/\s+/g,' ').trim())]=eng;}
+function offlineTranslate(text){
+  const k=hash(text.replace(/\s+/g,' ').trim());
+  if(DEMO_TR[k])return{english:DEMO_TR[k],exact:true};
+  let t=text;GLOSS.forEach(([re,en])=>{t=t.replace(re,en);});
+  t=t.replace(/[가-힣]+/g,'▮').replace(/[\u4E00-\u9FFF]+/g,'▮').replace(/[\u0E00-\u0E7F]+/g,'▮');
+  return{english:'Glossary rendering (local, not a full translation): '+t.replace(/▮+/g,'…').replace(/\s{2,}/g,' ').trim(),exact:false};
+}
+const INTENTS={
+ urgent_restock:{label:'Urgent restock',c:'#DB011C',route:'Supply planning',sla:'2 hour SLA',pri:1},
+ restock:{label:'Restock',c:'#0A0A0A',route:'Order desk',sla:'Same day',pri:2},
+ warranty:{label:'Warranty / repair',c:'#B87400',route:'Service desk',sla:'24 hour SLA',pri:3},
+ technical:{label:'Technical spec',c:'#2C6DAF',route:'Product specialist',sla:'48 hours',pri:4},
+ pricing:{label:'Pricing request',c:'#7A3FBF',route:'Commercial team',sla:'48 hours',pri:5},
+ other:{label:'General',c:'#8A8A8D',route:'Channel manager',sla:'Best effort',pri:6}
+};
+function intentOf(k){return INTENTS[k]||INTENTS.other;}
+function offlineIntent(t){
+  const s=(t||'').toLowerCase();
+  const urgent=/급하|급히|급합|긴급|urgent|asap|빨리|오늘|내일|急|尽快|馬上|ด่วน|gấp|right away|today|tomorrow|immediately/.test(s);
+  const restock=/restock|补货|補貨|주문|필요|발송|order|需要|要货|สั่ง|đặt hàng|butuh|\d+\s*개|\d+\s*台|\d+\s*个|\d+\s*ก้อน|\d+\s*ตัว|\d+\s*unit|units?\b/.test(s);
+  if(/보증|warranty|保修|保修期|repair|수리|고장|broken|충전이 안|坏了|维修|ไม่ทำงาน|bảo hành/.test(s))return'warranty';
+  if(/가격|price|pricing|价格|报价|折扣|discount|할인|quote|견적|ราคา|giá/.test(s))return'pricing';
+  if(/차이|difference|区别|spec|规格|사양|torque|토크|compatible|호환|which one|扭矩/.test(s))return'technical';
+  if(restock)return urgent?'urgent_restock':'restock';
+  return'other';
+}
+const POS=/감사|고맙|좋|잘|谢谢|好的|不错|thanks|thank you|great|good|ขอบคุณ|cảm ơn|terima kasih|만족/;
+const NEG=/문제|불만|늦|안 되|안돼|안됩|화가|실망|기다렸|아직도|问题|太慢|不行|投诉|失望|不满|不滿|等了|充不进|坏了|还没|late|delay|problem|issue|unacceptable|frustrat|complain|unhappy|angry|upset|waited|waiting|not charg|won'?t charg|ช้า|ปัญหา|ไม่ได้|chậm|vấn đề|chưa/;
+function offlineSentiment(t){
+  const s=(t||'').toLowerCase();let v=0;
+  if(POS.test(s))v+=0.45;
+  if(NEG.test(s))v-=0.6;
+  if(/\?{2,}|!{2,}/.test(s))v-=0.15;
+  return Math.max(-1,Math.min(1,v));
+}
+function numsIn(s,off){const out=[],re=/\d+/g;let m;
+  while((m=re.exec(s))){const n=+m[0];if(n>0&&n<10000)out.push({n,at:off+m.index});}return out;}
+function offlineParse(msg){
+  const lang=detectLang(msg),lines=[],flags=[];
+  const masked=msg.replace(/\bm\s?-?1[28]\b|\bmx\b/gi,m=>'\u00A7'.repeat(m.length))
+                  .replace(/\d+(?:\.\d+)?\s?ah\b/gi,m=>'\u00A4'.repeat(m.length));
+  let found=[];
+  OFFMAP.forEach(p=>{const m=new RegExp(p.re.source,'i').exec(masked);if(m)found.push({p,i:m.index});});
+  found.sort((a,b)=>a.i-b.i);
+  found=found.filter((f,k)=>k===0||f.i-found[k-1].i>6);
+  const used=new Set();
+  found.forEach((f,k)=>{
+    const end=k+1<found.length?found[k+1].i:masked.length,start=k===0?0:found[k-1].i;
+    let pick=numsIn(masked.slice(f.i,end),f.i).find(x=>!used.has(x.at));
+    if(!pick)pick=numsIn(masked.slice(start,f.i),start).reverse().find(x=>!used.has(x.at));
+    if(!pick){flags.push("Quantity not stated for "+f.p.d);return;}
+    const vague=/maybe|아마|대충|some\s|약\s|\?/i.test(msg.slice(Math.max(0,pick.at-25),pick.at+6));
+    used.add(pick.at);
+    lines.push({sku:f.p.sku,description:f.p.d,qty:pick.n,certain:!vague});
+    if(vague)flags.push("Quantity for "+f.p.d+" was hedged — confirm before shipping");
+  });
+  if(/mower|잔디|割草|new product|when.*korea/i.test(msg))flags.push("Availability question — route to product manager");
+  if(!lines.length)flags.push("No recognisable products found");
+  const tr=offlineTranslate(msg);
+  return{language:lang,english:tr.english,intent:offlineIntent(msg+' '+tr.english),
+    sentiment:offlineSentiment(msg+' '+tr.english),confidence:lines.length?72:20,lines,flags,
+    reply:(OFFREPLY[lang]||OFFREPLY.English).replace("{n}",lines.length),offlineTr:!tr.exact};
+}
+function offlineAnswer(q,hits){
+  if(!hits.length)return"Not covered in the indexed documentation. Check with MILWAUKEE Korea, or add the document on the Knowledge tab.";
+  const d=hits[0].d;
+  return"Local mode — retrieved source, not a written answer.\n\nFrom \""+d.t+"\":\n"+d.b.split(/(?<=\.)\s+/).slice(0,3).join(' ')+
+    (hits.length>1?"\n\nAlso matched: "+hits.slice(1).map(h=>h.d.t).join(", "):"");
+}
+function offlineOffer(units,dist,sku){
+  return"안녕하세요 "+dist+" 사장님.\n\n밀워키 코리아입니다. "+sku+" "+units+"대를 귀사에 우선 배정해 드리고자 합니다.\n\n90일 이내 미판매 재고는 전량 원가로 회수해 드리며, 우선 물량 배정과 결제 조건 개선도 함께 적용됩니다.\n\n검토 후 회신 부탁드립니다. 감사합니다.";
+}
+
+/* ── knowledge base ── */
+const SEED=[
+{t:"TTI group profile and 2025 results",s:"public",b:"Techtronic Industries Company Limited (TTI) was founded in 1985 by Horst Julius Pudwill and is a world leader in cordless technology. Listed in Hong Kong under stock code 0669, ADR symbol TTNDY. TTI operates in power tools, outdoor power equipment and floorcare, with more than 48,000 employees globally. For the year ended 31 December 2025 TTI reported record sales of US$15.3 billion, up 4.4% reported and 4.1% in local currency, with net profit up 6.8% to US$1.2 billion. MILWAUKEE grew 7.9% and RYOBI grew 5.4% in local currency."},
+{t:"TTI brand portfolio",s:"public",b:"MILWAUKEE sits at the forefront of TTI's professional tool portfolio, with global research and development headquartered in Brookfield, Wisconsin, and manufacturing history dating to 1924. RYOBI, headquartered in Greenville, South Carolina, is the leading consumer battery-powered tool and outdoor brand. The wider portfolio includes AEG, EMPIRE and HOMELITE, plus floorcare brands HOOVER, ORECK, VAX and DIRT DEVIL. All MILWAUKEE trade marks are owned by Techtronic Cordless GP."},
+{t:"MILWAUKEE M18 platform",s:"public",b:"M18 is MILWAUKEE's 18-volt cordless platform and the core professional system, covering impact wrenches, drills, percussion drills, impact drivers, grinders, saws, rotary hammers, pipe threaders, site lighting and cleanup equipment. M18 FUEL products combine the POWERSTATE brushless motor, REDLINK PLUS electronic intelligence and REDLITHIUM battery technology, giving longer motor life, more run time and more power. REDLINK PLUS protects against overload, overheating and over-discharge. AUTO STOP control prevents over-rotation in a bind-up. M18 packs run up to 12.0Ah REDLITHIUM HIGH OUTPUT and FORGE HD12.0. All M18 batteries fit all M18 tools regardless of generation. The M18 FUEL SURGE hydraulic impact driver is 50% quieter with three times less vibration than a standard impact driver."},
+{t:"MILWAUKEE M12 platform",s:"public",b:"M12 is MILWAUKEE's 12-volt sub-compact cordless platform for tight-access work, finish work and trades needing lightweight tools. One M12 battery powers over 150 different tools. M12 packs range from 1.5Ah to 6.0Ah, physically smaller and lighter than M18 packs. Typical M12 tools include compact drills, cable strippers, tyre inflators, flood lights, heated jackets and inspection tools. Recommend M12 where size, weight and access matter more than raw power; recommend M18 where power, run time and heavy-duty capability matter."},
+{t:"MILWAUKEE MX FUEL platform",s:"public",b:"MX FUEL is MILWAUKEE's battery-powered heavy equipment platform, designed to replace petrol and corded equipment on the jobsite. The lineup covers jackhammers, core drills, cut-off saws, concrete mixers, compaction equipment, dewatering pumps, wet concrete tools, demolition, drain cleaning, threading, pipe fusion and lighting. MX FUEL suits customers in concrete, demolition and heavy construction, and removes engine exhaust and trailing cords from the work area."},
+{t:"ONE-KEY asset management",s:"public",b:"ONE-KEY is MILWAUKEE's digital platform for tool tracking, customisation and inventory management. A ONE-KEY enabled tool connects wirelessly to a smartphone, letting the owner customise tool performance settings, track location and manage inventory. If a tool is lost or stolen its tracking can lock the tool out. ONE-KEY Asset ID Tags extend tracking to equipment that is not itself Bluetooth enabled. ONE-KEY covers many M18 FUEL tools including percussion drills, impact drivers, high torque impact wrenches and pipe threaders. For a contractor the practical value is theft deterrence, faster tool audits, and knowing what is on which van or site."},
+{t:"PACKOUT storage system",s:"public",b:"PACKOUT is MILWAUKEE's modular jobsite storage system, covering stackable organisers, tool boxes, rolling storage, totes and bags, mounting, racks, holders, foam inserts and a PACKOUT radio, all designed to interlock into one transportable stack. PACKOUT pairs with ONE-KEY so physical jobsite storage can be mirrored digitally. TOOLGUARD steel storage covers fixed cabinet storage."},
+{t:"Cordless platform lock-in",s:"public",b:"MILWAUKEE's system-wide approach unifies its battery platforms so a user can complete a job start to finish on one battery system. Because most power tool brands lock users into a single battery platform once they own a few tools, the platform decision is effectively a long-term commitment — which is why breadth of line within a platform is the main competitive argument at the counter, and why the first battery a tradesman buys matters more than any single tool sale. The brand positioning is NOTHING BUT HEAVY DUTY."},
+{t:"Warranty guidance for counter staff",s:"assumption",b:"PROJECT ASSUMPTION, NOT VERIFIED TTI POLICY. For prototype purposes assume MILWAUKEE tool warranty is five years from purchase and battery warranty three years, subject to local terms in each Asian market. Warranty requires proof of purchase and covers manufacturing defects, not wear items, abuse, or damage from unauthorised repair. A battery that will not charge should first be tested on a known-good charger, then inspected for contact damage and moisture ingress, before a warranty claim is raised. Counter staff must confirm exact terms with MILWAUKEE Korea before committing to a customer."},
+{t:"Asia messaging channel structure",s:"assumption",b:"PROJECT ASSUMPTION. Asian distributors order through consumer messaging apps rather than supplier portals: WeChat Official Accounts in mainland China, KakaoTalk business channels in Korea, LINE Official Accounts in Japan, Thailand and Taiwan, Zalo in Vietnam and WhatsApp across India and Southeast Asia. Each platform exposes a webhook that posts inbound messages as JSON to a supplier endpoint, so a single translation and extraction pipeline can serve all of them. WeChat requires a verified mainland China business entity and takes roughly four to eight weeks to approve; LINE is the fastest at one to two weeks. Messages arrive unstructured, in mixed script, frequently without stated quantities."},
+{t:"Asia channel economics",s:"assumption",b:"PROJECT ASSUMPTION. Unlike North America, where big-box retailers provide sell-through data at store and SKU level, most Asian markets are served through independent distributors and traditional hardware shops. MILWAUKEE therefore sees sell-in but not sell-through. Distributors are working-capital constrained and prefer fast-moving lower-priced stock, which suppresses shelf presence for premium lines regardless of underlying demand. Counter staff recommendation is the dominant purchase influence in this channel."},
+{t:"Buy-back programme terms",s:"assumption",b:"PROJECT ASSUMPTION. The stocking offer places forecast-backed inventory with a distributor under a 90-day buy-back guarantee: MILWAUKEE repurchases any unsold units at the end of the window at the original trade price. Eligibility requires the distributor to share point-of-sale data through the ONE-CHANNEL ordering agent. Offers are generated only where model confidence is at or above 78%. Exposure is capped at 400 units per account and 1,500 units across the programme. The commercial logic is that an accurate forecast converts inventory risk into a quantified, underwritable number."}];
+let KB=[];
+const ALIAS={"배터리":"battery","충전":"charge charger","보증":"warranty","임팩트":"impact","드릴":"drill","공구":"tool","가격":"price","재고":"stock inventory","수리":"repair","고장":"fault","추천":"recommend","차이":"difference","电池":"battery","保修":"warranty","冲击":"impact","钻":"drill","工具":"tool","价格":"price","库存":"stock","维修":"repair","区别":"difference","充电":"charge","แบตเตอรี่":"battery","สว่าน":"drill","รับประกัน":"warranty","bảo hành":"warranty","khoan":"drill","마끼다":"makita competitor platform","밀워키":"milwaukee","플랫폼":"platform","微信":"wechat messaging channel","카카오":"kakao messaging channel"};
+function expand(q){let o=q.toLowerCase();for(const k in ALIAS)if(q.includes(k))o+=" "+ALIAS[k];return o;}
+function tok(s){return (s.toLowerCase().match(/[a-z0-9]{3,}/g)||[]);}
+function retrieve(q,n){
+  const qt=[...new Set(tok(expand(q)))];if(!qt.length||!KB.length)return[];
+  const N=KB.length,df={};
+  qt.forEach(t=>{df[t]=KB.filter(d=>d._tok.includes(t)).length||0.5;});
+  return KB.map(d=>{let s=0;
+    qt.forEach(t=>{const tf=d._tok.filter(x=>x===t).length;
+      if(tf)s+=(1+Math.log(tf))*Math.log(1+N/df[t]);
+      if(d.t.toLowerCase().includes(t))s+=1.6;});
+    return{d,s:s/Math.sqrt(d._tok.length||1)*10};})
+    .filter(x=>x.s>0.12).sort((a,b)=>b.s-a.s).slice(0,n||3);
+}
+async function loadKB(){
+  const saved=await sget('kb_custom')||[];
+  KB=[...SEED.map((d,i)=>({...d,id:'seed'+i,own:false})),...saved];
+  KB.forEach(d=>d._tok=tok(d.t+' '+d.b));
+  renderKB();
+}
+function renderKB(){
+  const w=KB.reduce((a,d)=>a+d.b.split(/\s+/).length,0);
+  setTxt('kbCount',KB.length);setTxt('kbWords',w>999?(w/1000).toFixed(1)+'k':w);
+  setTxt('kbPub',KB.filter(d=>d.s==='public').length);
+  setTxt('kbAssum',KB.filter(d=>d.s==='assumption').length);
+  setTxt('kbOwn',KB.filter(d=>d.own).length);
+  document.getElementById('kbList').innerHTML=KB.map(d=>
+    `<div class="kbdoc" tabindex="0" onclick="this.classList.toggle('expanded')" onkeydown="if(event.key==='Enter')this.classList.toggle('expanded')">
+      <div style="display:flex;justify-content:space-between;gap:9px;align-items:start">
+        <h4>${esc(d.t)}</h4>
+        <div style="display:flex;gap:5px;flex-shrink:0;align-items:center">
+        <span class="tag ${d.own?'red':(d.s==='public'?'ok':'am')}">${d.own?'Internal':(d.s==='public'?'Verified':'Assumption')}</span>
+        ${d.own?`<button class="mini" onclick="event.stopPropagation();delDoc('${d.id}')">Remove</button>`:''}</div>
+      </div><p>${esc(d.b)}</p></div>`).join('');
+}
+async function addDoc(){
+  const t=document.getElementById('kbTitle').value.trim(),b=document.getElementById('kbBody').value.trim();
+  const e=document.getElementById('kbErr');e.classList.add('hidden');
+  if(!t||!b){e.textContent="Title and text are both required.";e.classList.remove('hidden');return;}
+  const saved=await sget('kb_custom')||[];
+  saved.push({t,b,s:'own',own:true,id:'own'+Date.now()});
+  await sset('kb_custom',saved);
+  document.getElementById('kbTitle').value='';document.getElementById('kbBody').value='';
+  await loadKB();emptyChat();
+}
+async function delDoc(id){
+  const saved=(await sget('kb_custom')||[]).filter(d=>d.id!==id);
+  await sset('kb_custom',saved);await loadKB();
+}
+function testRetrieve(){
+  const q=document.getElementById('kbQ').value.trim(),box=document.getElementById('kbTest');
+  if(!q){box.innerHTML='<div class="mono" style="color:var(--grey2)">Enter a query.</div>';return;}
+  const r=retrieve(q,5);
+  box.innerHTML=r.length
+    ?r.map(x=>`<div class="rowline"><span>${esc(x.d.t)}</span><b style="color:var(--red)">${x.s.toFixed(2)}</b></div>`).join('')
+      +`<p class="note">Expanded query: <span class="mono">${esc(expand(q))}</span></p>`
+    :'<div class="mono" style="color:var(--red)">No match — the assistant would decline to answer.</div>';
+}
+
+/* ── accounts, churn, live signal ── */
+const ACCOUNTS={};
+function seedAccounts(){
+  const seeds={'KR-0142':[6,5,7,6,5,6,7],'KR-0087':[9,8,10,9,11,9,10],'KR-0231':[4,4,3,3,2,1,1],
+               'KR-0356':[3,2,2,1,1,0,0],'KR-0419':[5,6,5,6,5,7,6],
+               'CN-2210':[7,6,8,7,6,7,8],'TH-0088':[3,3,4,3,4,3,3],'IN-0341':[2,3,2,2,3,2,2]};
+  const sent={'KR-0142':0.35,'KR-0087':0.55,'KR-0231':-0.2,'KR-0356':-0.55,'KR-0419':0.25,
+              'CN-2210':0.3,'TH-0088':0.1,'IN-0341':0.05};
+  Object.keys(seeds).forEach(k=>{ACCOUNTS[k]={days:seeds[k].slice(),sent:sent[k],n:seeds[k].reduce((a,b)=>a+b,0)};});
+}
+function churnScore(a){
+  if(!a)return 0;
+  const first=a.days.slice(0,3).reduce((x,y)=>x+y,0)/3;
+  const last=a.days.slice(-3).reduce((x,y)=>x+y,0)/3;
+  const drop=first>0?Math.max(0,(first-last)/first):0;
+  return Math.round(Math.min(100,drop*68+Math.max(0,-a.sent)*42));
+}
+function riskBand(s){return s>=55?'hi':s>=30?'md':'lo';}
+function noteAccount(code,sentiment){
+  const a=ACCOUNTS[code]||(ACCOUNTS[code]={days:[0,0,0,0,0,0,0],sent:0,n:0});
+  a.days[6]++;a.n++;
+  if(typeof sentiment==='number')a.sent=a.sent*0.7+sentiment*0.3;
+}
+let INBOX=[],SEL=null,UNSEEN=0,SIMIDX=0,SIMTIMER=null,FOLLOW=true,LIVE=null;
+function initLive(){LIVE=DISTS.map(()=>SKUS.map(()=>0));}
+function skuIndex(l){
+  const s=((l.sku||'')+' '+(l.description||'')).toLowerCase();
+  if(/packout|4932/.test(s))return 3;
+  if(/m12|subcompact|起子|드라이버/.test(s))return 2;
+  if(/batter|redlithium|b5\b|\dah|电池|배터리/.test(s))return 1;
+  if(/impact|wrench|drill|fuel|m18|fiw|fpd/.test(s))return 0;
+  return -1;
+}
+function distIndex(code){const i=DISTS.findIndex(d=>d[0]===code);return i<0?0:i;}
+function applyLive(m){
+  if(!LIVE)initLive();
+  const di=distIndex(m.dist);let added=0;
+  (m.data.lines||[]).forEach(l=>{const si=skuIndex(l);
+    if(si>=0){LIVE[di][si]+=(+l.qty||0);added+=(+l.qty||0);}});
+  m.applied=added;return added;
+}
+function liveTotal(){return LIVE?LIVE.reduce((a,r)=>a+r.reduce((x,y)=>x+y,0),0):0;}
+
+/* ── bridge ── */
+const SIM_SCRIPT=[
+ {ch:'kakao',from:'대성공구 · Daesung Tools',dist:'KR-0142',text:"사장님 안녕하세요, 부산 대성공구입니다.\nM18 FUEL 임팩트 렌치 15개랑 배터리 5.0Ah 30개 부탁드립니다.\n그리고 지난번에 온 그 작은 드릴 있잖아요, 그거 10개 더요.\n다음주 화요일까지 가능할까요?",
+  en:"Hello — this is Daesung Tools in Busan. We'd like 15 M18 FUEL impact wrenches and 30 of the 5.0Ah batteries. Also that small driver that came last time — another 10 of those. Can you make it by next Tuesday?"},
+ {ch:'wechat',from:'广州建业五金 · Jianye Hardware',dist:'CN-2210',text:"你好，我们要补货：\nM18 冲击扳手 20 台\nM12 起子机 15 台\n5.0Ah 电池 40 个\n另外上次那个 LED 工作灯还有货吗？要 8 个",
+  en:"Hello, we need to restock: 20 M18 impact wrenches, 15 M12 impact drivers, 40 of the 5.0Ah batteries. Also is that LED work light from last time still in stock? We want 8."},
+ {ch:'line',from:'ช่างทองสุพรรณ · Thongsuphan Tools',dist:'TH-0088',text:"สวัสดีครับ ต้องการสั่ง\nสว่านกระแทก M18 จำนวน 12 ตัว\nแบตเตอรี่ 5.0Ah 25 ก้อน\nส่งภายในสัปดาห์หน้าได้ไหมครับ",
+  en:"Hello, we'd like to order 12 M18 hammer drills and 25 of the 5.0Ah batteries. Could you deliver within next week?"},
+ {ch:'whatsapp',from:'Sharma Tools, Pune',dist:'IN-0341',text:"hi need restock — 20x m18 impact, some batteries (the big ones, maybe 30?), and can u check if the one-key trackers came in yet. also customer asking about the new mower, when landing korea?",
+  en:"Hi, need a restock — 20 M18 impact wrenches, some batteries (the large ones, maybe 30?), and can you check whether the ONE-KEY trackers have arrived. Also a customer is asking about the new mower — when does it land in Korea?"},
+ {ch:'kakao',from:'대성공구 · Daesung Tools',dist:'KR-0142',kind:'voice',dur:7,
+  text:"사장님 안녕하세요, 대성공구입니다. 급하게 M18 FUEL 임팩트 렌치 25개 필요합니다. 현장에서 내일까지 달라고 해서요. 배터리 5.0Ah도 20개 같이 부탁드립니다.",
+  en:"Hello, this is Daesung Tools. We urgently need 25 M18 FUEL impact wrenches — the site is asking for them by tomorrow. Please add 20 of the 5.0Ah batteries as well."},
+ {ch:'wechat',from:'广州建业五金 · Jianye Hardware',dist:'CN-2210',
+  text:"上次那批电池充不进电，还在保修期内吗？客户很不满意，已经等了两个星期了。",
+  en:"The batteries from the last shipment will not charge — are they still under warranty? The customer is very unhappy and has already waited two weeks."},
+ {ch:'line',from:'ช่างทองสุพรรณ · Thongsuphan Tools',dist:'TH-0088',
+  text:"ขอทราบราคา M18 FUEL แบบซื้อ 50 ตัวขึ้นไป มีส่วนลดไหมครับ",
+  en:"Could you give us pricing for the M18 FUEL at 50 units or more? Is there a discount?"}
+];
+SIM_SCRIPT.forEach(m=>regDemo(m.text,m.en));
+const BUS={mode:'sim',room:'',client:null,bc:null,status:'off'};
+function busRoom(){if(!BUS.room)BUS.room=(Math.random().toString(36).toUpperCase().replace(/[^A-Z0-9]/g,'')+'XKPQ').slice(0,4);return BUS.room;}
+function phoneURL(){return location.href.split('#')[0]+'#phone='+busRoom();}
+function renderBusPill(){
+  const p=document.getElementById('pillBus');if(!p)return;
+  const label={off:'Channel off',sim:'Simulator',connecting:'Connecting',live:'Channel live',error:'Channel error'}[BUS.status]||'Channel';
+  p.textContent=label+(UNSEEN?' · '+UNSEEN:'');
+  p.className='pill link'+(BUS.status==='live'?' ok':BUS.status==='error'?' bad':BUS.status==='connecting'?' warn':'');
+  setTxt('hdBridge',{off:'off',sim:'simulator',connecting:'connecting',live:'paired device',error:'error'}[BUS.status]||'—');
+  Object.keys(CHANNELS).forEach(id=>{const d=document.getElementById('d-'+id);
+    if(d)d.className='chdot'+(BUS.status==='live'||BUS.status==='sim'?'':' off');});
+  railBadge(1,UNSEEN);
+}
+function busSetMode(m){
+  ['sim','paired','local'].forEach(x=>{const b=document.getElementById('bm-'+x);if(b)b.classList.toggle('on',x===m);});
+  busTeardown();BUS.mode=m;renderBusBody();
+  if(m==='local')busConnectLocal();
+  renderBusPill();
+}
+function busTeardown(){
+  if(SIMTIMER){clearTimeout(SIMTIMER);SIMTIMER=null;}
+  if(BUS.client){try{BUS.client.end(true);}catch(e){}BUS.client=null;}
+  if(BUS.bc){try{BUS.bc.close();}catch(e){}BUS.bc=null;}
+  BUS.status='off';
+}
+function renderBusBody(){
+  const b=document.getElementById('busBody');if(!b)return;
+  if(BUS.mode==='sim'){
+    b.innerHTML=`<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+        <button class="act" id="simBtn" onclick="simToggle()">Start inbound feed</button>
+        <button class="ghost" onclick="simOne()">Inject one</button>
+        <span class="mono" style="color:var(--grey2)" id="simState">Idle</span>
+      </div><p class="note">Replays seven recorded distributor messages across five platforms. No network required.</p>`;
+  }else if(BUS.mode==='paired'){
+    b.innerHTML=`<div class="grid g2" style="gap:14px;align-items:start">
+        <div>
+          <h3>Room code</h3>
+          <div class="roomcode" style="margin:6px 0 3px">${esc(busRoom())}</div>
+          <div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap">
+            <button class="act" id="pairBtn" onclick="busConnectPaired()">Connect bridge</button>
+            <button class="ghost" onclick="copyPhoneLink()">Copy device link</button>
+          </div>
+          <div class="mono" style="margin-top:9px;word-break:break-all;color:var(--grey2)" id="phoneLink">${esc(phoneURL())}</div>
+        </div>
+        <div>
+          <h3>Requirements</h3>
+          <div class="rowline"><span>Device and desk on the same room code</span><b>Required</b></div>
+          <div class="rowline"><span>Page served over http(s), not file://</span><b>Required</b></div>
+          <div class="rowline"><span>Outbound WebSocket permitted</span><b>Required</b></div>
+          <p class="note">If the venue blocks the broker, switch to Simulator — it needs no network.</p>
+        </div>
+      </div>`;
+  }else{
+    b.innerHTML=`<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">
+        <button class="act" onclick="window.open(phoneURL(),'_blank','width=430,height=780')">Open device window</button>
+        <button class="ghost" onclick="copyPhoneLink()">Copy device link</button>
+        <span class="mono" style="color:var(--grey2)">Room ${esc(busRoom())}</span>
+      </div><p class="note">Opens the distributor view in a second window on this machine. No internet used.</p>`;
+  }
+}
+function copyPhoneLink(){
+  const u=phoneURL();
+  if(navigator.clipboard)navigator.clipboard.writeText(u).catch(()=>{});
+  const e=document.getElementById('busErr');
+  e.textContent='Copied: '+u;e.style.color='var(--ok)';e.classList.remove('hidden');
+}
+function busConnectLocal(){
+  try{
+    BUS.bc=new BroadcastChannel('onechannel-'+busRoom());
+    BUS.bc.onmessage=ev=>{if(ev.data&&ev.data.type==='msg')receiveMessage(ev.data);};
+    BUS.status='live';renderBusPill();
+  }catch(e){BUS.status='error';renderBusPill();}
+}
+async function busConnectPaired(){
+  const btn=document.getElementById('pairBtn'),err=document.getElementById('busErr');
+  err.classList.add('hidden');
+  if(btn){btn.disabled=true;btn.innerHTML='<span class="spin"></span>Connecting';}
+  BUS.status='connecting';renderBusPill();
+  try{
+    await loadScript('https://unpkg.com/mqtt@5.10.1/dist/mqtt.min.js');
+    const topic='milwaukee/onechannel/'+busRoom();
+    const c=window.mqtt.connect('wss://broker.emqx.io:8084/mqtt',
+      {clientId:'ocdesk_'+Math.random().toString(36).slice(2,10),connectTimeout:9000,reconnectPeriod:4000,keepalive:30});
+    BUS.client=c;
+    c.on('connect',()=>{c.subscribe(topic);BUS.status='live';renderBusPill();
+      if(btn){btn.disabled=false;btn.textContent='Bridge connected';}
+      err.textContent='Bridge live on room '+busRoom()+'.';err.style.color='var(--ok)';err.classList.remove('hidden');});
+    c.on('message',(t,payload)=>{try{const d=JSON.parse(payload.toString());if(d.type==='msg')receiveMessage(d);}catch(e){}});
+    c.on('error',e=>{BUS.status='error';renderBusPill();
+      err.textContent='Bridge error: '+e.message+'. Switch to Simulator.';err.style.color='var(--red)';err.classList.remove('hidden');
+      if(btn){btn.disabled=false;btn.textContent='Connect bridge';}});
+  }catch(e){
+    BUS.status='error';renderBusPill();
+    err.textContent=e.message+' — switch to Simulator.';err.style.color='var(--red)';err.classList.remove('hidden');
+    if(btn){btn.disabled=false;btn.textContent='Connect bridge';}
+  }
+}
+function busPublish(obj){
+  if(BUS.client&&BUS.status==='live'){try{BUS.client.publish('milwaukee/onechannel/'+busRoom(),JSON.stringify(obj));}catch(e){}}
+  if(BUS.bc){try{BUS.bc.postMessage(obj);}catch(e){}}
+}
+function simToggle(){
+  const btn=document.getElementById('simBtn');
+  if(SIMTIMER){clearTimeout(SIMTIMER);SIMTIMER=null;BUS.status='off';
+    btn.textContent='Start inbound feed';setTxt('simState','Paused');renderBusPill();return;}
+  BUS.status='sim';btn.textContent='Pause feed';renderBusPill();
+  const tick=()=>{simOne();SIMTIMER=setTimeout(tick,7000);};
+  setTxt('simState','Running · one message every 7s');tick();
+}
+function simOne(){
+  const m=SIM_SCRIPT[SIMIDX%SIM_SCRIPT.length];SIMIDX++;
+  receiveMessage({type:'msg',ch:m.ch,from:m.from,dist:m.dist,text:m.text,ts:Date.now(),kind:m.kind,dur:m.dur});
+}
+function receiveMessage(d){
+  const msg={id:'m'+Date.now()+Math.random().toString(36).slice(2,6),
+    ch:CHANNELS[d.ch]?d.ch:'wechat',from:d.from||'Unknown shop',dist:d.dist||'—',
+    text:d.text||'',ts:d.ts||Date.now(),time:nowHM(),state:'new',data:null,
+    kind:d.kind==='voice'?'voice':'text',dur:d.dur||0};
+  INBOX.unshift(msg);
+  if(INBOX.length>40)INBOX.pop();
+  UNSEEN++;renderInbox();renderBusPill();
+  if(document.getElementById('v-channel').classList.contains('on')){UNSEEN=0;renderBusPill();}
+  if(document.getElementById('autoTr').checked)processMessage(msg.id,FOLLOW||!SEL);
+  else if(FOLLOW||!SEL){SEL=msg.id;renderInbox();renderDetail();}
+  renderDash();
+}
+const INTAKE_SYS=`Inbound message processor for MILWAUKEE Asia's distributor messaging channel (WeChat, KakaoTalk, LINE, WhatsApp, Zalo). Messages are informal, in Korean, Chinese, Thai, Vietnamese, Japanese, Bahasa or English.
+Platforms: M18 / M18 FUEL (18V), M12 / M12 FUEL (12V), MX FUEL, REDLITHIUM batteries, ONE-KEY, PACKOUT.
+Return ONLY JSON, no fences:
+{"language":"language name in English","english":"faithful natural English translation","intent":"urgent_restock|restock|warranty|technical|pricing|other","sentiment":-1.0 to 1.0,"confidence":0-100,"lines":[{"sku":"MILWAUKEE-style code","description":"short English","qty":int,"certain":bool}],"flags":["anything ambiguous or needing a human"],"reply":"short professional reply IN THE SENDER'S OWN LANGUAGE"}
+Intent: urgent_restock only when a reorder carries explicit time pressure; restock for a normal reorder; warranty for faults or guarantee questions; technical for specification or compatibility; pricing for price, quote or discount.
+sentiment: negative for complaints or delays, positive for thanks, near zero for neutral.
+certain=false where product or quantity was inferred. Never invent a line — put it in flags.`;
+async function processMessage(id,autoSelect){
+  const m=INBOX.find(x=>x.id===id);if(!m||m.state==='working')return;
+  m.state='working';renderInbox();
+  if(autoSelect)SEL=m.id;
+  let cached=false;
+  const out=CFG.mode==='offline'?offlineParse(m.text):await withFallback(async()=>{
+    const r=await cachedCall('intake',m.text,[{role:"user",content:m.text}],INTAKE_SYS,800);
+    cached=r.cached;
+    const s=r.out.replace(/```json|```/g,'').trim(),a=s.indexOf('{'),b=s.lastIndexOf('}');
+    if(a<0||b<0)throw new Error("Model did not return JSON");
+    const j=JSON.parse(s.slice(a,b+1));if(!j.lines)j.lines=[];return j;
+  },()=>offlineParse(m.text),'channel intake');
+  if(!INTENTS[out.intent])out.intent=offlineIntent(m.text+' '+(out.english||''));
+  if(typeof out.sentiment!=='number')out.sentiment=offlineSentiment(m.text+' '+(out.english||''));
+  m.data=out;m.cached=cached;m.state='ready';
+  noteAccount(m.dist,out.sentiment);
+  const added=applyLive(m);
+  renderInbox();renderRouting();renderChurn();renderLive();renderDash();
+  if(added>0)drawChart();
+  if(SEL===m.id)renderDetail();
+}
+function seeded(s){let x=s*9301+49297;return()=>{x=(x*9301+49297)%233280;return x/233280;}}
+function waveSVG(seedTxt,bars){
+  const r=seeded(hash(seedTxt).split('').reduce((a,c)=>a+c.charCodeAt(0),0));
+  const n=bars||46;let out='';
+  for(let i=0;i<n;i++){
+    const env=Math.sin((i/n)*Math.PI);
+    const h=Math.max(3,Math.round((0.28+r()*0.72)*env*28));
+    out+=`<rect x="${i*(100/n)}%" y="${(32-h)/2}" width="${100/n*0.62}%" height="${h}" fill="#58585A" rx="1"/>`;
+  }
+  return `<svg viewBox="0 0 100 32" preserveAspectRatio="none">${out}</svg>`;
+}
+function playVoice(id){
+  const m=INBOX.find(x=>x.id===id);if(!m)return;
+  const ov=document.getElementById('vov-'+id);if(!ov)return;
+  ov.style.transition='none';ov.style.width='0%';void ov.offsetWidth;
+  ov.style.transition='width '+(m.dur||4)+'s linear';ov.style.width='100%';
+}
+function renderVoice(m){
+  const secs=m.dur||4;
+  return `<div class="voice"><div class="vrow">
+      <button class="vplay" onclick="playVoice('${m.id}')" aria-label="Play">&#9654;</button>
+      <div class="wave">${waveSVG(m.text)}<div class="play-ov" id="vov-${m.id}"></div></div>
+      <span class="vdur">0:${String(secs).padStart(2,'0')}</span></div>
+    <div class="vstate">${m.data?'Transcribed on arrival · '+esc(m.data.language||''):'Transcribing'}</div></div>`;
+}
+function renderInbox(){
+  const el=document.getElementById('inbox');
+  el.innerHTML=INBOX.length?INBOX.map(m=>{
+    const c=CHANNELS[m.ch];
+    const tr=m.data?m.data.english:(m.state==='working'?(m.kind==='voice'?'transcribing…':'translating…'):'');
+    const it=m.data?intentOf(m.data.intent):null;
+    return `<div class="inbox-item ${SEL===m.id?'sel':''}" tabindex="0" onclick="selectMessage('${m.id}')" onkeydown="if(event.key==='Enter')selectMessage('${m.id}')">
+      ${m.state==='new'?'<span class="unread"></span>':''}
+      <div class="hdr"><span><span class="chip" style="background:${c.colour}"></span>${esc(c.name)} · ${esc(m.from)}</span><span>${m.time}</span></div>
+      <div class="orig">${m.kind==='voice'?'<span style="color:var(--red)">&#9654;</span> Voice 0:'+String(m.dur||4).padStart(2,'0')+' — ':''}${esc(m.text.replace(/\n/g,' '))}</div>
+      <div class="tr">${esc(tr)}</div>
+      ${it?`<div style="margin-top:5px"><span class="ibadge" style="--i:${it.c}"><span class="idot"></span>${esc(it.label)}</span>
+        <span class="mono" style="color:var(--grey2);font-size:9px;margin-left:5px">&rarr; ${esc(it.route)}</span></div>`:''}
+    </div>`;}).join('')
+    :'<div style="padding:20px;text-align:center;color:var(--grey2);font-size:12.5px">Inbox empty.</div>';
+  setTxt('hdInbound',INBOX.length);
+}
+function clearInbox(){INBOX=[];SEL=null;renderInbox();renderRouting();renderDash();
+  document.getElementById('msgDetail').classList.add('hidden');
+  document.getElementById('msgEmpty').classList.remove('hidden');}
+function selectMessage(id){
+  SEL=id;FOLLOW=false;
+  const f=document.getElementById('followNew');if(f)f.checked=false;
+  const m=INBOX.find(x=>x.id===id);
+  if(m&&m.state==='new'&&!m.data)processMessage(id,true);
+  renderInbox();renderDetail();
+}
+function renderDetail(){
+  const m=INBOX.find(x=>x.id===SEL);
+  if(!m){document.getElementById('msgDetail').classList.add('hidden');
+    document.getElementById('msgEmpty').classList.remove('hidden');return;}
+  document.getElementById('msgEmpty').classList.add('hidden');
+  document.getElementById('msgDetail').classList.remove('hidden');
+  const c=CHANNELS[m.ch];
+  setTxt('mdCh',c.name+' · '+m.from);
+  const origPane=document.getElementById('mdOrig');
+  if(m.kind==='voice'){
+    origPane.innerHTML=renderVoice(m)+(m.data?'<div style="margin-top:9px;white-space:pre-wrap">'+esc(m.text)+'</div>':'');
+    origPane.previousElementSibling.textContent=m.data?'Voice note · transcript':'Voice note';
+  }else{
+    origPane.textContent=m.text;
+    origPane.previousElementSibling.textContent='As received';
+  }
+  document.getElementById('mdReplyWho').textContent='Outbound — '+c.name;
+  const ib=document.getElementById('mdIntentBadge');
+  if(!m.data){setTxt('mdLang','detecting');setTxt('mdIntent','—');setTxt('mdEng',m.kind==='voice'?'Transcribing…':'Translating…');
+    if(ib)ib.innerHTML='';document.getElementById('poRows').innerHTML='';setTxt('mdReply','…');return;}
+  const d=m.data,it=intentOf(d.intent);
+  setTxt('mdLang',d.language||'—');
+  setTxt('mdIntent','Confidence '+(d.confidence??'—')+'%');
+  document.getElementById('mdCache').classList.toggle('hidden',!m.cached);
+  setTxt('mdEng',d.english||'—');
+  if(ib){
+    const s=typeof d.sentiment==='number'?d.sentiment:0;
+    ib.innerHTML=`<span class="ibadge solid" style="--i:${it.c}">${esc(it.label)}</span>
+      <span class="mono" style="font-size:10px;color:var(--grey)">Routed to <b style="color:var(--ink)">${esc(it.route)}</b> · ${esc(it.sla)}</span>
+      <span class="mono" style="font-size:10px;color:var(--grey);margin-left:auto">Tone
+        <span class="senti"><i style="left:${Math.round((s+1)/2*49)}px;background:${s<-0.2?'var(--red)':s>0.2?'var(--ok)':'var(--ink)'}"></i></span>
+        ${s>0.2?'positive':s<-0.2?'negative':'neutral'}</span>`;
+  }
+  const tb=document.getElementById('poRows');tb.innerHTML='';
+  d.lines.forEach((l,i)=>{
+    const tr=document.createElement('tr');tr.className='row-in';tr.style.animationDelay=(i*55)+'ms';
+    tr.innerHTML=`<td style="color:var(--grey2)">${String(i+1).padStart(2,'0')}</td>
+      <td style="color:var(--red)">${esc(l.sku)}</td>
+      <td>${esc(l.description)}${l.certain===false?' <span class="flag">⚠ assumed</span>':''}</td>
+      <td style="text-align:right"><input class="qty" type="number" min="0" value="${l.qty||0}" onchange="editQty(${i},this.value)" aria-label="Quantity"></td>
+      <td><button class="mini" onclick="dropLine(${i})">Drop</button></td>`;
+    tb.appendChild(tr);});
+  document.getElementById('poFlags').innerHTML=((d.flags&&d.flags.length)
+    ?'<h3>Needs a human</h3>'+d.flags.map(x=>`<div class="rowline"><span class="flag">⚠ ${esc(x)}</span></div>`).join('')
+    :'<div class="mono" style="color:var(--ok)">✓ No ambiguities</div>')
+    +(d.offlineTr?'<p class="note" style="color:var(--amber)">⚠ Local glossary rendering, not a full translation.</p>':'')
+    +degradedNote();
+  setTxt('mdReply',d.reply||'—');
+}
+function editQty(i,v){const m=INBOX.find(x=>x.id===SEL);if(!m||!m.data)return;
+  m.data.lines[i].qty=+v;m.data.lines[i].certain=true;renderDetail();}
+function dropLine(i){const m=INBOX.find(x=>x.id===SEL);if(!m||!m.data)return;
+  m.data.lines.splice(i,1);renderDetail();}
+function sendReply(){
+  const m=INBOX.find(x=>x.id===SEL);if(!m||!m.data)return;
+  busPublish({type:'reply',ch:m.ch,text:m.data.reply,ts:Date.now()});
+  document.getElementById('replyMsg').innerHTML='<span style="color:var(--ok)">✓ Sent via '+esc(CHANNELS[m.ch].name)+'.</span>';
+}
+function renderRouting(){
+  const el=document.getElementById('routeList');if(!el)return;
+  const counts={};INBOX.forEach(m=>{if(m.data){counts[m.data.intent]=(counts[m.data.intent]||0)+1;}});
+  const keys=Object.keys(INTENTS).sort((a,b)=>INTENTS[a].pri-INTENTS[b].pri);
+  el.innerHTML=keys.map(k=>{const i=INTENTS[k],n=counts[k]||0;
+    return `<div class="routerow" style="--i:${i.c};${n?'':'opacity:.4'}">
+      <span class="cnt">${n}</span>
+      <span><b>${esc(i.label)}</b><br><span class="mono" style="font-size:10px;color:var(--grey2)">&rarr; ${esc(i.route)}</span></span>
+      <span class="sla">${esc(i.sla)}</span></div>`;}).join('');
+}
+function renderLive(){
+  if(!LIVE)initLive();
+  const pairs=[];
+  LIVE.forEach((row,di)=>row.forEach((v,si)=>{if(v>0)pairs.push({di,si,v});}));
+  setTxt('liveUnits',liveTotal());setTxt('liveSkus',pairs.length);
+  const el=document.getElementById('liveList');if(!el)return;
+  el.innerHTML=pairs.length
+    ?pairs.sort((a,b)=>b.v-a.v).slice(0,6).map(p=>
+      `<div class="rowline"><span>${DISTS[p.di][0]} · ${SKUS[p.si][0]}</span><b style="color:var(--red)">+${p.v}</b></div>`).join('')
+    :'<div class="mono" style="color:var(--grey2)">No inbound signal yet.</div>';
+}
+function renderChurn(){
+  const el=document.getElementById('churnRows');
+  const rows=Object.keys(ACCOUNTS).map(code=>{
+    const a=ACCOUNTS[code],s=churnScore(a),d=DISTS.find(x=>x[0]===code);
+    return{code,a,s,city:d?d[3]:'—'};}).sort((x,y)=>y.s-x.s);
+  const atRisk=rows.filter(r=>r.s>=55).length;
+  setTxt('kRisk',atRisk);
+  setTxt('kRiskSub',atRisk?rows[0].code+' worst':'All healthy');
+  if(!el)return;
+  const mx=Math.max(1,...rows.flatMap(r=>r.a.days));
+  el.innerHTML=rows.map(r=>{
+    const band=riskBand(r.s),falling=r.a.days.slice(-3).reduce((x,y)=>x+y,0)<r.a.days.slice(0,3).reduce((x,y)=>x+y,0);
+    const spark='<span class="spark '+(falling?'dn':'')+'">'+r.a.days.map(v=>`<i style="height:${Math.max(2,Math.round(v/mx*20))}px"></i>`).join('')+'</span>';
+    const act=r.s>=55?'Account call + stocking offer':r.s>=30?'Check in via channel':'None';
+    return `<tr><td style="color:var(--red)">${r.code}</td><td>${r.city}</td><td>${spark}</td>
+      <td style="text-align:right">${r.a.days.reduce((x,y)=>x+y,0)}</td>
+      <td><span class="senti"><i style="left:${Math.round((r.a.sent+1)/2*49)}px;background:${r.a.sent<-0.2?'var(--red)':r.a.sent>0.2?'var(--ok)':'var(--ink)'}"></i></span></td>
+      <td style="text-align:right"><span class="risk ${band}">${r.s}</span></td>
+      <td>${act}</td></tr>`;}).join('');
+}
+let LEDGER=[];
+function approvePO(){
+  const m=INBOX.find(x=>x.id===SEL);
+  if(!m||!m.data||!m.data.lines.length)return;
+  LEDGER.push({ref:'PO-'+(m.dist||'KR')+'-'+(Math.floor(Math.random()*9000)+1000),dist:m.dist,
+    units:m.data.lines.reduce((a,l)=>a+(+l.qty||0),0),lines:m.data.lines.length,lang:m.data.language,ch:m.ch});
+  INBOX=INBOX.filter(x=>x.id!==m.id);SEL=INBOX.length?INBOX[0].id:null;
+  FOLLOW=true;const f=document.getElementById('followNew');if(f)f.checked=true;
+  renderInbox();renderDetail();renderLedger();renderRouting();drawChart();renderDash();
+}
+function renderLedger(){
+  document.getElementById('ledger').innerHTML=LEDGER.length
+    ?LEDGER.map(o=>`<div class="rowline"><span><span class="chip" style="background:${CHANNELS[o.ch]?CHANNELS[o.ch].colour:'#888'}"></span><b style="color:var(--red)">${esc(o.ref)}</b> · ${esc(o.dist)} · ${o.lines} lines</span><b>${o.units} units</b></div>`).join('')
+      +`<p class="note">Forecast confidence uplift applied: <b style="color:var(--ok)">+${Math.min(9,LEDGER.length*3)}%</b></p>`
+    :'<div class="mono" style="color:var(--grey2)">Nothing captured today.</div>';
+}
+
+/* ── forecast ── */
+const DISTS=[["KR-0142","대성공구",1.0,"Busan",71],["KR-0087","한양툴스",1.45,"Seoul",84],["KR-0231","제일산업",0.72,"Daegu",58],["KR-0356","광주기공",0.61,"Gwangju",47],["KR-0419","인천상사",0.93,"Incheon",66]];
+const SKUS=[["M18 FUEL™ impact wrench",34,0.30,289],["M18™ REDLITHIUM™ 5.0Ah",78,0.16,119],["M12 FUEL™ impact driver",21,0.24,165],["PACKOUT™ storage",13,0.41,210]];
+const MON=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+function series(di,si){
+  const scale=DISTS[di][2],base=SKUS[si][1],vol=SKUS[si][2];
+  const r=seeded((di+1)*73+(si+1)*197),hist=[];
+  for(let i=0;i<18;i++)hist.push(Math.max(1,Math.round(base*scale*(1+i*0.021)*(1+0.26*Math.sin((i+4)/12*2*Math.PI))*(1+(r()-0.5)*vol))));
+  const fc=[];for(let i=18;i<21;i++)fc.push(Math.round(base*scale*(1+i*0.021)*(1+0.26*Math.sin((i+4)/12*2*Math.PI))));
+  const pen=(scale<0.8?9:0)+(scale<0.7?4:0);
+  const conf=Math.round(97-vol*62)-pen+Math.min(9,LEDGER.length*3);
+  return{hist,fc,conf:Math.max(55,Math.min(97,conf))};
+}
+DISTS.forEach((d,i)=>{const o=document.createElement('option');o.value=i;o.textContent=d[0]+"  ·  "+d[1]+"  ·  "+d[3];document.getElementById('selDist').appendChild(o);});
+SKUS.forEach((s,i)=>{const o=document.createElement('option');o.value=i;o.textContent=s[0];document.getElementById('selSku').appendChild(o);});
+function renderNet(){
+  const cur=+document.getElementById('selDist').value;
+  document.getElementById('netRows').innerHTML=DISTS.map((d,i)=>
+    `<tr class="clickable ${i===cur?'sel':''}" onclick="pickDist(${i})">
+      <td style="color:var(--red)">${d[0]}</td><td>${d[1]}</td><td>${d[3]}</td>
+      <td><div class="bar" style="width:64px"><span style="width:${d[4]}%"></span></div></td>
+      <td style="text-align:right">${Math.round(28+d[2]*16)}d</td>
+      <td style="text-align:right;color:${LEDGER.some(o=>o.dist===d[0])?'var(--ok)':'var(--grey2)'}">${LEDGER.some(o=>o.dist===d[0])?'Yes':'No'}</td></tr>`).join('');
+}
+function pickDist(i){document.getElementById('selDist').value=i;drawChart();go(2);}
+function simFactor(){
+  const p=+document.getElementById('sPrice').value,m=+document.getElementById('sMkt').value,
+        t=+document.getElementById('sTrain').value,b=document.getElementById('sBuy').checked;
+  setTxt('lPrice',(p>0?'+':'')+p+'%');setTxt('lMkt',['None','Light','Standard','Heavy'][m]);setTxt('lTrain',t+'%');
+  return (1-p*0.018)*(1+m*0.055)*(1+t*0.0022)*(b?1.34:1);
+}
+let CUR=null;
+function drawChart(){
+  const di=+document.getElementById('selDist').value,si=+document.getElementById('selSku').value;
+  const d=series(di,si),f=simFactor();
+  const live=(LIVE&&LIVE[di])?LIVE[di][si]:0;
+  if(live>0){d.fc=d.fc.slice();d.fc[0]+=live;d.conf=Math.min(97,d.conf+Math.min(6,Math.round(live/8)));}
+  CUR={di,si,...d,f,live};
+  const sc=d.fc.map(v=>Math.round(v*f));
+  const max=Math.max(...d.hist,...d.fc,...sc)*1.25;
+  const W=720,H=236,PL=42,PR=14,PT=14,PB=28,iw=W-PL-PR,ih=H-PT-PB;
+  const X=i=>PL+i*(iw/20),Y=v=>PT+ih-(v/max)*ih;
+  let g='';
+  for(let k=0;k<=4;k++){const y=PT+ih-(k/4)*ih;
+    g+=`<line x1="${PL}" y1="${y}" x2="${W-PR}" y2="${y}" stroke="#E8E8E8"/><text x="${PL-7}" y="${y+4}" fill="#8A8A8D" font-size="9.5" font-family="JetBrains Mono, monospace" text-anchor="end">${Math.round(max*k/4)}</text>`;}
+  const last=d.hist[17],w=(1-d.conf/100)*1.5;
+  const hp=d.hist.map((v,i)=>`${X(i)},${Y(v)}`).join(' ');
+  const fp=[`${X(17)},${Y(last)}`,...d.fc.map((v,i)=>`${X(18+i)},${Y(v)}`)].join(' ');
+  const scp=[`${X(17)},${Y(last)}`,...sc.map((v,i)=>`${X(18+i)},${Y(v)}`)].join(' ');
+  const band=[`${X(17)},${Y(last)}`,...d.fc.map((v,i)=>`${X(18+i)},${Y(v*(1+w))}`),...d.fc.map((v,i)=>`${X(18+i)},${Y(v*(1-w))}`).reverse()].join(' ');
+  let lbl='';for(let i=0;i<21;i+=3)lbl+=`<text x="${X(i)}" y="${H-9}" fill="#8A8A8D" font-size="9.5" font-family="JetBrains Mono, monospace" text-anchor="middle">${MON[i%12]}</text>`;
+  document.getElementById('chartWrap').innerHTML=
+   `<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="Demand forecast">${g}
+     <polygon points="${band}" fill="#F7CDD3"/>
+     <polyline points="${hp}" fill="none" stroke="#58585A" stroke-width="2"/>
+     <polyline points="${fp}" fill="none" stroke="#DB011C" stroke-width="2" stroke-dasharray="5 4"/>
+     ${Math.abs(f-1)>0.01?`<polyline points="${scp}" fill="none" stroke="#0A0A0A" stroke-width="2"/>`:''}
+     <line x1="${X(17)}" y1="${PT}" x2="${X(17)}" y2="${PT+ih}" stroke="#DB011C" stroke-dasharray="3 3" opacity=".45"/>
+     ${live>0?`<rect x="${X(18)-9}" y="${Y(d.fc[0])}" width="18" height="${PT+ih-Y(d.fc[0])}" fill="#DB011C" opacity="0.2"/>
+       <line x1="${X(18)-11}" y1="${Y(d.fc[0])}" x2="${X(18)+11}" y2="${Y(d.fc[0])}" stroke="#DB011C" stroke-width="2.5"/>
+       <text x="${X(18)}" y="${Math.max(11,Y(d.fc[0])-7)}" fill="#DB011C" font-size="9.5" font-weight="600" font-family="JetBrains Mono, monospace" text-anchor="middle">+${live} live</text>`:''}
+     ${d.hist.map((v,i)=>`<circle cx="${X(i)}" cy="${Y(v)}" r="2.3" fill="#58585A"/>`).join('')}
+     ${d.fc.map((v,i)=>`<circle cx="${X(18+i)}" cy="${Y(v)}" r="2.8" fill="#DB011C"/>`).join('')}${lbl}</svg>`;
+  const sig=[["Own order history",42],["Seasonality",23],["Construction permits",18],["Competitor pricing",11],["Holiday calendar",6]];
+  document.getElementById('signals').innerHTML=sig.map(s=>
+    `<div style="margin-bottom:9px"><div class="rowline" style="border:0;padding:0 0 4px"><span>${s[0]}</span><b>${s[1]}%</b></div><div class="bar"><span style="width:${s[1]*2.2}%"></span></div></div>`).join('');
+  const base=d.fc.reduce((a,b)=>a+b,0),scT=sc.reduce((a,b)=>a+b,0),trail=d.hist.slice(-3).reduce((a,b)=>a+b,0);
+  const onHand=Math.round(DISTS[di][2]*SKUS[si][1]*1.35);
+  const cover=Math.max(0,Math.round(onHand/(base/90)));
+  document.getElementById('fcStats').innerHTML=
+   `<div class="rowline"><span>Baseline, 90 days</span><b style="color:var(--red)">${base} units</b></div>
+    <div class="rowline"><span>Confidence</span><b>${d.conf}%</b></div>
+    <div class="rowline"><span>Trailing 3 months</span><b>${trail}</b></div>
+    <div class="rowline"><span>Change</span><b style="color:${base>=trail?'var(--ok)':'var(--red)'}">${base>=trail?'+':''}${Math.round((base/trail-1)*100)}%</b></div>
+    <div class="rowline"><span>Live inbound</span><b style="color:${live>0?'var(--red)':'var(--grey2)'}">${live>0?'+'+live+' units':'none'}</b></div>
+    <div class="rowline"><span>Stock on hand</span><b>${onHand} units</b></div>
+    <div class="rowline"><span>Cover</span><b style="color:${cover<30?'var(--red)':cover<60?'var(--amber)':'var(--ok)'}">${cover} days</b></div>
+    <div class="rowline"><span>Underwriting gate</span><b>${d.conf>=78?'<span style="color:var(--ok)">Pass</span>':'<span style="color:var(--red)">Hold</span>'}</b></div>`;
+  setTxt('scDelta',(scT>=base?'+':'')+(scT-base)+' units ('+(scT>=base?'+':'')+Math.round((scT/base-1)*100)+'%)');
+  setTxt('scRev','US$'+((scT-base)*SKUS[si][3]).toLocaleString());
+  renderNet();updateOffer();renderLive();
+}
+function resetSim(){document.getElementById('sPrice').value=0;document.getElementById('sMkt').value=0;
+  document.getElementById('sTrain').value=0;document.getElementById('sBuy').checked=false;drawChart();}
+
+/* ── offer ── */
+let EXPOSURE=[];
+function offerUnits(){return Math.round(Math.round(CUR.fc.reduce((a,b)=>a+b,0)*CUR.f)*(0.85+CUR.conf/500));}
+function facings(u){return Math.max(1,Math.round(u/22));}
+function updateOffer(){
+  if(!CUR)return;
+  const total=Math.round(CUR.fc.reduce((a,b)=>a+b,0)*CUR.f),units=offerUnits(),pass=CUR.conf>=78;
+  setTxt('offUnits',pass?units:'—');
+  setTxt('offSub',pass?units+' units · '+SKUS[CUR.si][0]+' · '+DISTS[CUR.di][0]:'Below the 78% gate');
+  setTxt('offFc',total+' units');setTxt('offConf',CUR.conf+'%');
+  setTxt('offRisk',Math.round(units*0.35)+' units');
+  setTxt('offUnsold',Math.round(units*(1-CUR.conf/100)*0.6)+' units');
+  setTxt('offShelf',pass?facings(units)+' facings':'—');
+  document.getElementById('offDec').innerHTML=pass?'<span style="color:var(--ok)">Approved</span>':'<span style="color:var(--red)">Hold</span>';
+  document.getElementById('offerBtn').disabled=!pass;
+}
+function acceptOffer(){
+  if(!CUR||CUR.conf<78)return;
+  const units=offerUnits();
+  EXPOSURE=EXPOSURE.filter(e=>!(e.di===CUR.di&&e.si===CUR.si));
+  EXPOSURE.push({di:CUR.di,si:CUR.si,units,risk:Math.round(units*0.35),fac:facings(units)});
+  renderExposure();
+}
+function renderExposure(){
+  const u=EXPOSURE.reduce((a,e)=>a+e.units,0),r=EXPOSURE.reduce((a,e)=>a+e.risk,0),f=EXPOSURE.reduce((a,e)=>a+e.fac,0);
+  setTxt('expUnits',u);setTxt('expRisk',r);setTxt('expShelf',f);
+  setTxt('expDists',new Set(EXPOSURE.map(e=>e.di)).size);
+  setTxt('expPct',Math.min(100,Math.round(u/1500*100))+'%');
+  document.getElementById('expBar').style.width=Math.min(100,Math.round(u/1500*100))+'%';
+  document.getElementById('expList').innerHTML=EXPOSURE.length
+    ?EXPOSURE.map(e=>`<div class="rowline"><span>${DISTS[e.di][0]} · ${SKUS[e.si][0]}</span><b>${e.units} units · ${e.fac} facings · ${e.risk} at risk</b></div>`).join('')
+    :'<div class="mono" style="color:var(--grey2)">No offers accepted.</div>';
+}
+function offerPrompt(){
+  return `KakaoTalk message in Korean from MILWAUKEE Korea to distributor ${DISTS[CUR.di][0]} (${DISTS[CUR.di][1]}, ${DISTS[CUR.di][3]}). Offer ${offerUnits()} units of ${SKUS[CUR.si][0]} with 90-day buy-back on unsold stock, priority allocation, better payment terms. Warm, direct, professional. Korean only, no preamble, under 80 words.`;
+}
+async function writeOffer(){
+  if(!CUR)return;
+  const btn=document.getElementById('offerBtn'),err=document.getElementById('offerErr');
+  err.classList.add('hidden');btn.disabled=true;btn.innerHTML='<span class="spin"></span>Drafting';
+  try{
+    const p=offerPrompt();
+    const t=CFG.mode==='offline'?offlineOffer(offerUnits(),DISTS[CUR.di][1],SKUS[CUR.si][0])
+      :await withFallback(async()=>(await cachedCall('offer',p,[{role:"user",content:p}],null,400)).out,
+        ()=>offlineOffer(offerUnits(),DISTS[CUR.di][1],SKUS[CUR.si][0]),'offer draft');
+    setTxt('offerText',t);document.getElementById('offerOut').classList.remove('hidden');
+  }catch(e){err.textContent=e.message;err.classList.remove('hidden');}
+  btn.disabled=false;btn.textContent='Draft offer';
+}
+
+/* ── counter ── */
+const COUNTER_SYS=`MILWAUKEE counter assistant for staff in independent tool distributors across Asia.
+RULES: Answer ONLY from the retrieved documents in the user turn. If they do not contain the answer, say so plainly and name what the counter should check; never invent specs, prices, part numbers or warranty terms. If a document is marked PROJECT ASSUMPTION, say the answer is provisional. ALWAYS reply in the language of the question. Be concise and practical; when comparing a competitor be fair and focus on the customer's job; for a fault give likely cause and next diagnostic step. Under 130 words, no markdown headers.`;
+const QUICKS=['마끼다 임팩트 드릴 쓰던 고객인데 밀워키로 뭐 추천해요?','M18 배터리가 충전이 안 됩니다. 보증 되나요?','客户问 M12 和 M18 有什么区别?','What is ONE-KEY and why should a contractor care?'];
+let HIST=[];
+function bubble(who,text,me){const d=document.createElement('div');d.className='bub'+(me?' me':'');
+  d.innerHTML='<div class="lbl2">'+esc(who)+'</div><div>'+esc(text).replace(/\n/g,'<br>')+'</div>';
+  const c=document.getElementById('chat');c.appendChild(d);c.scrollTop=c.scrollHeight;return d;}
+function emptyChat(){document.getElementById('chat').innerHTML='<div class="mono" style="color:var(--grey2)">Grounded on '+KB.length+' documents.'
+  +(CFG.mode==='offline'?' <span style="color:var(--amber)">Local mode — retrieval only.</span>':'')+'</div>';}
+function clearChat(){HIST=[];emptyChat();}
+function quick(i){document.getElementById('q').value=QUICKS[i];askCounter();}
+function buildCtx(hits){
+  return hits.length?hits.map((h,i)=>`[DOC ${i+1}] ${h.d.t}${h.d.s==='assumption'?' (PROJECT ASSUMPTION)':''}\n${h.d.b.slice(0,620)}`).join('\n\n'):'NO DOCUMENTS MATCHED.';
+}
+async function askCounter(){
+  const inp=document.getElementById('q'),q=inp.value.trim();
+  const err=document.getElementById('chatErr'),btn=document.getElementById('askBtn');
+  err.classList.add('hidden');
+  if(!q){err.textContent="Enter a question.";err.classList.remove('hidden');return;}
+  if(!HIST.length)document.getElementById('chat').innerHTML='';
+  bubble('Counter staff',q,true);inp.value='';
+  btn.disabled=true;btn.innerHTML='<span class="spin"></span>';
+  const pending=bubble('Assistant','Searching…');
+  const hits=retrieve(q,3),ctx=buildCtx(hits);
+  let cached=false;
+  try{
+    const a=CFG.mode==='offline'?offlineAnswer(q,hits):await withFallback(async()=>{
+      const msgs=[...HIST.slice(-4),{role:"user",content:`RETRIEVED DOCUMENTS:\n${ctx}\n\nQUESTION:\n${q}`}];
+      const r=await cachedCall('counter',ctx+'|'+q+'|'+HIST.slice(-2).map(m=>m.content).join('|'),msgs,COUNTER_SYS,550);
+      cached=r.cached;return r.out;
+    },()=>offlineAnswer(q,hits),'counter assistant');
+    pending.innerHTML='<div class="lbl2">Assistant</div><div>'+esc(a).replace(/\n/g,'<br>')+'</div>'
+      +(hits.length?`<div class="cites">Sources: ${hits.map(h=>esc(h.d.t)).join(' · ')}${cached?' · cached':''}</div>`
+        :'<div class="cites" style="color:var(--red)">No source matched — answer withheld</div>')+degradedNote();
+    HIST.push({role:"user",content:q});HIST.push({role:"assistant",content:a});
+    if(HIST.length>8)HIST=HIST.slice(-8);
+  }catch(e){pending.remove();err.textContent=e.message;err.classList.remove('hidden');}
+  btn.disabled=false;btn.textContent='Ask';
+}
+
+/* ── dashboard ── */
+function renderDash(){
+  const waiting=INBOX.length;
+  setTxt('kMsgs',waiting);
+  const urgent=INBOX.filter(m=>m.data&&m.data.intent==='urgent_restock').length;
+  setTxt('kMsgsSub',urgent?urgent+' urgent':'No urgent items');
+  setTxt('kOrders',LEDGER.length);
+  setTxt('kOrdersSub',LEDGER.reduce((a,o)=>a+o.units,0)+' units');
+  setTxt('kLive',liveTotal());
+  const cov=Math.min(100,LEDGER.length*17);
+  setTxt('kCover',cov+'%');
+  setTxt('kCoverSub',cov?'Improving':'No POS data yet');
+  setTxt('dashClock',new Date().toLocaleDateString('en-GB',{day:'2-digit',month:'short'})+' · '+nowHM());
+  renderAlerts();railBadge(0,0);
+}
+function renderAlerts(){
+  const el=document.getElementById('alertList');if(!el)return;
+  const A=[];
+  INBOX.filter(m=>m.data&&m.data.intent==='urgent_restock').slice(0,2).forEach(m=>
+    A.push({i:'#DB011C',ic:'!',t:'Urgent restock — '+m.from,s:'Supply planning · 2 hour SLA',go:1}));
+  Object.keys(ACCOUNTS).map(c=>({c,s:churnScore(ACCOUNTS[c])})).filter(x=>x.s>=55)
+    .sort((a,b)=>b.s-a.s).slice(0,2).forEach(x=>
+      A.push({i:'#B87400',ic:'▼',t:x.c+' engagement falling',s:'Churn score '+x.s+' · account call this week',go:0}));
+  INBOX.filter(m=>m.data&&m.data.intent==='warranty').slice(0,1).forEach(m=>
+    A.push({i:'#B87400',ic:'⚑',t:'Warranty claim — '+m.from,s:'Service desk · 24 hour SLA',go:1}));
+  for(let di=0;di<DISTS.length;di++){
+    const d=series(di,0),onHand=Math.round(DISTS[di][2]*SKUS[0][1]*1.35);
+    const cover=Math.round(onHand/(d.fc.reduce((a,b)=>a+b,0)/90));
+    if(cover<26){A.push({i:'#DB011C',ic:'▣',t:DISTS[di][0]+' low cover on M18 FUEL™',s:cover+' days against forecast',go:2});break;}
+  }
+  if(EXPOSURE.reduce((a,e)=>a+e.units,0)>1200)A.push({i:'#B87400',ic:'◈',t:'Programme exposure above 80%',s:'Review before new offers',go:3});
+  el.innerHTML=A.length?A.map(a=>
+    `<div class="alert" style="--i:${a.i}"><span class="ic">${a.ic}</span>
+      <span class="tx"><b>${esc(a.t)}</b>${esc(a.s)}</span>
+      <span class="go"><button class="mini" onclick="go(${a.go})">Open</button></span></div>`).join('')
+    :'<div class="mono" style="color:var(--ok)">✓ Nothing requires attention.</div>';
+}
+
+/* ── setup ── */
+function syncModelUI(){
+  const i=document.getElementById('cfgGmodel');if(i)i.value=CFG.gmodel;
+  const s=document.getElementById('cfgGlist');
+  if(s&&[...s.options].some(o=>o.value===CFG.gmodel))s.value=CFG.gmodel;
+}
+function renderConn(){
+  const names={proxy:'Claude sandbox',anthropic:'Anthropic',gemini:'Google AI Studio'};
+  const pill=document.getElementById('pillConn'),el=document.getElementById('connStatus');
+  let cls='pill link',txt,html;
+  if(CFG.mode==='offline'){cls+=' warn';txt='Local mode';
+    html='<span class="tag am">Local mode</span><p class="note">All modules operating without a model connection.</p>';}
+  else if(LASTOK){cls+=' ok';txt=names[LASTOK];
+    html='<span class="tag ok">Connected — '+names[LASTOK]+'</span><p class="note">Last successful call used this provider.</p>';}
+  else{txt='Unverified';html='<span class="tag">Unverified</span><p class="note">Run a test or use any feature.</p>';}
+  if(pill){pill.className=cls;pill.textContent=txt;}
+  if(el)el.innerHTML=html;
+}
+function setMode(m){CFG.mode=m;const s=document.getElementById('cfgMode');if(s)s.value=m;saveCfg();renderConn();emptyChat();
+  setTxt('dashData',m==='offline'?'Demo dataset · local mode':'Demo dataset');}
+function saveCfg(){
+  const g=document.getElementById('cfgGkey'),a=document.getElementById('cfgAkey'),gm=document.getElementById('cfgGmodel');
+  if(g)CFG.gkey=g.value.trim();
+  if(a)CFG.akey=a.value.trim();
+  if(gm)CFG.gmodel=gm.value.trim()||'gemini-2.5-flash';
+  sset('cfg',CFG);
+}
+async function loadCfg(){
+  const c=await sget('cfg');if(c)CFG={...CFG,...c};
+  const u=await sget('use');
+  USE=(u&&u.date===today())?u:{date:today(),calls:0,cached:0};
+  const cc=await sget('cache');
+  if(cc&&cc.v){CACHE=cc.v;CACHEKEYS=cc.k||Object.keys(cc.v);}
+  const set=(id,v)=>{const e=document.getElementById(id);if(e)e.value=v;};
+  set('cfgMode',CFG.mode);set('cfgGkey',CFG.gkey||'');set('cfgAkey',CFG.akey||'');
+  set('cfgGmodel',CFG.gmodel||'gemini-2.5-flash');set('sBudget',CFG.budget);
+  renderConn();renderUsage();
+}
+async function testConn(){
+  const btn=document.getElementById('testBtn'),el=document.getElementById('connStatus');
+  if(CFG.mode==='offline'){renderConn();return;}
+  btn.disabled=true;btn.innerHTML='<span class="spin"></span>Testing';
+  try{await callModel([{role:"user",content:"Reply with one word: ready"}],null,10);renderConn();}
+  catch(e){el.innerHTML='<span class="tag red">No connection</span><p class="err">'+esc(e.message)+'</p>';
+    const p=document.getElementById('pillConn');if(p){p.className='pill link bad';p.textContent='Check setup';}}
+  btn.disabled=false;btn.textContent='Test connection';
+}
+async function fetchModels(){
+  const btn=document.getElementById('fetchBtn'),msg=document.getElementById('modelMsg'),sel=document.getElementById('cfgGlist');
+  saveCfg();
+  if(!CFG.gkey){msg.innerHTML='<span class="err">Enter a key first.</span>';return;}
+  btn.disabled=true;btn.innerHTML='<span class="spin d"></span>Fetching';
+  try{
+    const r=await fetch("https://generativelanguage.googleapis.com/v1beta/models?pageSize=200",{headers:{"x-goog-api-key":CFG.gkey}});
+    if(!r.ok){let t='';try{const j=await r.json();t=(j.error&&j.error.message)||'';}catch(e){}
+      throw new Error("Google "+r.status+(t?" — "+t:""));}
+    const d=await r.json();
+    GMODELS=(d.models||[]).filter(m=>(m.supportedGenerationMethods||[]).includes('generateContent'))
+      .map(m=>m.name.replace(/^models\//,'')).filter(n=>!/embedding|aqa|imagen|veo|tts|image|gemma/i.test(n));
+    if(!GMODELS.length)throw new Error("No text models on this key");
+    const free=GMODELS.filter(n=>/flash/i.test(n)&&!/pro/i.test(n));
+    sel.innerHTML='<option value="">— select —</option>'
+      +(free.length?'<optgroup label="Flash">'+free.map(n=>`<option value="${esc(n)}">${esc(n)}</option>`).join('')+'</optgroup>':'')
+      +'<optgroup label="All">'+GMODELS.map(n=>`<option value="${esc(n)}">${esc(n)}</option>`).join('')+'</optgroup>';
+    sel.classList.remove('hidden');
+    CFG.gpool=(free.length?free:GMODELS).slice(0,6);sset('cfg',CFG);
+    msg.innerHTML=GMODELS.length+' models, '+free.length+' Flash. Now run <b style="color:var(--red)">Find one that works</b>.';
+  }catch(e){msg.innerHTML='<span class="err">'+esc(e.message)+'</span>';}
+  btn.disabled=false;btn.textContent='Fetch models';
+}
+function pickModel(n){if(!n)return;document.getElementById('cfgGmodel').value=n;saveCfg();}
+async function autoFix(){
+  const btn=document.getElementById('fixBtn'),msg=document.getElementById('modelMsg');
+  saveCfg();
+  if(!CFG.gkey){msg.innerHTML='<span class="err">Enter a key first.</span>';return;}
+  btn.disabled=true;btn.innerHTML='<span class="spin"></span>Testing';
+  const pool=GMODELS.length?GMODELS:['gemini-2.5-flash','gemini-2.0-flash','gemini-flash-latest','gemini-2.5-flash-lite'];
+  const chosen=CFG.gmodel&&pool.includes(CFG.gmodel)?[CFG.gmodel]:[];
+  const flash=pool.filter(n=>/flash/i.test(n)&&!/pro/i.test(n)&&n!==CFG.gmodel);
+  const rest=pool.filter(n=>!flash.includes(n)&&n!==CFG.gmodel);
+  const order=[...chosen,...flash,...rest].slice(0,14),vers=['v1beta','v1','v1alpha'];
+  const log=[];let win=null;
+  outer:
+  for(const m of order){for(const v of vers){
+    try{await geminiCall(v,m,[{role:"user",content:"hi"}],null,5);win={m,v};break outer;}
+    catch(e){log.push(m+' @ '+v+' → '+e.message.slice(0,80));
+      if(e.status&&e.status!==404&&e.status!==400)break outer;}}}
+  if(win){
+    CFG.gmodel=win.m;CFG.gver=win.v;
+    CFG.gpool=[win.m,...order.filter(n=>n!==win.m&&/flash/i.test(n)&&!/pro/i.test(n))].slice(0,5);
+    sset('cfg',CFG);syncModelUI();LASTOK='gemini';renderConn();
+    msg.innerHTML='<b style="color:var(--ok)">'+esc(win.m)+'</b> on <b style="color:var(--ok)">'+win.v+'</b> · '+(CFG.gpool.length-1)+' backups.';
+  }else{
+    msg.innerHTML='<span class="err">No working combination.</span><div class="mono" style="color:var(--grey2);margin-top:7px;max-height:140px;overflow:auto">'
+      +log.slice(0,8).map(l=>esc(l)).join('<br>')+'</div>';
+  }
+  btn.disabled=false;btn.textContent='Find one that works';
+}
+async function prewarm(){
+  const btn=document.getElementById('warmBtn'),msg=document.getElementById('warmMsg');
+  if(CFG.mode==='offline'){msg.innerHTML='<span class="err">Local mode is on.</span>';return;}
+  btn.disabled=true;
+  const jobs=[];
+  SIM_SCRIPT.forEach(m=>jobs.push(()=>cachedCall('intake',m.text,[{role:"user",content:m.text}],INTAKE_SYS,800)));
+  QUICKS.forEach(q=>{const hits=retrieve(q,3),ctx=buildCtx(hits);
+    jobs.push(()=>cachedCall('counter',ctx+'|'+q+'|',[{role:"user",content:`RETRIEVED DOCUMENTS:\n${ctx}\n\nQUESTION:\n${q}`}],COUNTER_SYS,550));});
+  if(CUR&&CUR.conf>=78){const p=offerPrompt();jobs.push(()=>cachedCall('offer',p,[{role:"user",content:p}],null,400));}
+  let ok=0,fail=0,hit=0;
+  for(let i=0;i<jobs.length;i++){
+    btn.innerHTML='<span class="spin"></span>'+(i+1)+' / '+jobs.length;
+    try{const r=await jobs[i]();r.cached?hit++:ok++;}catch(e){fail++;}
+  }
+  msg.innerHTML=ok+' newly cached, '+hit+' already cached'+(fail?', <span style="color:var(--red)">'+fail+' failed</span>':'')+'.';
+  btn.disabled=false;btn.textContent='Pre-warm cache';
+}
+
+/* ── phone ── */
+const PH={room:'',ch:'wechat',name:'',dist:'KR-0142',client:null,bc:null};
+const PH_QUICK=[
+ {label:'补货订单',text:"你好，我们要补货：\nM18 冲击扳手 20 台\nM12 起子机 15 台\n5.0Ah 电池 40 个"},
+ {label:'保修',text:"M18 电池充不进电，还在保修期内吗？"},
+ {label:'주문',text:"M18 FUEL 임팩트 렌치 15개랑 배터리 5.0Ah 30개 부탁드립니다"},
+ {label:'ราคา',text:"ขอทราบราคา M18 FUEL แบบซื้อ 50 ตัวขึ้นไป มีส่วนลดไหมครับ"}
+];
+const PH_VOICE=[
+ {lang:'Korean',dur:7,text:"사장님 안녕하세요, 대성공구입니다. 급하게 M18 FUEL 임팩트 렌치 25개 필요합니다. 현장에서 내일까지 달라고 해서요. 배터리 5.0Ah도 20개 같이 부탁드립니다.",
+  en:"Hello, this is Daesung Tools. We urgently need 25 M18 FUEL impact wrenches — the site is asking for them by tomorrow. Please add 20 of the 5.0Ah batteries as well."},
+ {lang:'Mandarin',dur:6,text:"你好，我们工地明天要用，急需 M18 冲击扳手 30 台，还有 5.0Ah 电池 40 个，能不能今天发货？",
+  en:"Hello — our site needs these tomorrow. We urgently need 30 M18 impact wrenches and 40 of the 5.0Ah batteries. Can you ship today?"},
+ {lang:'Bahasa Indonesia',dur:6,text:"Halo pak, kami butuh 20 unit bor M18 FUEL dan 30 baterai 5.0Ah. Tolong dikirim minggu depan ya. Terima kasih.",
+  en:"Hello — we need 20 units of the M18 FUEL drill and 30 of the 5.0Ah batteries. Please send them next week. Thank you."}
+];
+PH_VOICE.forEach(v=>regDemo(v.text,v.en));
+const CATALOG=[
+ {sku:'M18 FIW2F12',n:'M18 FUEL™ 1/2" impact wrench',p:289,st:{Korea:'in',China:'in',Japan:'in',Thailand:'low',Vietnam:'in',India:'in'}},
+ {sku:'M18 FPD3',n:'M18 FUEL™ percussion drill',p:245,st:{Korea:'in',China:'in',Japan:'low',Thailand:'in',Vietnam:'in',India:'low'}},
+ {sku:'M18 B5',n:'M18™ REDLITHIUM™ 5.0Ah battery',p:119,st:{Korea:'in',China:'in',Japan:'in',Thailand:'in',Vietnam:'low',India:'in'}},
+ {sku:'M18 HD12',n:'M18™ FORGE™ HD12.0 battery',p:229,st:{Korea:'out',China:'out',Japan:'low',Thailand:'out',Vietnam:'out',India:'out'}},
+ {sku:'M12 FID2',n:'M12 FUEL™ impact driver',p:165,st:{Korea:'in',China:'in',Japan:'in',Thailand:'in',Vietnam:'in',India:'in'}},
+ {sku:'M12 FPDX',n:'M12 FUEL™ installation drill',p:198,st:{Korea:'in',China:'low',Japan:'in',Thailand:'low',Vietnam:'out',India:'low'}},
+ {sku:'M18 CAG115',n:'M18™ 115mm angle grinder',p:176,st:{Korea:'in',China:'in',Japan:'in',Thailand:'in',Vietnam:'in',India:'in'}},
+ {sku:'M18 HAL',n:'M18™ site light',p:132,st:{Korea:'in',China:'in',Japan:'low',Thailand:'in',Vietnam:'in',India:'in'}},
+ {sku:'4932464244',n:'PACKOUT™ large tool box',p:210,st:{Korea:'in',China:'low',Japan:'in',Thailand:'out',Vietnam:'out',India:'low'}},
+ {sku:'48-21-0004',n:'ONE-KEY™ Asset ID tag (10 pack)',p:64,st:{Korea:'low',China:'in',Japan:'in',Thailand:'low',Vietnam:'out',India:'low'}}
+];
+const STOCKLBL={in:['In stock','#1E7F45'],low:['Low stock','#B87400'],out:['Out of stock','#DB011C']};
+const CHMKT={wechat:'China',kakao:'Korea',line:'Thailand',whatsapp:'India',zalo:'Vietnam'};
+let CART={};
+function catMarket(){return CHMKT[PH.ch]||'Korea';}
+function openCatalog(){setTxt('catRegion',catMarket()+' stock');
+  document.getElementById('catModal').classList.remove('hidden');renderCatalog();}
+function closeCatalog(){document.getElementById('catModal').classList.add('hidden');}
+function renderCatalog(){
+  const qEl=document.getElementById('catSearch');
+  const q=(qEl?qEl.value:'').trim().toLowerCase(),mkt=catMarket();
+  const list=CATALOG.filter(p=>!q||(p.n+' '+p.sku).toLowerCase().includes(q));
+  document.getElementById('catBody').innerHTML=list.length?list.map(p=>{
+    const s=p.st[mkt]||'in',[lbl,col]=STOCKLBL[s],qty=CART[p.sku]||0;
+    return `<div class="prod"><div class="info"><div class="pn">${esc(p.n)}</div>
+        <div class="ps">${esc(p.sku)} · US$${p.p} · <span class="stockdot" style="background:${col}"></span><span style="color:${col}">${lbl}</span></div></div>
+      <div class="stepper"><button onclick="bump('${p.sku}',-1)" aria-label="Less">−</button>
+        <input type="number" min="0" value="${qty}" onchange="setQty('${p.sku}',this.value)" aria-label="Qty">
+        <button onclick="bump('${p.sku}',1)" ${s==='out'?'disabled title="Out of stock"':''} aria-label="More">+</button>
+      </div></div>`;}).join('')
+    :'<p style="padding:16px 0;color:#8A8A8D;font-size:13px">No matches.</p>';
+  renderTray();
+}
+function bump(sku,d){CART[sku]=Math.max(0,(CART[sku]||0)+d);if(!CART[sku])delete CART[sku];renderCatalog();}
+function setQty(sku,v){const n=Math.max(0,parseInt(v)||0);if(n)CART[sku]=n;else delete CART[sku];renderCatalog();}
+function clearCart(){CART={};renderCatalog();}
+function renderTray(){
+  const keys=Object.keys(CART),units=keys.reduce((a,k)=>a+CART[k],0);
+  const val=keys.reduce((a,k)=>a+CART[k]*(CATALOG.find(p=>p.sku===k)||{p:0}).p,0);
+  setTxt('catTray',keys.length?keys.length+' lines · '+units+' units · about US$'+val.toLocaleString():'Nothing selected');
+  const b=document.getElementById('catSendBtn');if(b)b.disabled=!keys.length;
+}
+const CART_INTRO={Korea:'아래 품목 주문 부탁드립니다.',China:'请帮我们下以下订单。',Thailand:'ขอสั่งสินค้าตามรายการนี้ครับ',
+  Vietnam:'Vui lòng đặt các mặt hàng sau.',India:'Please process the following order.',Japan:'以下の商品を注文いたします。'};
+function sendCart(){
+  const keys=Object.keys(CART);if(!keys.length)return;
+  const body=keys.map(k=>{const p=CATALOG.find(x=>x.sku===k);return p.n+' ('+k+') × '+CART[k];}).join('\n');
+  document.getElementById('phInput').value=(CART_INTRO[catMarket()]||CART_INTRO.India)+'\n'+body;
+  CART={};closeCatalog();phSend();
+}
+function phInit(){
+  const sel=document.getElementById('phCh');
+  Object.entries(CHANNELS).forEach(([id,c])=>{const o=document.createElement('option');o.value=id;o.textContent=c.name+' — '+c.region;sel.appendChild(o);});
+  const m=location.hash.match(/#phone=?([A-Z0-9]{0,6})/i);
+  if(m&&m[1])document.getElementById('phRoom').value=m[1].toUpperCase();
+  document.getElementById('phInput').addEventListener('keydown',e=>{
+    if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();phSend();}});
+}
+async function phJoin(){
+  const err=document.getElementById('phErr');err.classList.add('hidden');
+  PH.room=document.getElementById('phRoom').value.trim().toUpperCase();
+  PH.ch=document.getElementById('phCh').value;
+  PH.name=document.getElementById('phName').value.trim()||'Distributor';
+  if(!/^[A-Z0-9]{3,6}$/.test(PH.room)){err.textContent='Enter the room code.';err.classList.remove('hidden');return;}
+  const c=CHANNELS[PH.ch];
+  const av=document.getElementById('phAv');
+  av.textContent=c.short;av.style.background=c.colour;av.style.color=PH.ch==='kakao'?'#111':'#fff';
+  setTxt('phTitle','MILWAUKEE — '+c.name);
+  document.getElementById('phSetup').classList.add('hidden');
+  document.getElementById('phChat').classList.remove('hidden');
+  document.getElementById('phQuick').innerHTML=PH_QUICK.map((q,i)=>`<button onclick="phQuick(${i})">${esc(q.label)}</button>`).join('');
+  phSys('Joined '+PH.room);
+  try{PH.bc=new BroadcastChannel('onechannel-'+PH.room);
+    PH.bc.onmessage=ev=>{if(ev.data&&ev.data.type==='reply')phIn(ev.data.text);};}catch(e){}
+  phStatus('connecting…');
+  try{
+    await loadScript('https://unpkg.com/mqtt@5.10.1/dist/mqtt.min.js');
+    const topic='milwaukee/onechannel/'+PH.room;
+    const cl=window.mqtt.connect('wss://broker.emqx.io:8084/mqtt',
+      {clientId:'ocph_'+Math.random().toString(36).slice(2,10),connectTimeout:9000,reconnectPeriod:4000,keepalive:30});
+    PH.client=cl;
+    cl.on('connect',()=>{cl.subscribe(topic);phStatus('connected · '+PH.room);});
+    cl.on('message',(t,p)=>{try{const d=JSON.parse(p.toString());if(d.type==='reply')phIn(d.text);}catch(e){}});
+    cl.on('error',()=>phStatus('same-browser only'));
+  }catch(e){phStatus('same-browser only');}
+}
+function phLeave(){
+  if(PH.client){try{PH.client.end(true);}catch(e){}PH.client=null;}
+  if(PH.bc){try{PH.bc.close();}catch(e){}PH.bc=null;}
+  document.getElementById('phChat').classList.add('hidden');
+  document.getElementById('phSetup').classList.remove('hidden');
+  document.getElementById('phThread').innerHTML='';
+}
+function phStatus(s){setTxt('phStatus',s);}
+function phSys(t){const d=document.createElement('div');d.className='ph-sys';d.textContent=t;
+  const th=document.getElementById('phThread');th.appendChild(d);th.scrollTop=th.scrollHeight;}
+function phOut(t){const d=document.createElement('div');d.className='ph-msg out';
+  d.innerHTML=esc(t).replace(/\n/g,'<br>')+'<div class="meta">'+nowHM()+' · sent</div>';
+  const th=document.getElementById('phThread');th.appendChild(d);th.scrollTop=th.scrollHeight;}
+function phIn(t){const d=document.createElement('div');d.className='ph-msg in';
+  d.innerHTML=esc(t).replace(/\n/g,'<br>')+'<div class="meta">MILWAUKEE · '+nowHM()+'</div>';
+  const th=document.getElementById('phThread');th.appendChild(d);th.scrollTop=th.scrollHeight;}
+function phQuick(i){document.getElementById('phInput').value=PH_QUICK[i].text;phSend();}
+function phPublish(payload){
+  if(PH.client){try{PH.client.publish('milwaukee/onechannel/'+PH.room,JSON.stringify(payload));}catch(e){}}
+  if(PH.bc){try{PH.bc.postMessage(payload);}catch(e){}}
+}
+function phSend(){
+  const inp=document.getElementById('phInput'),t=inp.value.trim();
+  if(!t)return;
+  phOut(t);inp.value='';
+  phPublish({type:'msg',ch:PH.ch,from:PH.name,dist:PH.dist,text:t,ts:Date.now()});
+}
+function phVoice(i){
+  const v=PH_VOICE[i];
+  const d=document.createElement('div');d.className='ph-msg out';
+  d.innerHTML='&#127908; Voice 0:'+String(v.dur).padStart(2,'0')+'<div class="meta">'+nowHM()+' · '+esc(v.lang)+' · sent</div>';
+  const th=document.getElementById('phThread');th.appendChild(d);th.scrollTop=th.scrollHeight;
+  phPublish({type:'msg',kind:'voice',dur:v.dur,ch:PH.ch,from:PH.name,dist:PH.dist,text:v.text,ts:Date.now()});
+}
+function phRestock(){
+  const t={wechat:"急需补货：M18 FUEL 冲击扳手 50 台，明天现场要用，请尽快发货。",
+    kakao:"급합니다. M18 FUEL 임팩트 렌치 50개 오늘 중으로 발송 부탁드립니다. 내일 현장에 필요합니다.",
+    line:"ด่วนครับ ต้องการ M18 FUEL 50 ตัว ส่งวันนี้ได้ไหมครับ พรุ่งนี้ต้องใช้ที่ไซต์",
+    whatsapp:"Urgent — need 50 units of the M18 FUEL drill shipped today, site needs them tomorrow.",
+    zalo:"Cần gấp 50 máy M18 FUEL, giao trong hôm nay được không? Ngày mai công trường cần."}[PH.ch]||"Urgent — need 50 units of the M18 FUEL drill today.";
+  document.getElementById('phInput').value=t;phSend();
+}
+
+/* ── self test ── */
+function selfTest(){
+  const T=[],ok=(n,c,d)=>T.push({n,c,d:d||''});
+  try{
+    const p=offlineParse(SIM_SCRIPT[0].text);
+    ok('Intake — Korean quantities',p.lines.length===3&&p.lines[0].qty===15&&p.lines[1].qty===30&&p.lines[2].qty===10,p.lines.map(l=>l.qty).join('/'));
+    ok('Intake — Korean translation exact',p.english===SIM_SCRIPT[0].en&&!p.offlineTr);
+    const p2=offlineParse(SIM_SCRIPT[3].text);
+    ok('Intake — hedge detection',p2.lines.some(l=>l.certain===false)&&p2.flags.length>=2,'flags '+p2.flags.length);
+    ok('Intake — Thai',offlineParse(SIM_SCRIPT[2].text).language==='Thai');
+    ok('Intake — Chinese translation exact',offlineParse(SIM_SCRIPT[1].text).english===SIM_SCRIPT[1].en);
+    ok('Language detection',detectLang('안녕')==='Korean'&&detectLang('你好')==='Chinese'&&detectLang('สวัสดี')==='Thai');
+    ok('Intent — urgent restock',offlineIntent('급합니다 M18 임팩트 50개 오늘 발송 부탁드립니다')==='urgent_restock');
+    ok('Intent — plain restock',offlineIntent('M18 임팩트 렌치 15개 부탁드립니다')==='restock');
+    ok('Intent — warranty',offlineIntent('电池充不进电，还在保修期内吗？')==='warranty');
+    ok('Intent — pricing',offlineIntent('ขอทราบราคา M18 FUEL ซื้อ 50 ตัว มีส่วนลดไหม')==='pricing');
+    ok('Intent — technical',offlineIntent('客户问 M12 和 M18 有什么区别?')==='technical');
+    ok('Every intent has route and SLA',Object.values(INTENTS).every(i=>i.route&&i.sla&&i.c));
+    ok('Sentiment — complaint negative',offlineSentiment('客户很不满意，已经等了两个星期了 problem delay')<-0.3);
+    ok('Sentiment — thanks positive',offlineSentiment('감사합니다 좋습니다 thanks')>0.2);
+    ok('Sentiment — order neutral',Math.abs(offlineSentiment('M18 임팩트 렌치 15개'))<0.2);
+    ok('Churn — declining account flagged',churnScore(ACCOUNTS['KR-0356'])>=55,'score '+churnScore(ACCOUNTS['KR-0356']));
+    ok('Churn — healthy account low',churnScore(ACCOUNTS['KR-0087'])<30,'score '+churnScore(ACCOUNTS['KR-0087']));
+    ok('Churn — bands map',riskBand(70)==='hi'&&riskBand(40)==='md'&&riskBand(10)==='lo');
+    const saved=LIVE;initLive();
+    const add=applyLive({dist:'KR-0142',data:{lines:[{sku:'M18 FIW2F12',description:'impact wrench',qty:50},{sku:'M18 B5',description:'5.0Ah battery',qty:30}]}});
+    ok('Live sync — quantities applied',add===80&&LIVE[0][0]===50&&LIVE[0][1]===30,'applied '+add);
+    ok('Live sync — SKU matcher',skuIndex({sku:'M18 FIW2F12',description:'impact wrench'})===0
+      &&skuIndex({sku:'M18 B5',description:'battery'})===1&&skuIndex({sku:'M12 FID2',description:'driver'})===2
+      &&skuIndex({sku:'4932464244',description:'PACKOUT'})===3);
+    LIVE=saved||LIVE;
+    let bad=0;for(let a=0;a<DISTS.length;a++)for(let s=0;s<SKUS.length;s++){
+      const x=series(a,s);if(x.hist.length!==18||x.fc.length!==3||x.conf<55||x.conf>97)bad++;}
+    ok('Forecast — 20 combinations valid',bad===0,bad+' invalid');
+    let pass=0;for(let a=0;a<DISTS.length;a++)for(let s=0;s<SKUS.length;s++)if(series(a,s).conf>=78)pass++;
+    ok('Underwriting gate has a spread',pass>0&&pass<20,pass+'/20 pass');
+    ok('Voice — 3 languages',PH_VOICE.length===3&&new Set(PH_VOICE.map(v=>v.lang)).size===3);
+    ok('Voice — transcripts translate exactly',PH_VOICE.every(v=>offlineTranslate(v.text).exact));
+    ok('Voice — waveform renders',(waveSVG('t').match(/<rect/g)||[]).length>=40);
+    ok('Catalogue — stock per market',CATALOG.length>=10&&CATALOG.every(p=>p.st.Korea&&p.st.China));
+    ok('Catalogue — Korea has a constrained line',CATALOG.some(p=>p.st.Korea==='out'));
+    ok('Simulator — covers 4+ intents',new Set(SIM_SCRIPT.map(m=>offlineIntent(m.text+' '+m.en))).size>=4,
+      [...new Set(SIM_SCRIPT.map(m=>offlineIntent(m.text+' '+m.en)))].join('/'));
+    ok('Simulator — includes a voice note',SIM_SCRIPT.some(m=>m.kind==='voice'));
+    ok('Retrieval — Korean alias',retrieve('배터리 보증',3).length>0);
+    ok('Retrieval — rejects nonsense',retrieve('xylophone quantum bratwurst',3).length===0);
+    ok('Knowledge base seeded',KB.length>=12&&KB.some(d=>d.s==='assumption'),KB.length+' docs');
+    ok('Cache keys distinct',hash('abc')!==hash('abd'));
+  }catch(e){ok('Self-test crashed',false,e.message);}
+  const pass=T.filter(t=>t.c).length;
+  document.getElementById('testOut').innerHTML=
+    '<div class="rowline" style="border-bottom:3px solid var(--red)"><span><b>'+pass+' / '+T.length+' passed</b></span><b style="color:'+(pass===T.length?'var(--ok)':'var(--red)')+'">'+(pass===T.length?'OK':'ATTENTION')+'</b></div>'
+    +T.map(t=>`<div class="rowline"><span style="color:${t.c?'var(--ok)':'var(--red)'}">${t.c?'✓':'✗'} ${esc(t.n)}</span><b style="color:var(--grey2);font-weight:400">${esc(t.d)}</b></div>`).join('');
+}
+
+/* ── boot ── */
+function isPhone(){return /^#phone/i.test(location.hash);}
+(async()=>{
+  if(isPhone()){
+    document.getElementById('deskApp').classList.add('hidden');
+    document.getElementById('phoneApp').classList.remove('hidden');
+    document.body.style.background='#EDEDED';
+    phInit();return;
+  }
+  await loadCfg();
+  await loadKB();
+  seedAccounts();initLive();
+  emptyChat();renderLedger();drawChart();renderExposure();
+  busSetMode('sim');renderInbox();renderDetail();renderBusPill();
+  renderRouting();renderChurn();renderLive();renderDash();renderUsage();
+  setInterval(()=>setTxt('dashClock',new Date().toLocaleDateString('en-GB',{day:'2-digit',month:'short'})+' · '+nowHM()),30000);
+})();
+</script>
