@@ -1,0 +1,1831 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MILWAUKEE® ONE-CHANNEL™ — Asia penetration system</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --red:#DB011C; --red-dk:#A80016; --red-lt:#FDEFF1; --red-md:#F7CDD3;
+  --ink:#0A0A0A; --char:#141416; --grey:#58585A; --grey2:#8A8A8D;
+  --line:#DCDCDC; --line2:#EEEEEE; --bg:#FFFFFF; --bg2:#F4F4F4;
+  --amber:#B87400; --amber-bg:#FFF6E0; --ok:#1E7F45; --ok-bg:#E8F5ED;
+  --disp:'Barlow Condensed',sans-serif; --body:'Inter',sans-serif; --mono:'JetBrains Mono',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:14px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.topbar{position:sticky;top:0;z-index:50;height:56px;background:var(--red);display:flex;align-items:center;gap:15px;padding:0 18px;color:#fff}
+.wordmark{font-family:var(--disp);font-weight:700;font-size:22px;font-style:italic;white-space:nowrap}
+.slash{width:1px;height:26px;background:rgba(255,255,255,.35);flex-shrink:0}
+.appname{font-family:var(--disp);font-weight:600;font-size:15px;letter-spacing:2.6px;color:rgba(255,255,255,.85);white-space:nowrap}
+.topbar .spacer{flex:1}
+.pill{font-family:var(--mono);font-size:10px;letter-spacing:1px;text-transform:uppercase;padding:4px 9px;border:1px solid rgba(255,255,255,.45);color:#fff;white-space:nowrap;background:rgba(0,0,0,.12)}
+.pill.ok{border-color:#8BE8AF;color:#B6F5CE}.pill.warn{border-color:#FFD98A;color:#FFE7B0}
+.pill.bad{border-color:#fff;background:#fff;color:var(--red)}
+.pill.link{cursor:pointer}.pill.link:hover{background:rgba(0,0,0,.3)}
+.shell{display:flex;min-height:calc(100vh - 56px)}
+.rail{width:80px;flex-shrink:0;background:var(--char);display:flex;flex-direction:column;align-items:center;padding:8px 0;position:sticky;top:56px;height:calc(100vh - 56px);overflow-y:auto}
+.rail nav{display:flex;flex-direction:column;gap:1px;width:100%}
+.rbtn{background:none;border:0;color:#8A8A8D;padding:10px 0;cursor:pointer;font-family:var(--disp);font-weight:600;font-size:11px;letter-spacing:1.2px;writing-mode:vertical-rl;height:90px;display:flex;align-items:center;justify-content:center;transition:.15s;width:100%}
+.rbtn:hover{color:#fff;background:#232326}
+.rbtn.on{color:#fff;background:var(--red)}.rbtn.on .n{color:#fff}
+.rbtn .n{font-family:var(--mono);font-size:9px;color:var(--red);margin-bottom:6px}
+.rbtn .dot{position:absolute;margin-left:26px;margin-top:-30px;width:8px;height:8px;background:var(--red);border-radius:50%;border:1.5px solid var(--char)}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,.kbdoc:focus-visible,.inbox-item:focus-visible{outline:3px solid var(--red);outline-offset:2px}
+main{flex:1;min-width:0;padding:0 0 90px;max-width:1240px}
+.pad{padding:0 34px}
+.eyebrow{font-family:var(--mono);font-size:10px;letter-spacing:2.2px;color:var(--red);text-transform:uppercase;margin-bottom:9px}
+h1{font-family:var(--disp);font-weight:700;font-size:48px;line-height:.95;text-transform:uppercase}
+h2{font-family:var(--disp);font-weight:700;font-size:23px;text-transform:uppercase}
+h3{font-family:var(--disp);font-weight:600;font-size:14px;letter-spacing:1.4px;text-transform:uppercase;color:var(--grey)}
+.lede{color:var(--grey);font-size:15px;max-width:68ch;margin-top:13px}
+.view{display:none;animation:in .25s ease}.view.on{display:block}
+@keyframes in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.masthead{background:var(--red);color:#fff;padding:32px 34px;position:relative;overflow:hidden}
+.masthead::after{content:'';position:absolute;right:-70px;top:-40px;width:280px;height:280px;background:rgba(0,0,0,.09);transform:rotate(35deg)}
+.masthead h1{color:#fff;font-size:54px;position:relative;z-index:1}
+.masthead .lede{color:rgba(255,255,255,.92);position:relative;z-index:1}
+.masthead .eyebrow{color:rgba(255,255,255,.75)}
+.sechead{background:var(--ink);color:#fff;padding:20px 34px;margin-bottom:20px}
+.sechead h1{color:#fff;font-size:38px}.sechead .eyebrow{color:#FF8A96}.sechead .lede{color:#C9C9CC}
+.panel{background:var(--bg);border:1px solid var(--line);border-top:4px solid var(--red);padding:20px}
+.panel.quiet{border-top:1px solid var(--line);background:#FBFBFB}
+.panel.tint{background:var(--red-lt);border-color:var(--red-md);border-top:4px solid var(--red)}
+.panel.red{background:var(--red);border-color:var(--red);color:#fff}
+.panel.red h2{color:#fff}.panel.red h3{color:rgba(255,255,255,.8)}.panel.red .lede,.panel.red .note{color:rgba(255,255,255,.9)}
+.panel.dark{background:var(--ink);border-color:var(--ink);color:#fff}
+.panel.dark h2{color:#fff}.panel.dark h3{color:#8A8A8D}.panel.dark .lede{color:#C9C9CC}
+.grid{display:grid;gap:13px}.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}
+.g5{grid-template-columns:repeat(5,1fr)}
+.stack{margin-top:20px}
+.kpi{background:var(--bg2);border:1px solid var(--line);border-left:4px solid var(--red);padding:14px 16px}
+.kpi.solid{background:var(--red);border-color:var(--red);color:#fff}.kpi.solid .l{color:rgba(255,255,255,.85)}
+.kpi.dark{background:var(--ink);border-color:var(--ink);color:#fff}.kpi.dark .l{color:#8A8A8D}
+.kpi .v{font-family:var(--disp);font-weight:700;font-size:34px;line-height:1}
+.kpi .v.red{color:var(--red)}.kpi .v.ok{color:var(--ok)}.kpi .v.am{color:var(--amber)}
+.kpi .l{font-family:var(--mono);font-size:9.5px;letter-spacing:1.2px;color:var(--grey2);text-transform:uppercase;margin-top:7px}
+.tag{display:inline-block;font-family:var(--mono);font-size:9.5px;letter-spacing:1.1px;text-transform:uppercase;padding:3px 8px;border:1px solid var(--line);color:var(--grey)}
+.tag.am{border-color:#E5C36A;background:var(--amber-bg);color:var(--amber)}
+.tag.ok{border-color:#9AD1B0;background:var(--ok-bg);color:var(--ok)}
+.tag.red{border-color:var(--red);background:var(--red);color:#fff}
+.tag.rout{border-color:var(--red);background:var(--red-lt);color:var(--red)}
+.mono{font-family:var(--mono);font-size:12px}
+button.act{font-family:var(--disp);font-weight:600;font-size:14px;letter-spacing:1.6px;text-transform:uppercase;background:var(--red);color:#fff;border:0;padding:12px 22px;cursor:pointer;transition:.15s}
+button.act:hover{background:var(--red-dk)}button.act:disabled{background:#E9BCC1;cursor:not-allowed}
+button.act.dark{background:var(--ink)}button.act.dark:hover{background:#333}
+button.ghost{font-family:var(--disp);font-weight:600;font-size:12px;letter-spacing:1.3px;text-transform:uppercase;background:var(--bg);color:var(--ink);border:1px solid var(--line);padding:8px 14px;cursor:pointer}
+button.ghost:hover{border-color:var(--red);color:var(--red)}
+button.ghost.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+button.mini{background:none;border:1px solid var(--line);color:var(--grey2);font-family:var(--mono);font-size:10px;padding:3px 7px;cursor:pointer}
+button.mini:hover{color:var(--red);border-color:var(--red)}
+textarea,input,select{font-family:var(--mono);font-size:13px;background:var(--bg);color:var(--ink);border:1px solid var(--line);padding:11px;width:100%;resize:vertical}
+textarea:focus,input:focus,select:focus{outline:none;border-color:var(--red)}
+input.qty{width:66px;padding:5px 7px;text-align:right}
+.note{font-size:12.5px;color:var(--grey2);margin-top:9px}
+.err{color:var(--red);font-size:12.5px;margin-top:9px;font-weight:500}
+.divider{height:1px;background:var(--line);margin:14px 0}.divider.red{height:3px;background:var(--red)}
+.thread{background:var(--bg2);border:1px solid var(--line);padding:14px;max-height:420px;overflow-y:auto}
+.bub{background:var(--bg);border:1px solid var(--line);border-left:3px solid var(--ink);padding:11px 13px;font-size:13.5px;margin-bottom:8px}
+.bub.me{border-left-color:var(--red);background:var(--red-lt)}
+.bub .who{font-family:var(--mono);font-size:9.5px;letter-spacing:1.1px;color:var(--grey2);text-transform:uppercase;margin-bottom:5px}
+.cites{margin-top:9px;padding-top:8px;border-top:1px solid var(--line2);font-family:var(--mono);font-size:10px;color:var(--grey2)}
+.cites b{color:var(--red);font-weight:500}
+table{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:12px}
+th{text-align:left;font-size:9.5px;letter-spacing:1.2px;color:#fff;text-transform:uppercase;padding:9px 10px;background:var(--ink);font-weight:500}
+td{padding:9px 10px;border-bottom:1px solid var(--line2)}
+tr.clickable{cursor:pointer}tr.clickable:hover td{background:var(--red-lt)}
+tr.sel td{background:var(--red-lt);box-shadow:inset 3px 0 0 var(--red)}
+tr.row-in{animation:slide .3s ease backwards}
+@keyframes slide{from{opacity:0;transform:translateX(-8px)}to{opacity:1;transform:none}}
+.flag{color:var(--amber)}
+.legend{display:flex;gap:18px;flex-wrap:wrap;font-family:var(--mono);font-size:10.5px;color:var(--grey2)}
+.legend i{display:inline-block;width:18px;height:2px;vertical-align:middle;margin-right:6px}
+.bar{height:7px;background:#E8E8E8;overflow:hidden}
+.bar span{display:block;height:100%;background:var(--red);transition:width .3s}
+.rowline{display:flex;justify-content:space-between;align-items:baseline;font-family:var(--mono);font-size:11.5px;padding:7px 0;border-bottom:1px solid var(--line2);gap:12px}
+.rowline b{font-weight:500;text-align:right}
+.big{font-family:var(--disp);font-weight:700;font-size:56px;line-height:1;color:var(--red)}
+.loop{display:flex;flex-wrap:wrap;gap:7px;align-items:center;font-family:var(--mono);font-size:11px;color:var(--grey)}
+.loop span{border:1px solid var(--line);padding:7px 10px;background:var(--bg)}
+.loop em{color:var(--red);font-style:normal;font-weight:700}
+.banner{background:var(--amber-bg);border:1px solid #E5C36A;border-left:4px solid var(--amber);padding:11px 15px;font-size:12.5px;color:#6B4A00;margin-bottom:18px}
+.banner.info{background:#EEF4FB;border-color:#B9D3EE;border-left-color:#2C6DAF;color:#1E4670}
+.spin{display:inline-block;width:11px;height:11px;border:2px solid rgba(255,255,255,.35);border-top-color:#fff;border-radius:50%;animation:sp .7s linear infinite;vertical-align:-1px;margin-right:7px}
+.spin.d{border-color:rgba(0,0,0,.2);border-top-color:var(--ink)}
+@keyframes sp{to{transform:rotate(360deg)}}
+.hidden{display:none}
+input[type=range]{-webkit-appearance:none;appearance:none;background:transparent;padding:0;border:0;height:22px}
+input[type=range]::-webkit-slider-runnable-track{height:4px;background:var(--line)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:16px;height:16px;background:var(--red);margin-top:-6px;cursor:pointer}
+input[type=range]::-moz-range-track{height:4px;background:var(--line)}
+input[type=range]::-moz-range-thumb{width:16px;height:16px;background:var(--red);border:0;cursor:pointer}
+.kbdoc{border:1px solid var(--line);border-left:3px solid var(--red);background:var(--bg);padding:12px;margin-bottom:9px;cursor:pointer}
+.kbdoc:hover{background:var(--red-lt)}
+.kbdoc h4{font-family:var(--disp);font-size:15px;font-weight:600;text-transform:uppercase}
+.kbdoc p{font-size:12.5px;color:var(--grey);margin-top:6px;max-height:48px;overflow:hidden}
+.kbdoc.expanded p{max-height:none}
+.toggle{display:flex;align-items:center;gap:9px;cursor:pointer;user-select:none;font-family:var(--mono);font-size:11.5px}
+.tt{width:36px;height:20px;background:#C8C8C8;position:relative;flex-shrink:0;transition:.2s}
+.tt::after{content:'';position:absolute;top:2px;left:2px;width:16px;height:16px;background:#fff;transition:.2s}
+.toggle input{display:none}
+.toggle input:checked + .tt{background:var(--red)}
+.toggle input:checked + .tt::after{transform:translateX(16px)}
+.verbs{display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--line);margin-top:20px}
+.verb{padding:18px;border-right:1px solid var(--line)}
+.verb:last-child{border-right:0}
+.verb .vn{font-family:var(--disp);font-weight:700;font-size:38px;color:var(--red);line-height:1}
+.verb h3{color:var(--ink);font-size:16px;margin-top:5px}
+.verb p{font-size:13px;color:var(--grey);margin-top:7px}
+
+/* ── channel bridge ── */
+.chcard{border:1px solid var(--line);padding:11px 12px;background:var(--bg);position:relative;overflow:hidden}
+.chcard::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--c)}
+.chcard .nm{font-family:var(--disp);font-weight:600;font-size:15px;text-transform:uppercase;letter-spacing:.4px}
+.chcard .rg{font-family:var(--mono);font-size:9.5px;color:var(--grey2);margin-top:3px;text-transform:uppercase;letter-spacing:.8px}
+.chcard .hd{font-family:var(--mono);font-size:10.5px;color:var(--grey);margin-top:6px}
+.chdot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--ok);margin-right:5px;vertical-align:1px}
+.chdot.off{background:#C8C8C8}
+.inbox{border:1px solid var(--line);max-height:430px;overflow-y:auto;background:var(--bg2)}
+.inbox-item{padding:11px 12px;border-bottom:1px solid var(--line);cursor:pointer;background:var(--bg);position:relative;animation:pop .35s ease}
+@keyframes pop{from{opacity:0;transform:translateY(-8px);background:#FFF3F4}to{opacity:1;transform:none}}
+.inbox-item:hover{background:var(--red-lt)}
+.inbox-item.sel{background:var(--red-lt);box-shadow:inset 3px 0 0 var(--red)}
+.inbox-item .hdr{display:flex;justify-content:space-between;align-items:center;gap:8px;font-family:var(--mono);font-size:9.5px;color:var(--grey2);text-transform:uppercase;letter-spacing:.8px}
+.inbox-item .orig{font-size:13.5px;margin-top:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.inbox-item .tr{font-size:12px;color:var(--grey);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-style:italic}
+.chip{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+.unread{position:absolute;right:10px;top:10px;width:8px;height:8px;background:var(--red);border-radius:50%}
+.tpane{border:1px solid var(--line);padding:13px;background:var(--bg)}
+.tpane.orig{border-left:3px solid var(--ink)}
+.tpane.eng{border-left:3px solid var(--red)}
+.tpane .lbl{font-family:var(--mono);font-size:9.5px;color:var(--grey2);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
+.tpane .txt{font-size:14px;white-space:pre-wrap}
+.roomcode{font-family:var(--disp);font-weight:700;font-size:44px;letter-spacing:8px;color:var(--red);line-height:1}
+
+/* ── phone view ── */
+.phone-body{background:#EDEDED;min-height:100vh;display:flex;flex-direction:column;font-family:var(--body)}
+.ph-top{background:#2C2C2C;color:#fff;padding:12px 14px;display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:5}
+.ph-top .av{width:34px;height:34px;background:var(--red);display:grid;place-items:center;font-family:var(--disp);font-weight:700;font-size:15px;flex-shrink:0}
+.ph-top .nm{font-weight:600;font-size:15px}
+.ph-top .st{font-size:11px;color:#B9B9B9;font-family:var(--mono)}
+.ph-thread{flex:1;padding:14px;overflow-y:auto;display:flex;flex-direction:column;gap:10px}
+.ph-msg{max-width:82%;padding:9px 12px;border-radius:4px;font-size:15px;line-height:1.45;white-space:pre-wrap;animation:pop .3s ease}
+.ph-msg.out{align-self:flex-end;background:#95EC69;color:#111}
+.ph-msg.in{align-self:flex-start;background:#fff;color:#111;border:1px solid #E0E0E0}
+.ph-msg .meta{font-family:var(--mono);font-size:9.5px;color:#8A8A8D;margin-top:5px}
+.ph-sys{align-self:center;font-family:var(--mono);font-size:10.5px;color:#8A8A8D;background:#DCDCDC;padding:3px 9px;border-radius:3px}
+.ph-bar{background:#F7F7F7;border-top:1px solid #D6D6D6;padding:10px;display:flex;gap:8px;align-items:flex-end;position:sticky;bottom:0}
+.ph-bar textarea{flex:1;font-family:var(--body);font-size:15px;border-radius:4px;min-height:42px;max-height:110px;padding:9px}
+.ph-send{background:#07C160;color:#fff;border:0;padding:11px 16px;font-weight:600;font-size:14px;border-radius:4px;cursor:pointer;flex-shrink:0}
+.ph-send:disabled{background:#B7E3C9}
+.ph-quick{display:flex;gap:6px;flex-wrap:wrap;padding:0 10px 10px;background:#F7F7F7}
+.ph-quick button{font-size:11px;padding:6px 9px;border:1px solid #D0D0D0;background:#fff;border-radius:14px;cursor:pointer;font-family:var(--body)}
+.ph-setup{padding:20px;max-width:420px;margin:0 auto}
+.ph-setup h2{font-family:var(--disp);text-transform:uppercase;font-size:24px}
+@media(max-width:920px){.g2,.g3,.g4,.g5,.verbs{grid-template-columns:1fr}.pad{padding:0 15px}.masthead,.sechead{padding:20px 15px}h1{font-size:31px}.masthead h1,.sechead h1{font-size:31px}.rail{width:58px}.rbtn{height:84px;font-size:10px}.appname{display:none}.verb{border-right:0;border-bottom:1px solid var(--line)}}
+</style>
+
+<!-- ══════════════ PHONE VIEW ══════════════ -->
+<div id="phoneApp" class="hidden">
+  <div id="phSetup" class="phone-body"><div class="ph-setup">
+    <h2 style="margin-top:26px">Join the MILWAUKEE® channel</h2>
+    <p class="note">This page simulates a distributor's messaging app. Enter the room code shown on the ONE-CHANNEL™ desk, pick your platform, and start messaging in your own language.</p>
+    <div style="margin-top:16px"><h3>Room code</h3><input id="phRoom" placeholder="ABCD" maxlength="6" style="margin-top:7px;text-transform:uppercase;font-size:22px;letter-spacing:6px;text-align:center" aria-label="Room code"></div>
+    <div style="margin-top:12px"><h3>Platform</h3><select id="phCh" style="margin-top:7px" aria-label="Messaging platform"></select></div>
+    <div style="margin-top:12px"><h3>Your shop</h3><input id="phName" value="大成工具 / Daesung Tools" style="margin-top:7px" aria-label="Shop name"></div>
+    <button class="act" style="margin-top:18px;width:100%" onclick="phJoin()">Join channel</button>
+    <div id="phErr" class="err hidden"></div>
+    <p class="note">If the desk is running in Simulator mode this will not connect — switch the desk to <b>Paired device</b> first.</p>
+  </div></div>
+
+  <div id="phChat" class="phone-body hidden">
+    <div class="ph-top">
+      <div class="av" id="phAv">微</div>
+      <div style="flex:1"><div class="nm" id="phTitle">MILWAUKEE 밀워키</div><div class="st" id="phStatus">connecting…</div></div>
+      <button class="mini" style="color:#fff;border-color:#555" onclick="phLeave()">Leave</button>
+    </div>
+    <div class="ph-thread" id="phThread"></div>
+    <div class="ph-quick" id="phQuick"></div>
+    <div class="ph-bar">
+      <textarea id="phInput" rows="1" placeholder="Type a message…" aria-label="Message"></textarea>
+      <button class="ph-send" id="phSend" onclick="phSend()">Send</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ DESK ══════════════ -->
+<div id="deskApp">
+<div class="topbar">
+  <div class="wordmark">MILWAUKEE®</div><div class="slash"></div>
+  <div class="appname">ONE-CHANNEL™</div>
+  <div class="spacer"></div>
+  <span class="pill link" id="pillBus" onclick="go(1)">Channel off</span>
+  <span class="pill link" id="pillConn" onclick="go(8)">Checking…</span>
+  <span class="pill link" id="pillUse" onclick="go(8)">0 calls</span>
+</div>
+
+<div class="shell">
+<div class="rail"><nav id="nav"></nav></div>
+<main>
+
+<!-- ══ 01 STRATEGY ══ -->
+<section class="view on" id="v-strategy">
+  <div class="masthead">
+    <div class="eyebrow">Asia market penetration — pilot: Republic of Korea</div>
+    <h1>You don't win Asia<br>by selling harder.</h1>
+    <p class="lede">You win it by seeing the channel, buying the shelf, and owning the battery. MILWAUKEE® has the best professional tool on the market and 18% of the shelf. That gap is not a product problem — it is three structural problems, and every one of them is a data problem underneath.</p>
+  </div>
+  <div class="pad">
+    <div class="verbs">
+      <div class="verb"><div class="vn">01</div><h3>See the channel</h3><p>Hundreds of independent distributors stand between MILWAUKEE® and the tradesman, ordering by WeChat, KakaoTalk and LINE in five languages. Sell-in is visible; sell-through is not.</p><p class="note">Modules 02–03</p></div>
+      <div class="verb"><div class="vn">02</div><h3>Buy the shelf</h3><p>Distributors are working-capital constrained, so premium lines lose shelf space to fast movers. An accurate forecast lets MILWAUKEE® underwrite that risk and place stock where it will sell.</p><p class="note">Modules 04–05</p></div>
+      <div class="verb"><div class="vn">03</div><h3>Own the battery</h3><p>Cordless is a platform business. Whoever supplies a tradesman's first battery captures a decade of tool purchases. Converting a competitor user is worth far more than one sale.</p><p class="note">Modules 06–07</p></div>
+    </div>
+    <div class="grid g4 stack">
+      <div class="kpi solid"><div class="v">18%</div><div class="l">Share of shelf today</div></div>
+      <div class="kpi"><div class="v red" id="kShelf">18%</div><div class="l">Share of shelf, modelled</div></div>
+      <div class="kpi"><div class="v" id="kInstall">0</div><div class="l">Platform conversions won</div></div>
+      <div class="kpi dark"><div class="v" id="kVis">0%</div><div class="l">Sell-through visibility</div></div>
+    </div>
+    <p class="note">The first figure is the standing position. The others move as you work through the modules.</p>
+    <div class="panel stack">
+      <h2>The loop we are breaking</h2>
+      <p class="lede" style="margin-top:8px">The Asian shortfall gets read internally as weak demand. It is not. It is a working-capital constraint at the distributor, compounding into invisibility on the shelf.</p>
+      <div class="loop" style="margin-top:16px">
+        <span>Distributor capital is tight</span><em>&rarr;</em><span>Premium SKUs turn slowly</span><em>&rarr;</em>
+        <span>He stocks what he knows moves</span><em>&rarr;</em><span>MILWAUKEE® is not on the shelf</span><em>&rarr;</em>
+        <span>Contractor buys the competitor</span><em>&rarr;</em><span>He is now on their battery</span><em>&rarr;</em>
+        <span>Locked out for a decade</span><em>&rarr;</em><span style="border-color:var(--red);color:var(--red);font-weight:700">back to the start</span>
+      </div>
+    </div>
+    <div class="panel quiet stack">
+      <h2>Distributor network</h2>
+      <p class="note" style="margin-top:0">Click any row to load that account across the forecast and offer modules.</p>
+      <table style="margin-top:13px"><thead><tr><th>Code</th><th>Account</th><th>City</th><th>Health</th><th style="text-align:right">Cover</th><th style="text-align:right">Data shared</th></tr></thead><tbody id="netRows"></tbody></table>
+    </div>
+  </div>
+</section>
+
+<!-- ══ 02 CHANNEL DESK ══ -->
+<section class="view" id="v-channel">
+  <div class="sechead"><div class="eyebrow">See the channel — module 02</div><h1>Channel desk</h1>
+    <p class="lede">Asian distributors do not use portals. They use WeChat in China, KakaoTalk in Korea, LINE in Japan and Thailand, Zalo in Vietnam, WhatsApp across South and Southeast Asia. ONE-CHANNEL™ terminates all of them in one inbox, translates every message into English for the MILWAUKEE® employee, extracts the purchase order, and replies in the distributor's own language. The interface that reduces his admin is the sensor that collects the data.</p></div>
+  <div class="pad">
+
+  <div class="grid g5">
+    <div class="chcard" style="--c:#07C160"><div class="nm">WeChat 微信</div><div class="rg">Mainland China</div><div class="hd"><span class="chdot" id="d-wechat"></span>OA: MilwaukeeCN</div></div>
+    <div class="chcard" style="--c:#FEE500"><div class="nm">KakaoTalk</div><div class="rg">Korea</div><div class="hd"><span class="chdot" id="d-kakao"></span>@milwaukee_kr</div></div>
+    <div class="chcard" style="--c:#06C755"><div class="nm">LINE</div><div class="rg">Japan · Thailand · Taiwan</div><div class="hd"><span class="chdot" id="d-line"></span>@milwaukee</div></div>
+    <div class="chcard" style="--c:#25D366"><div class="nm">WhatsApp</div><div class="rg">India · SEA</div><div class="hd"><span class="chdot" id="d-whatsapp"></span>+82 10 5512 0119</div></div>
+    <div class="chcard" style="--c:#0068FF"><div class="nm">Zalo</div><div class="rg">Vietnam</div><div class="hd"><span class="chdot" id="d-zalo"></span>Milwaukee VN</div></div>
+  </div>
+
+  <div class="panel stack">
+    <h2>Bridge</h2>
+    <p class="note" style="margin-top:0">How inbound messages reach this desk. In production each platform posts to a webhook; for the prototype pick a transport below.</p>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">
+      <button class="ghost" id="bm-sim" onclick="busSetMode('sim')">Simulator</button>
+      <button class="ghost" id="bm-paired" onclick="busSetMode('paired')">Paired device</button>
+      <button class="ghost" id="bm-local" onclick="busSetMode('local')">Same browser</button>
+    </div>
+    <div id="busBody" style="margin-top:16px"></div>
+    <div id="busErr" class="err hidden"></div>
+  </div>
+
+  <div class="grid g2 stack" style="gap:13px">
+    <div class="panel">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap">
+        <h3 style="margin:0">Unified inbox</h3>
+        <div style="display:flex;gap:6px;align-items:center">
+          <label class="toggle"><input type="checkbox" id="autoTr" checked><span class="tt"></span>Auto-translate</label>
+          <button class="mini" onclick="clearInbox()">Clear</button>
+        </div>
+      </div>
+      <div class="inbox stack" id="inbox" style="margin-top:12px"></div>
+      <p class="note">Messages arrive live. Each is translated and parsed on arrival, then a reply is drafted in the sender's language.</p>
+    </div>
+
+    <div class="panel">
+      <h3>Message detail</h3>
+      <div id="msgEmpty" style="margin-top:16px;color:var(--grey2);font-size:13.5px">No message selected. Send one from a paired phone, or run the simulator.</div>
+      <div id="msgDetail" class="hidden">
+        <div style="display:flex;gap:7px;flex-wrap:wrap;margin:12px 0 13px">
+          <span class="tag rout" id="mdCh"></span><span class="tag" id="mdLang"></span>
+          <span class="tag" id="mdIntent"></span><span class="tag ok hidden" id="mdCache">Cached</span>
+        </div>
+        <div class="grid g2" style="gap:10px">
+          <div class="tpane orig"><div class="lbl">As received</div><div class="txt" id="mdOrig"></div></div>
+          <div class="tpane eng"><div class="lbl">Live translation — English</div><div class="txt" id="mdEng">…</div></div>
+        </div>
+        <div class="divider"></div>
+        <h3>Extracted purchase order</h3>
+        <table style="margin-top:9px"><thead><tr><th>#</th><th>SKU</th><th>Description</th><th style="text-align:right">Qty</th><th></th></tr></thead><tbody id="poRows"></tbody></table>
+        <div id="poFlags" style="margin-top:11px"></div>
+        <div class="divider"></div>
+        <h3>Auto-drafted reply</h3>
+        <div class="bub me" style="margin-top:9px"><div class="who" id="mdReplyWho">Outbound</div><div id="mdReply"></div></div>
+        <div style="display:flex;gap:9px;margin-top:13px;flex-wrap:wrap">
+          <button class="act" onclick="sendReply()">Send reply to distributor</button>
+          <button class="act dark" onclick="approvePO()">Approve and capture</button>
+        </div>
+        <div id="replyMsg" class="note"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel quiet stack">
+    <h2>Captured order ledger</h2>
+    <p class="note" style="margin-top:0">Every approved order feeds the forecast and lifts sell-through visibility.</p>
+    <div id="ledger" style="margin-top:12px"></div>
+  </div>
+
+  <div class="panel dark stack">
+    <h2>Production architecture</h2>
+    <p class="lede" style="margin-top:8px">What replaces the bridge above when this is real, and what each platform actually requires. Put this on a slide — it is the first thing a TTI engineer will ask.</p>
+    <table style="margin-top:14px"><thead><tr><th>Platform</th><th>Integration</th><th>Requirement</th><th>Lead time</th></tr></thead>
+      <tbody>
+        <tr><td style="color:#FF8A96">WeChat</td><td>Official Account webhook</td><td>Verified mainland China business entity, annual verification</td><td>4–8 weeks</td></tr>
+        <tr><td style="color:#FF8A96">KakaoTalk</td><td>Kakao Business channel API</td><td>Korean business registration</td><td>2–4 weeks</td></tr>
+        <tr><td style="color:#FF8A96">LINE</td><td>Messaging API webhook</td><td>LINE Official Account</td><td>1–2 weeks</td></tr>
+        <tr><td style="color:#FF8A96">WhatsApp</td><td>Cloud API webhook</td><td>Meta Business verification, phone number</td><td>1–3 weeks</td></tr>
+        <tr><td style="color:#FF8A96">Zalo</td><td>Zalo OA API</td><td>Vietnamese business entity</td><td>2–4 weeks</td></tr>
+      </tbody></table>
+    <p class="note" style="color:#8A8A8D">All five post JSON to the same endpoint, so the translation and extraction pipeline behind this desk is identical regardless of platform. That is the point of terminating them in one channel.</p>
+  </div>
+  </div>
+</section>
+
+<!-- ══ 03 FORECAST ══ -->
+<section class="view" id="v-forecast">
+  <div class="sechead"><div class="eyebrow">See the channel — module 03</div><h1>Demand forecast</h1>
+    <p class="lede">Ninety days ahead, per distributor, per SKU, with a scenario simulator on top. Every captured order tightens the confidence interval — so the module that saves the distributor time is the one that earns him better terms.</p></div>
+  <div class="pad">
+  <div class="banner"><b>Synthetic dataset.</b> These series are generated in-browser to demonstrate the mechanism; in deployment the model reads TTI's own order history. Say this out loud on Friday.</div>
+  <div class="panel">
+    <div class="grid g2" style="gap:16px">
+      <div><h3>Distributor</h3><select id="selDist" onchange="drawChart()" style="margin-top:8px"></select></div>
+      <div><h3>Product line</h3><select id="selSku" onchange="drawChart()" style="margin-top:8px"></select></div>
+    </div>
+    <div id="chartWrap" style="margin-top:20px"></div>
+    <div class="legend" style="margin-top:10px">
+      <span><i style="background:#58585A"></i>Units ordered</span><span><i style="background:var(--red)"></i>Baseline forecast</span>
+      <span><i style="background:var(--ink)"></i>Scenario</span><span><i style="background:#F7CDD3"></i>80% confidence band</span>
+    </div>
+  </div>
+  <div class="grid g2 stack">
+    <div class="panel">
+      <h2>Scenario simulator</h2>
+      <p class="note" style="margin-top:0">Modelled on order behaviour, not invented consumer psychology. The elasticities are assumptions — put them on a slide and defend them.</p>
+      <div style="margin-top:16px">
+        <div class="rowline" style="border:0;padding-bottom:4px"><span>Trade price change</span><b id="lPrice">0%</b></div>
+        <input type="range" id="sPrice" min="-15" max="15" value="0" oninput="drawChart()" aria-label="Trade price change">
+        <div class="rowline" style="border:0;padding:10px 0 4px"><span>Marketing and demo push</span><b id="lMkt">None</b></div>
+        <input type="range" id="sMkt" min="0" max="3" value="0" oninput="drawChart()" aria-label="Marketing intensity">
+        <div class="rowline" style="border:0;padding:10px 0 4px"><span>Counter staff trained</span><b id="lTrain">0%</b></div>
+        <input type="range" id="sTrain" min="0" max="100" value="0" step="10" oninput="drawChart()" aria-label="Counter staff trained">
+        <label class="toggle" style="margin-top:16px"><input type="checkbox" id="sBuy" onchange="drawChart()"><span class="tt"></span>90-day buy-back guarantee offered</label>
+      </div>
+      <div class="divider red"></div>
+      <div class="rowline"><span>Scenario vs baseline, 90 days</span><b id="scDelta">—</b></div>
+      <div class="rowline"><span>Est. trade revenue impact</span><b id="scRev">—</b></div>
+      <button class="ghost" style="margin-top:12px" onclick="resetSim()">Reset scenario</button>
+    </div>
+    <div>
+      <div class="panel quiet"><h3>Signal contribution</h3><div id="signals" style="margin-top:14px"></div></div>
+      <div class="panel quiet" style="margin-top:13px"><h3>Model output</h3><div id="fcStats" style="margin-top:8px"></div></div>
+    </div>
+  </div>
+  </div>
+</section>
+
+<!-- ══ 04 WHITE SPACE ══ -->
+<section class="view" id="v-market">
+  <div class="sechead"><div class="eyebrow">Buy the shelf — module 04</div><h1>White space</h1>
+    <p class="lede">Where should MILWAUKEE® place its next distributor? Not simply where demand is highest — where demand is high, competitor entrenchment is beatable, and MILWAUKEE® coverage is thin. Those three rarely point at the same place.</p></div>
+  <div class="pad">
+  <div class="grid g4">
+    <div class="kpi solid"><div class="v" id="mTop">—</div><div class="l">Highest opportunity region</div></div>
+    <div class="kpi"><div class="v red" id="mEnter">0</div><div class="l">Regions ready to enter</div></div>
+    <div class="kpi"><div class="v" id="mUncov">0%</div><div class="l">Trade demand uncovered</div></div>
+    <div class="kpi dark"><div class="v" id="mDists">5</div><div class="l">Distributors appointed</div></div>
+  </div>
+  <div class="panel stack">
+    <h2>Opportunity vs coverage</h2>
+    <p class="note" style="margin-top:0">Bubble size is opportunity score. The top-left quadrant is the target: strong trade demand, thin MILWAUKEE® coverage.</p>
+    <div id="mapWrap" style="margin-top:16px"></div>
+  </div>
+  <div class="panel quiet stack">
+    <h2>Region ranking</h2>
+    <p class="note" style="margin-top:0">Click a region for the entry plan. Synthetic indices — replace with Korean construction permit and trade registry data.</p>
+    <table style="margin-top:13px"><thead><tr><th>Region</th><th style="text-align:right">Trade demand</th><th style="text-align:right">Competitor grip</th><th style="text-align:right">Our coverage</th><th style="text-align:right">Opportunity</th><th>Action</th></tr></thead><tbody id="mapRows"></tbody></table>
+  </div>
+  <div class="panel stack">
+    <h2>Entry plan</h2>
+    <div id="planOut" style="margin-top:12px;color:var(--grey2);font-size:13.5px">Select a region above.</div>
+    <div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap">
+      <button class="act" id="planBtn" onclick="writePlan()">Draft the entry plan</button>
+      <span class="mono" style="color:var(--grey2)" id="planFor"></span>
+    </div>
+    <div id="planErr" class="err hidden"></div>
+    <div id="planText" class="bub hidden" style="margin-top:14px"><div class="who">Regional entry brief</div><div id="planBody"></div></div>
+  </div>
+  </div>
+</section>
+
+<!-- ══ 05 OFFER ══ -->
+<section class="view" id="v-offer">
+  <div class="sechead"><div class="eyebrow">Buy the shelf — module 05</div><h1>Stocking offer</h1>
+    <p class="lede">MILWAUKEE® cannot ask a distributor to gamble his working capital on a premium line — but it can absorb that gamble itself, once the risk is a number. Accuracy buys shelf space that discounting alone cannot.</p></div>
+  <div class="pad">
+  <div class="panel">
+    <div class="grid g2" style="gap:30px;align-items:start">
+      <div>
+        <h3>Recommended placement</h3>
+        <div class="big" id="offUnits" style="margin:10px 0 4px">—</div>
+        <div class="mono" style="color:var(--grey2)" id="offSub">—</div>
+        <div style="margin-top:20px">
+          <div class="rowline"><span>Forecast, 90 days</span><b id="offFc">—</b></div>
+          <div class="rowline"><span>Model confidence</span><b id="offConf">—</b></div>
+          <div class="rowline"><span>Buy-back window</span><b>90 days</b></div>
+          <div class="rowline"><span>Worst-case exposure</span><b id="offRisk">—</b></div>
+          <div class="rowline"><span>Expected unsold at close</span><b id="offUnsold">—</b></div>
+          <div class="rowline"><span>Shelf facings bought</span><b id="offShelf">—</b></div>
+          <div class="rowline"><span>Underwriting decision</span><b id="offDec">—</b></div>
+        </div>
+      </div>
+      <div>
+        <h3>What each side gets</h3>
+        <div style="margin-top:12px;font-size:13.5px;color:var(--grey)">
+          <p style="margin-bottom:11px"><b style="color:var(--ink)">The distributor</b> stocks a premium line without tying up capital, with 90-day buy-back on anything unsold, priority allocation and improved terms.</p>
+          <p style="margin-bottom:11px"><b style="color:var(--ink)">MILWAUKEE®</b> gets shelf facings it cannot otherwise buy, SKU-level sell-through data, and a forecast that sharpens every cycle.</p>
+          <p><b style="color:var(--ink)">Exposure is capped</b> per distributor, and the programme opens on high-confidence SKUs only.</p>
+        </div>
+        <div class="divider red"></div>
+        <div style="display:flex;gap:9px;flex-wrap:wrap">
+          <button class="act" id="offerBtn" onclick="writeOffer()">Draft offer in Korean</button>
+          <button class="ghost" onclick="acceptOffer()">Distributor accepts</button>
+        </div>
+        <div id="offerErr" class="err hidden"></div>
+        <div id="offerOut" class="bub me hidden" style="margin-top:14px"><div class="who">Outbound — KakaoTalk</div><div id="offerText"></div></div>
+      </div>
+    </div>
+  </div>
+  <div class="panel quiet stack">
+    <h2>Programme exposure</h2>
+    <div class="grid g4" style="margin-top:14px">
+      <div class="kpi solid"><div class="v" id="expUnits">0</div><div class="l">Units placed</div></div>
+      <div class="kpi"><div class="v" id="expRisk">0</div><div class="l">Units at risk, worst case</div></div>
+      <div class="kpi"><div class="v ok" id="expDists">0</div><div class="l">Distributors enrolled</div></div>
+      <div class="kpi"><div class="v red" id="expShelf">0</div><div class="l">Shelf facings gained</div></div>
+    </div>
+    <div style="margin-top:16px">
+      <div class="rowline" style="border:0"><span>Exposure against 1,500-unit programme cap</span><b id="expPct">0%</b></div>
+      <div class="bar" style="height:11px"><span id="expBar" style="width:0%"></span></div>
+    </div>
+    <div id="expList" style="margin-top:16px"></div>
+  </div>
+  </div>
+</section>
+
+<!-- ══ 06 CONVERSION ══ -->
+<section class="view" id="v-convert">
+  <div class="sechead"><div class="eyebrow">Own the battery — module 06</div><h1>Conversion engine</h1>
+    <p class="lede">Cordless is a platform business. A tradesman who buys his first M18™ battery is likely to buy MILWAUKEE® for the next decade, because the battery he already owns makes every subsequent tool cheaper. The corollary is brutal: every month a Korean electrician spends on a rival platform is a decade of revenue MILWAUKEE® never sees.</p></div>
+  <div class="pad">
+  <div class="panel">
+    <div class="grid g3" style="gap:16px">
+      <div><h3>Currently on</h3><select id="cvComp" onchange="calcConvert()" style="margin-top:8px"></select></div>
+      <div><h3>Trade</h3><select id="cvTrade" onchange="calcConvert()" style="margin-top:8px"></select></div>
+      <div><h3>Market</h3><select id="cvMkt" onchange="calcConvert()" style="margin-top:8px"></select></div>
+    </div>
+    <div style="margin-top:16px">
+      <div class="rowline" style="border:0;padding-bottom:4px"><span>Competitor batteries already owned</span><b id="lBat">4</b></div>
+      <input type="range" id="cvBat" min="1" max="12" value="4" oninput="calcConvert()" aria-label="Competitor batteries owned">
+    </div>
+  </div>
+  <div class="grid g2 stack">
+    <div class="panel tint">
+      <h3>Lock-in economics</h3>
+      <div class="big" id="cvValue" style="margin:10px 0 4px">—</div>
+      <div class="mono" style="color:var(--grey2)">Ten-year platform value of this one tradesman</div>
+      <div style="margin-top:18px">
+        <div class="rowline"><span>Stranded competitor batteries</span><b id="cvStrand">—</b></div>
+        <div class="rowline"><span>Switching cost to him</span><b id="cvSwitch">—</b></div>
+        <div class="rowline"><span>Trade-in subsidy required</span><b id="cvSub">—</b></div>
+        <div class="rowline"><span>Three-year MILWAUKEE® capture</span><b id="cvCap">—</b></div>
+        <div class="rowline"><span>Gross margin on capture</span><b id="cvMargin">—</b></div>
+        <div class="rowline"><span>Subsidy payback</span><b id="cvPay">—</b></div>
+        <div class="rowline"><span>Verdict</span><b id="cvVerdict">—</b></div>
+      </div>
+    </div>
+    <div class="panel">
+      <h3>Conversion pitch</h3>
+      <p class="note" style="margin-top:0">Written for the counter, in the customer's language, arguing from his trade and his stranded investment — not from a spec sheet.</p>
+      <div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap">
+        <button class="act" id="cvBtn" onclick="writePitch()">Generate the pitch</button>
+        <button class="ghost" onclick="document.getElementById('cvOut').classList.add('hidden')">Clear</button>
+      </div>
+      <div id="cvErr" class="err hidden"></div>
+      <div id="cvOut" class="bub me hidden" style="margin-top:14px"><div class="who">Counter pitch</div><div id="cvText"></div></div>
+      <div class="divider"></div>
+      <h3>Recommended entry kit</h3>
+      <div id="cvKit" style="margin-top:10px"></div>
+    </div>
+  </div>
+  <div class="panel red stack">
+    <h2>Why this is the penetration lever</h2>
+    <p class="lede" style="margin-top:8px">A discount wins one transaction. A platform conversion wins every transaction that tradesman makes for ten years, and simultaneously removes him from a competitor's installed base. In a market where MILWAUKEE® is behind on shelf space, conversion economics justify subsidies that unit economics never would — which is precisely the argument TTI needs to fund an Asian push.</p>
+  </div>
+  <div class="panel quiet stack">
+    <h2>Conversions won this session</h2>
+    <div id="cvLog" style="margin-top:12px"></div>
+    <button class="act dark" style="margin-top:14px" onclick="logConversion()">Record this conversion</button>
+  </div>
+  </div>
+</section>
+
+<!-- ══ 07 COUNTER ══ -->
+<section class="view" id="v-counter">
+  <div class="sechead"><div class="eyebrow">Own the battery — module 07</div><h1>Counter assistant</h1>
+    <p class="lede">In a market of hundreds of independent shops, the person deciding whether a contractor walks out on the MILWAUKEE® platform is a counter employee who knows the competitor's catalogue cold and MILWAUKEE®'s barely at all.</p></div>
+  <div class="pad">
+  <div class="panel">
+    <div id="chat" class="thread" style="min-height:230px"></div>
+    <div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap">
+      <input id="q" placeholder="Ask in Korean, Chinese, Thai, Vietnamese or English…" onkeydown="if(event.key==='Enter')askCounter()" aria-label="Question" style="flex:1;min-width:220px">
+      <button class="act" id="askBtn" onclick="askCounter()">Ask</button>
+      <button class="ghost" onclick="clearChat()">Clear</button>
+    </div>
+    <div id="chatErr" class="err hidden"></div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:12px">
+      <button class="ghost" onclick="quick(0)">KO — competitor swap</button>
+      <button class="ghost" onclick="quick(1)">KO — warranty fault</button>
+      <button class="ghost" onclick="quick(2)">ZH — platform choice</button>
+      <button class="ghost" onclick="quick(3)">EN — ONE-KEY™</button>
+    </div>
+    <p class="note">Every answer cites the documents it retrieved. If retrieval finds nothing relevant the assistant says so rather than inventing.</p>
+  </div>
+  </div>
+</section>
+
+<!-- ══ 08 KNOWLEDGE ══ -->
+<section class="view" id="v-kb">
+  <div class="sechead"><div class="eyebrow">Infrastructure — module 08</div><h1>Knowledge base</h1>
+    <p class="lede">The assistant does not answer from memory. It searches these documents and answers only from what it found. Paste TTI's own manuals or policy below and they are indexed immediately.</p></div>
+  <div class="pad">
+  <div class="grid g4">
+    <div class="kpi solid"><div class="v" id="kbCount">0</div><div class="l">Documents indexed</div></div>
+    <div class="kpi"><div class="v" id="kbWords">0</div><div class="l">Words in index</div></div>
+    <div class="kpi"><div class="v ok" id="kbPub">0</div><div class="l">Verified public sources</div></div>
+    <div class="kpi"><div class="v am" id="kbOwn">0</div><div class="l">Your own documents</div></div>
+  </div>
+  <div class="panel stack">
+    <h2>Add a document</h2>
+    <input id="kbTitle" placeholder="Document title" style="margin-top:12px" aria-label="Document title">
+    <textarea id="kbBody" rows="6" placeholder="Paste the document text here…" style="margin-top:9px" aria-label="Document body"></textarea>
+    <div style="display:flex;gap:10px;align-items:center;margin-top:12px;flex-wrap:wrap">
+      <button class="act" onclick="addDoc()">Index document</button>
+      <span class="mono" style="color:var(--grey2)">Stored in this browser only</span>
+    </div>
+    <div id="kbErr" class="err hidden"></div>
+  </div>
+  <div class="panel quiet stack">
+    <h2>Test retrieval</h2>
+    <div style="display:flex;gap:10px;margin-top:12px;flex-wrap:wrap">
+      <input id="kbQ" placeholder="e.g. 배터리 보증" onkeydown="if(event.key==='Enter')testRetrieve()" style="flex:1;min-width:200px" aria-label="Retrieval test">
+      <button class="ghost" onclick="testRetrieve()">Search index</button>
+    </div>
+    <div id="kbTest" style="margin-top:14px"></div>
+  </div>
+  <div class="panel quiet stack"><h2>Indexed documents</h2><div id="kbList" style="margin-top:14px"></div></div>
+  </div>
+</section>
+
+<!-- ══ 09 SETUP ══ -->
+<section class="view" id="v-setup">
+  <div class="sechead"><div class="eyebrow">Infrastructure — module 09</div><h1>Setup</h1>
+    <p class="lede">Live features need a model connection. Inside the Claude chat sandbox that is automatic; anywhere else add a free Google AI Studio key — or run the whole system offline.</p></div>
+  <div class="pad">
+  <div class="panel">
+    <h2>Connection status</h2>
+    <div id="connStatus" style="margin-top:12px"></div>
+    <div style="display:flex;gap:10px;margin-top:14px;flex-wrap:wrap">
+      <button class="act" id="testBtn" onclick="testConn()">Test connection</button>
+      <button class="ghost" onclick="setMode('offline')">Force offline demo mode</button>
+    </div>
+  </div>
+  <div class="panel quiet stack">
+    <h2>Quota and pacing</h2>
+    <div class="grid g4" style="margin-top:14px">
+      <div class="kpi"><div class="v" id="uCalls">0</div><div class="l">Model calls today</div></div>
+      <div class="kpi"><div class="v ok" id="uCached">0</div><div class="l">Served from cache</div></div>
+      <div class="kpi"><div class="v am" id="uSaved">0%</div><div class="l">Calls avoided</div></div>
+      <div class="kpi solid"><div class="v" id="uLeft">—</div><div class="l">Left in daily budget</div></div>
+    </div>
+    <div style="margin-top:16px">
+      <div class="rowline" style="border:0"><span>Daily budget</span><b id="lBudget">200</b></div>
+      <input type="range" id="sBudget" min="25" max="1000" step="25" value="200" oninput="setBudget()" aria-label="Daily budget">
+      <div class="bar" style="height:11px;margin-top:6px"><span id="uBar" style="width:0%"></span></div>
+    </div>
+    <div class="divider red"></div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+      <button class="act dark" id="warmBtn" onclick="prewarm()">Pre-warm the demo cache</button>
+      <button class="ghost" onclick="clearCache()">Clear cache</button>
+    </div>
+    <div id="warmMsg" class="note">Runs every scripted demo step once and stores the results. Do this the night before.</div>
+  </div>
+  <div class="panel quiet stack">
+    <h2>Provider</h2>
+    <div style="margin-top:14px"><h3>Mode</h3>
+      <select id="cfgMode" onchange="setMode(this.value)" style="margin-top:8px">
+        <option value="auto">Auto — try each in turn (recommended)</option>
+        <option value="proxy">Claude sandbox only (no key)</option>
+        <option value="anthropic">Anthropic API key</option>
+        <option value="gemini">Google AI Studio key</option>
+        <option value="offline">Offline demo — no network at all</option>
+      </select></div>
+    <div class="divider"></div>
+    <h3>Google AI Studio key</h3>
+    <input id="cfgGkey" type="password" placeholder="AQ.Ab… or AIza…" style="margin-top:9px" aria-label="Google key" oninput="saveCfg()">
+    <div style="display:flex;gap:9px;margin-top:9px;flex-wrap:wrap;align-items:center">
+      <input id="cfgGmodel" placeholder="gemini-2.5-flash" style="flex:1;min-width:170px" aria-label="Model" oninput="saveCfg()">
+      <button class="ghost" id="fetchBtn" onclick="fetchModels()">Fetch models</button>
+      <button class="act" id="fixBtn" onclick="autoFix()">Find one that works</button>
+    </div>
+    <select id="cfgGlist" class="hidden" style="margin-top:9px" onchange="pickModel(this.value)" aria-label="Available models"></select>
+    <div id="modelMsg" class="note">Fetch the list, then let it test each one for real. Prefer a pinned Flash model over an alias.</div>
+    <div class="divider"></div>
+    <h3>Anthropic API key</h3>
+    <input id="cfgAkey" type="password" placeholder="sk-ant-…" style="margin-top:9px" aria-label="Anthropic key" oninput="saveCfg()">
+  </div>
+  <div class="panel dark stack">
+    <h2>Offline demo mode</h2>
+    <p class="lede" style="margin-top:8px">Every module works with no network. The channel desk uses a rule-based parser and shipped translations for the demo messages, the counter assistant returns retrieved passages, and the conversion maths is entirely local.</p>
+  </div>
+  <div class="panel quiet stack">
+    <h2>Self-test</h2>
+    <button class="ghost" style="margin-top:12px" onclick="selfTest()">Run self-test</button>
+    <div id="testOut" style="margin-top:14px"></div>
+  </div>
+  </div>
+</section>
+
+</main></div>
+</div>
+
+<script>
+/* ═════ base helpers ═════ */
+const MEM={};
+async function sget(k){try{const r=await window.storage.get(k);return r?JSON.parse(r.value):(MEM[k]??null)}catch(e){return MEM[k]??null}}
+async function sset(k,v){MEM[k]=v;try{await window.storage.set(k,JSON.stringify(v))}catch(e){}}
+function esc(s){const d=document.createElement('div');d.textContent=s==null?'':s;return d.innerHTML;}
+function sleep(ms){return new Promise(r=>setTimeout(r,ms));}
+function usd(n){return 'US$'+Math.round(n).toLocaleString();}
+function setTxt(id,v){const e=document.getElementById(id);if(e)e.textContent=v;}
+function nowHM(){const d=new Date();return String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');}
+function loadScript(src){return new Promise((res,rej)=>{
+  if(document.querySelector('script[data-src="'+src+'"]'))return res();
+  const s=document.createElement('script');s.src=src;s.setAttribute('data-src',src);
+  s.onload=()=>res();s.onerror=()=>rej(new Error('Could not load '+src+' — check the network'));
+  document.head.appendChild(s);});}
+
+/* ═════ channels ═════ */
+const CHANNELS={
+ wechat:{name:'WeChat 微信',short:'微',colour:'#07C160',region:'China',lang:'Chinese',handle:'OA MilwaukeeCN'},
+ kakao:{name:'KakaoTalk 카카오톡',short:'K',colour:'#FEE500',region:'Korea',lang:'Korean',handle:'@milwaukee_kr'},
+ line:{name:'LINE',short:'L',colour:'#06C755',region:'Japan / Thailand',lang:'Japanese',handle:'@milwaukee'},
+ whatsapp:{name:'WhatsApp',short:'W',colour:'#25D366',region:'India / SEA',lang:'English',handle:'+82 10 5512 0119'},
+ zalo:{name:'Zalo',short:'Z',colour:'#0068FF',region:'Vietnam',lang:'Vietnamese',handle:'Milwaukee VN'}
+};
+
+/* ═════ nav ═════ */
+const VIEWS=[['strategy','Strategy'],['channel','Channel desk'],['forecast','Forecast'],['market','White space'],['offer','Offer'],['convert','Conversion'],['counter','Counter'],['kb','Knowledge'],['setup','Setup']];
+const nav=document.getElementById('nav');
+VIEWS.forEach((v,i)=>{const b=document.createElement('button');b.className='rbtn'+(i===0?' on':'');b.id='nav'+i;
+  b.innerHTML='<span class="n">0'+(i+1)+'</span>'+v[1];b.onclick=()=>go(i);nav.appendChild(b);});
+function go(i){document.querySelectorAll('.rbtn').forEach((b,j)=>b.classList.toggle('on',j===i));
+  document.querySelectorAll('.view').forEach(s=>s.classList.remove('on'));
+  document.getElementById('v-'+VIEWS[i][0]).classList.add('on');window.scrollTo(0,0);
+  if(i===1)UNSEEN=0,renderBusPill();}
+
+/* ═════ config / usage / cache ═════ */
+let CFG={mode:'auto',akey:'',gkey:'',gmodel:'gemini-2.5-flash',gver:'auto',gpool:[],budget:200};
+let USE={date:today(),calls:0,cached:0};
+let CACHE={},CACHEKEYS=[],GMODELS=[],LASTOK='',CALLTIMES=[],DEGRADED=false,DEGRADE_REASON='';
+function today(){return new Date().toISOString().slice(0,10);}
+function hash(s){let h=5381;for(let i=0;i<s.length;i++)h=((h*33)^s.charCodeAt(i))>>>0;return h.toString(36)+s.length.toString(36);}
+function budgetLeft(){return Math.max(0,CFG.budget-USE.calls);}
+function renderUsage(){
+  const tot=USE.calls+USE.cached;
+  setTxt('uCalls',USE.calls);setTxt('uCached',USE.cached);
+  setTxt('uSaved',tot?Math.round(USE.cached/tot*100)+'%':'0%');
+  setTxt('uLeft',budgetLeft());setTxt('lBudget',CFG.budget);
+  const b=document.getElementById('uBar');if(b)b.style.width=Math.min(100,Math.round(USE.calls/Math.max(1,CFG.budget)*100))+'%';
+  const p=document.getElementById('pillUse');
+  if(p){p.textContent=USE.calls+' calls · '+USE.cached+' cached';
+    p.className='pill link'+(budgetLeft()===0?' bad':budgetLeft()<15?' warn':'');}
+  const s=document.getElementById('sBudget');if(s)s.value=CFG.budget;
+}
+function setBudget(){CFG.budget=+document.getElementById('sBudget').value;sset('cfg',CFG);renderUsage();}
+async function bumpCalls(){USE.calls++;await sset('use',USE);renderUsage();}
+async function bumpCached(){USE.cached++;await sset('use',USE);renderUsage();}
+function cacheGet(k){return CACHE[k];}
+function cacheSet(k,v){if(!(k in CACHE))CACHEKEYS.push(k);CACHE[k]=v;
+  while(CACHEKEYS.length>80)delete CACHE[CACHEKEYS.shift()];sset('cache',{k:CACHEKEYS,v:CACHE});}
+async function clearCache(){CACHE={};CACHEKEYS=[];await sset('cache',{k:[],v:{}});
+  document.getElementById('warmMsg').innerHTML='Cache cleared.';}
+
+/* ═════ providers ═════ */
+const RETRYABLE=new Set([429,500,502,503,504]);
+function anthBody(m,s,mx){const b={model:"claude-sonnet-4-6",max_tokens:mx||800,messages:m};if(s)b.system=s;return b;}
+function anthText(d){return d.content.filter(c=>c.type==="text").map(c=>c.text).join("\n").trim();}
+async function viaProxy(m,s,mx){
+  const r=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(anthBody(m,s,mx))});
+  if(!r.ok){const e=new Error("sandbox proxy unavailable ("+r.status+")");e.status=r.status;throw e;}
+  return anthText(await r.json());
+}
+async function viaAnthropic(m,s,mx){
+  if(!CFG.akey)throw new Error("no Anthropic key set");
+  const r=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",
+    headers:{"Content-Type":"application/json","x-api-key":CFG.akey,"anthropic-version":"2023-06-01","anthropic-dangerous-direct-browser-access":"true"},
+    body:JSON.stringify(anthBody(m,s,mx))});
+  if(!r.ok){let t='';try{const j=await r.json();t=(j.error&&j.error.message)||'';}catch(e){}
+    const e2=new Error("Anthropic "+r.status+(t?" — "+t:""));e2.status=r.status;throw e2;}
+  return anthText(await r.json());
+}
+async function geminiCall(ver,model,messages,system,max){
+  const body={contents:messages.map(m=>({role:m.role==='assistant'?'model':'user',parts:[{text:m.content}]})),
+    generationConfig:{maxOutputTokens:max||800}};
+  if(system)body.system_instruction={parts:[{text:system}]};
+  const r=await fetch("https://generativelanguage.googleapis.com/"+ver+"/models/"+model+":generateContent",
+    {method:"POST",headers:{"Content-Type":"application/json","x-goog-api-key":CFG.gkey},body:JSON.stringify(body)});
+  if(!r.ok){let t='';try{const j=await r.json();t=(j.error&&j.error.message)||'';}catch(e){}
+    const err=new Error("Google "+r.status+(t?" — "+t:""));err.status=r.status;throw err;}
+  const d=await r.json(),c=d.candidates&&d.candidates[0];
+  if(!c||!c.content)throw new Error("Google returned no text. Try another model.");
+  return (c.content.parts||[]).map(p=>p.text||'').join("\n").trim();
+}
+async function tryModel(m,messages,system,max){
+  const vers=(CFG.gver&&CFG.gver!=='auto')?[CFG.gver,'v1beta','v1','v1alpha']:['v1beta','v1','v1alpha'];
+  const seen=new Set();let last=null;
+  for(const v of vers){if(seen.has(v))continue;seen.add(v);
+    try{return{out:await geminiCall(v,m,messages,system,max),v};}
+    catch(e){last=e;if(e.status!==404)throw e;}}
+  throw last||new Error("no API version accepted this model");
+}
+async function viaGemini(messages,system,max){
+  if(!CFG.gkey)throw new Error("no Google AI Studio key set");
+  const primary=CFG.gmodel||'gemini-2.5-flash';
+  const pool=[primary,...(CFG.gpool||[]).filter(n=>n!==primary)].slice(0,4);
+  let last=null;
+  for(let mi=0;mi<pool.length;mi++){
+    const tries=mi===0?3:2;
+    for(let a=0;a<tries;a++){
+      try{const r=await tryModel(pool[mi],messages,system,max);
+        if(CFG.gver!==r.v||CFG.gmodel!==pool[mi]){CFG.gver=r.v;CFG.gmodel=pool[mi];sset('cfg',CFG);syncModelUI();}
+        return r.out;}
+      catch(e){last=e;if(!RETRYABLE.has(e.status))break;if(a<tries-1)await sleep(600*Math.pow(2,a));}
+    }
+    if(last&&last.status&&!RETRYABLE.has(last.status)&&last.status!==404)throw last;
+  }
+  throw new Error((last&&RETRYABLE.has(last.status))?"Google is busy — tried "+pool.length+" model(s) with retries. Capacity, not your key.":(last?last.message:"Google request failed"));
+}
+async function rateGuard(){
+  const now=Date.now();
+  CALLTIMES=CALLTIMES.filter(t=>now-t<60000);
+  if(CALLTIMES.length>=8){await sleep(Math.min(60000-(now-CALLTIMES[0])+300,20000));
+    CALLTIMES=CALLTIMES.filter(t=>Date.now()-t<60000);}
+  CALLTIMES.push(Date.now());
+}
+async function callModel(messages,system,max){
+  if(budgetLeft()===0)throw new Error("Daily budget of "+CFG.budget+" calls reached. Raise it in Setup.");
+  await rateGuard();
+  const order=CFG.mode==='auto'?['proxy','anthropic','gemini']:[CFG.mode];
+  let last=null;
+  for(const p of order){
+    try{
+      let out;
+      if(p==='proxy')out=await viaProxy(messages,system,max);
+      else if(p==='anthropic')out=await viaAnthropic(messages,system,max);
+      else if(p==='gemini')out=await viaGemini(messages,system,max);
+      else continue;
+      LASTOK=p;await bumpCalls();renderConn();return out;
+    }catch(e){last=e;}
+  }
+  throw new Error("No model connection ("+(last?last.message:"nothing configured")+"). Open Setup — add a free Google AI Studio key, or switch to offline demo mode.");
+}
+async function cachedCall(kind,keySrc,messages,system,max){
+  const k=kind+':'+hash(keySrc),hit=cacheGet(k);
+  if(hit!==undefined){await bumpCached();return{out:hit,cached:true};}
+  const out=await callModel(messages,system,max);
+  cacheSet(k,out);return{out,cached:false};
+}
+function classifyErr(m){
+  if(/api key not valid|invalid.*key|unauthor|401|403|no .*key set|nothing configured/i.test(m))return'config';
+  if(/budget/i.test(m))return'budget';
+  if(/busy|capacity|high demand|overload|503|429|5\d\d/i.test(m))return'busy';
+  return'other';
+}
+async function withFallback(live,offline,tag){
+  try{const r=await live();DEGRADED=false;DEGRADE_REASON='';return r;}
+  catch(e){
+    const c=classifyErr(e.message);DEGRADED=true;
+    DEGRADE_REASON=c==='config'?'Model connection is not working — open Setup and check your key. Answered with the offline engine meanwhile.'
+      :c==='budget'?'Daily call budget reached. Answered with the offline engine.'
+      :c==='busy'?'Google was at capacity. Answered with the offline engine; the live model should return shortly.'
+      :'Live model unavailable ('+e.message.slice(0,70)+'). Answered with the offline engine.';
+    if(c==='config'){const p=document.getElementById('pillConn');if(p){p.className='pill link bad';p.textContent='Check Setup';}}
+    console.warn('ONE-CHANNEL '+tag+' → offline ['+c+']:',e.message);
+    return offline();
+  }
+}
+function degradedNote(){return DEGRADED?'<p class="note" style="color:var(--red)">⚠ '+esc(DEGRADE_REASON)+'</p>':'';}
+
+/* ═════ offline language engines ═════ */
+function detectLang(s){
+  if(/[\uAC00-\uD7AF]/.test(s))return"Korean";
+  if(/[\u0E00-\u0E7F]/.test(s))return"Thai";
+  if(/[\u3040-\u30FF]/.test(s))return"Japanese";
+  if(/[\u4E00-\u9FFF]/.test(s))return"Chinese";
+  if(/[\u01A0\u01A1\u1EA0-\u1EF9]/.test(s))return"Vietnamese";
+  return"English";
+}
+const OFFMAP=[
+ {re:/임팩트|冲击|扳手|impact|กระแทก/i,sku:"M18 FIW2F12",d:"M18 FUEL™ impact wrench"},
+ {re:/배터리|电池|แบตเตอรี่|batter|pin\b/i,sku:"M18 B5",d:"M18™ REDLITHIUM™ 5.0Ah battery"},
+ {re:/작은 드릴|起子|드라이버|driver|subcompact|m12/i,sku:"M12 FID2",d:"M12 FUEL™ impact driver"},
+ {re:/드릴|钻|สว่าน|khoan|drill/i,sku:"M18 FPD3",d:"M18 FUEL™ percussion drill"},
+ {re:/작업등|工作灯|light|랜턴|đèn/i,sku:"M18 HAL",d:"M18™ site light"},
+ {re:/one-?key|원키|tracker|asset/i,sku:"48-21-0004",d:"ONE-KEY™ Asset ID tag"},
+ {re:/packout|팩아웃|storage/i,sku:"4932464244",d:"PACKOUT™ storage box"}
+];
+const OFFREPLY={
+ Korean:"안녕하세요, 주문 확인했습니다. 총 {n}개 품목 접수되었으며 재고 확인 후 배송 일정 회신드리겠습니다. 감사합니다.",
+ Chinese:"您好，订单已收到，共 {n} 个品项。我们确认库存后会回复发货时间。谢谢。",
+ Thai:"สวัสดีครับ รับออร์เดอร์แล้ว รวม {n} รายการ จะตรวจสอบสต็อกและแจ้งกำหนดส่งกลับไปครับ",
+ Japanese:"ご注文を承りました。全{n}品目です。在庫を確認のうえ、納期をご連絡いたします。",
+ Vietnamese:"Đã nhận đơn hàng gồm {n} mặt hàng. Chúng tôi sẽ kiểm tra tồn kho và phản hồi lịch giao hàng.",
+ English:"Thanks — order received, {n} line items. We'll confirm stock and come back with a delivery date."
+};
+/* glossary for offline translation */
+const GLOSS=[
+ [/임팩트\s*렌치/g,'impact wrench'],[/임팩트/g,'impact'],[/배터리/g,'battery'],[/드릴/g,'drill'],
+ [/개(?=\s|$|,|\.)/g,' units'],[/부탁드립니다/g,'please'],[/안녕하세요/g,'hello'],[/사장님/g,'boss'],
+ [/다음주/g,'next week'],[/화요일/g,'Tuesday'],[/가능할까요/g,'is it possible'],[/그리고/g,'and'],
+ [/재고/g,'stock'],[/보증/g,'warranty'],[/충전/g,'charging'],[/작은/g,'small'],
+ [/冲击扳手/g,'impact wrench'],[/电池/g,'battery'],[/起子机/g,'impact driver'],[/工作灯/g,'work light'],
+ [/补货/g,'restock'],[/你好/g,'hello'],[/台(?=\s|$|,)/g,' units'],[/个(?=\s|$|,)/g,' units'],
+ [/还有货吗/g,'still in stock?'],[/要/g,'need'],[/我们/g,'we'],[/另外/g,'also'],
+ [/สว่านกระแทก/g,'hammer drill'],[/แบตเตอรี่/g,'battery'],[/จำนวน/g,'quantity'],[/ตัว/g,' units'],
+ [/ก้อน/g,' units'],[/สวัสดีครับ/g,'hello'],[/ต้องการสั่ง/g,'would like to order'],
+ [/สัปดาห์หน้า/g,'next week'],[/ได้ไหมครับ/g,'is that possible'],[/ส่งภายใน/g,'deliver within']
+];
+const DEMO_TR={};
+function regDemo(orig,eng){DEMO_TR[hash(orig.replace(/\s+/g,' ').trim())]=eng;}
+function offlineTranslate(text){
+  const k=hash(text.replace(/\s+/g,' ').trim());
+  if(DEMO_TR[k])return{english:DEMO_TR[k],exact:true};
+  let t=text;GLOSS.forEach(([re,en])=>{t=t.replace(re,en);});
+  t=t.replace(/[가-힣]+/g,'▮').replace(/[\u4E00-\u9FFF]+/g,'▮').replace(/[\u0E00-\u0E7F]+/g,'▮');
+  return{english:'Glossary rendering (offline, not a full translation): '+t.replace(/▮+/g,'…').replace(/\s{2,}/g,' ').trim(),exact:false};
+}
+function numsIn(s,off){const out=[],re=/\d+/g;let m;
+  while((m=re.exec(s))){const n=+m[0];if(n>0&&n<10000)out.push({n,at:off+m.index});}return out;}
+function offlineParse(msg){
+  const lang=detectLang(msg),lines=[],flags=[];
+  const masked=msg.replace(/\bm\s?-?1[28]\b|\bmx\b/gi,m=>'\u00A7'.repeat(m.length))
+                  .replace(/\d+(?:\.\d+)?\s?ah\b/gi,m=>'\u00A4'.repeat(m.length));
+  let found=[];
+  OFFMAP.forEach(p=>{const m=new RegExp(p.re.source,'i').exec(masked);if(m)found.push({p,i:m.index});});
+  found.sort((a,b)=>a.i-b.i);
+  found=found.filter((f,k)=>k===0||f.i-found[k-1].i>6);
+  const used=new Set();
+  found.forEach((f,k)=>{
+    const end=k+1<found.length?found[k+1].i:masked.length,start=k===0?0:found[k-1].i;
+    let pick=numsIn(masked.slice(f.i,end),f.i).find(x=>!used.has(x.at));
+    if(!pick)pick=numsIn(masked.slice(start,f.i),start).reverse().find(x=>!used.has(x.at));
+    if(!pick){flags.push("Quantity not stated for "+f.p.d+" — confirm with the distributor");return;}
+    const vague=/maybe|아마|대충|some\s|약\s|\?/i.test(msg.slice(Math.max(0,pick.at-25),pick.at+6));
+    used.add(pick.at);
+    lines.push({sku:f.p.sku,description:f.p.d,qty:pick.n,certain:!vague});
+    if(vague)flags.push("Quantity for "+f.p.d+" was hedged — confirm before shipping");
+  });
+  if(/mower|잔디|割草|new product|when.*korea/i.test(msg))flags.push("Product availability question — route to the MILWAUKEE Korea product manager");
+  if(!lines.length)flags.push("No recognisable products found — the offline parser handles common lines only");
+  const tr=offlineTranslate(msg);
+  return{language:lang,english:tr.english,intent:lines.length?'order':'enquiry',confidence:lines.length?72:20,lines,flags,
+    reply:(OFFREPLY[lang]||OFFREPLY.English).replace("{n}",lines.length),offlineTr:!tr.exact};
+}
+function offlineAnswer(q,hits){
+  if(!hits.length)return"That is not covered in the indexed documentation, so I will not guess. Check with MILWAUKEE Korea, or add the relevant document on the Knowledge tab.\n\n(Offline mode — no model connected.)";
+  const d=hits[0].d;
+  return"Offline mode — showing the retrieved source rather than a written answer.\n\nFrom \""+d.t+"\":\n"+d.b.split(/(?<=\.)\s+/).slice(0,3).join(' ')+
+    (hits.length>1?"\n\nAlso matched: "+hits.slice(1).map(h=>h.d.t).join(", "):"")+
+    "\n\nConnect a model in Setup for a composed answer in the customer's language.";
+}
+function offlineOffer(units,dist,sku){
+  return"안녕하세요 "+dist+" 사장님.\n\n밀워키 코리아입니다. "+sku+" "+units+"대를 귀사에 우선 배정해 드리고자 합니다.\n\n90일 이내 미판매 재고는 전량 원가로 회수해 드리며, 우선 물량 배정과 결제 조건 개선도 함께 적용됩니다.\n\n검토 후 회신 부탁드립니다. 감사합니다.\n\n(오프라인 템플릿)";
+}
+function offlinePlan(r,sc,act){
+  return`${r[0]} — ${act}\n\nTrade demand index ${r[1]} of 100, competitor grip ${r[3]}%, MILWAUKEE coverage ${r[5]}%, opportunity score ${sc}.\n\nRecommended sequence:\n1. Appoint ${r[4]===0?'a first':'a second'} authorised distributor covering the main trade cluster.\n2. Open with the buy-back stocking offer on M18 FUEL core lines to secure shelf facings without distributor capital.\n3. Bring the distributor onto the ONE-CHANNEL messaging bridge on day one so sell-through data starts flowing immediately.\n4. Target ${Math.round(r[2]*1.4)} platform conversions in the first two quarters.\n\n(Offline template — connect a model for a written brief.)`;
+}
+function offlinePitch(c,t,m,bat,ec){
+  return`${m[2]} pitch (offline template)\n\nThis customer has ${bat} ${c[0]} batteries — about ${usd(ec.strand)} of kit that stops working the day he switches. Do not argue specifications; argue the ten years in front of him.\n\nOpen with: he is not buying a tool, he is choosing the platform that will price every tool he buys until ${new Date().getFullYear()+10}.\n\nOffer: ${usd(ec.subsidy)} trade-in against his existing batteries, removing most of the ${usd(ec.switchCost)} switching cost. Expected capture over three years is ${usd(ec.capture)}, so the subsidy pays back in ${ec.payback} months.\n\nClose on breadth: ${t[0]} work is fully covered across M12 and M18 on one battery system.`;
+}
+
+/* ═════ knowledge base ═════ */
+const SEED=[
+{t:"TTI group profile and 2025 results",s:"public",b:"Techtronic Industries Company Limited (TTI) was founded in 1985 by Horst Julius Pudwill and is a world leader in cordless technology. Listed in Hong Kong under stock code 0669, ADR symbol TTNDY. TTI operates in power tools, outdoor power equipment and floorcare, with more than 48,000 employees globally. For the year ended 31 December 2025 TTI reported record sales of US$15.3 billion, up 4.4% reported and 4.1% in local currency, with net profit up 6.8% to US$1.2 billion, achieved despite significant tariff headwinds. MILWAUKEE grew 7.9% and RYOBI grew 5.4% in local currency."},
+{t:"TTI brand portfolio",s:"public",b:"MILWAUKEE sits at the forefront of TTI's professional tool portfolio, with global research and development headquartered in Brookfield, Wisconsin, and manufacturing history dating to 1924. RYOBI, headquartered in Greenville, South Carolina, is the leading consumer battery-powered tool and outdoor brand. The wider portfolio includes AEG, EMPIRE and HOMELITE, plus floorcare brands HOOVER, ORECK, VAX and DIRT DEVIL. All MILWAUKEE trade marks are owned by Techtronic Cordless GP."},
+{t:"MILWAUKEE M18 platform",s:"public",b:"M18 is MILWAUKEE's 18-volt cordless platform and the core professional system, covering impact wrenches, drills, percussion drills, impact drivers, grinders, saws, rotary hammers, pipe threaders, site lighting and cleanup equipment. M18 FUEL products combine the POWERSTATE brushless motor, REDLINK PLUS electronic intelligence and REDLITHIUM battery technology, giving longer motor life, more run time and more power. REDLINK PLUS protects against overload, overheating and over-discharge. AUTO STOP control prevents over-rotation in a bind-up. M18 packs run up to 12.0Ah REDLITHIUM HIGH OUTPUT and FORGE HD12.0. All M18 batteries fit all M18 tools regardless of generation. The M18 FUEL SURGE hydraulic impact driver is 50% quieter with three times less vibration than a standard impact driver."},
+{t:"MILWAUKEE M12 platform",s:"public",b:"M12 is MILWAUKEE's 12-volt sub-compact cordless platform for tight-access work, finish work and trades needing lightweight tools. One M12 battery powers over 150 different tools. M12 packs range from 1.5Ah to 6.0Ah, physically smaller and lighter than M18 packs. Typical M12 tools include compact drills, cable strippers, tyre inflators, flood lights, heated jackets and inspection tools. Recommend M12 where size, weight and access matter more than raw power; recommend M18 where power, run time and heavy-duty capability matter."},
+{t:"MILWAUKEE MX FUEL platform",s:"public",b:"MX FUEL is MILWAUKEE's battery-powered heavy equipment platform, designed to replace petrol and corded equipment on the jobsite. The lineup covers jackhammers, core drills, cut-off saws, concrete mixers, compaction equipment, dewatering pumps, wet concrete tools, demolition, drain cleaning, threading, pipe fusion and lighting. MX FUEL suits customers in concrete, demolition and heavy construction, and removes engine exhaust and trailing cords from the work area."},
+{t:"ONE-KEY asset management",s:"public",b:"ONE-KEY is MILWAUKEE's digital platform for tool tracking, customisation and inventory management. A ONE-KEY enabled tool connects wirelessly to a smartphone, letting the owner customise tool performance settings, track location and manage inventory. If a tool is lost or stolen its tracking can lock the tool out. ONE-KEY Asset ID Tags extend tracking to equipment that is not itself Bluetooth enabled. ONE-KEY covers many M18 FUEL tools including percussion drills, impact drivers, high torque impact wrenches and pipe threaders. For a contractor the practical value is theft deterrence, faster tool audits, and knowing what is on which van or site."},
+{t:"PACKOUT storage system",s:"public",b:"PACKOUT is MILWAUKEE's modular jobsite storage system, covering stackable organisers, tool boxes, rolling storage, totes and bags, mounting, racks, holders, foam inserts and a PACKOUT radio, all designed to interlock into one transportable stack. PACKOUT pairs with ONE-KEY so physical jobsite storage can be mirrored digitally. TOOLGUARD steel storage covers fixed cabinet storage."},
+{t:"Cordless platform lock-in",s:"public",b:"MILWAUKEE's system-wide approach unifies its battery platforms so a user can complete a job start to finish on one battery system. Because most power tool brands lock users into a single battery platform once they own a few tools, the platform decision is effectively a long-term commitment — which is why breadth of line within a platform is the main competitive argument at the counter, and why the first battery a tradesman buys matters far more than any single tool sale. The brand positioning is NOTHING BUT HEAVY DUTY."},
+{t:"Warranty guidance for counter staff",s:"assumption",b:"PROJECT ASSUMPTION, NOT VERIFIED TTI POLICY. For prototype purposes assume MILWAUKEE tool warranty is five years from purchase and battery warranty three years, subject to local terms in each Asian market. Warranty requires proof of purchase and covers manufacturing defects, not wear items, abuse, or damage from unauthorised repair. A battery that will not charge should first be tested on a known-good charger, then inspected for contact damage and moisture ingress, before a warranty claim is raised. Counter staff must confirm exact terms with MILWAUKEE Korea before committing to a customer."},
+{t:"Asia messaging channel structure",s:"assumption",b:"PROJECT ASSUMPTION FOR THE ONE-CHANNEL CONCEPT. Asian distributors order through consumer messaging apps rather than supplier portals: WeChat Official Accounts in mainland China, KakaoTalk business channels in Korea, LINE Official Accounts in Japan, Thailand and Taiwan, Zalo in Vietnam and WhatsApp across India and Southeast Asia. Each platform exposes a webhook that posts inbound messages as JSON to a supplier endpoint, so a single translation and extraction pipeline can serve all of them. WeChat requires a verified mainland China business entity and takes roughly four to eight weeks to approve; LINE is the fastest at one to two weeks. Messages arrive unstructured, in mixed script, frequently without stated quantities, and often with several products in one line of text."},
+{t:"Asia channel economics",s:"assumption",b:"PROJECT ASSUMPTION. Unlike North America, where big-box retailers provide sell-through data at store and SKU level, most Asian markets are served through independent distributors and traditional hardware shops. MILWAUKEE therefore sees sell-in but not sell-through. Distributors are working-capital constrained and prefer fast-moving lower-priced stock, which suppresses shelf presence for premium lines regardless of underlying demand. Counter staff recommendation is the dominant purchase influence in this channel."},
+{t:"ONE-CHANNEL buy-back programme terms",s:"assumption",b:"PROJECT ASSUMPTION. The stocking offer places forecast-backed inventory with a distributor under a 90-day buy-back guarantee: MILWAUKEE repurchases any unsold units at the end of the window at the original trade price. Eligibility requires the distributor to share point-of-sale data through the ONE-CHANNEL ordering agent. Offers are generated only where model confidence is at or above 78%. Exposure is capped across the programme at 1,500 units. The commercial logic is that an accurate forecast converts inventory risk into a quantified, underwritable number."},
+{t:"Platform conversion economics",s:"assumption",b:"PROJECT ASSUMPTION FOR THE CONVERSION ENGINE. A tradesman on a competitor cordless platform faces a switching cost equal to the residual value of the batteries and chargers he would strand, typically around US$95 per pack. Once converted to M18 he is expected to remain on the platform for around ten years, buying tools at a rate that varies by trade: concrete and demolition trades buy most, drywall least. The conversion decision should be underwritten on ten-year platform value rather than the margin of a single sale, and a trade-in subsidy is justified where it is recovered within eighteen months of gross margin on captured spend."}];
+let KB=[];
+const ALIAS={"배터리":"battery","충전":"charge charger","보증":"warranty","임팩트":"impact","드릴":"drill","공구":"tool","가격":"price","재고":"stock inventory","수리":"repair","고장":"fault","추천":"recommend","차이":"difference","电池":"battery","保修":"warranty","冲击":"impact","钻":"drill","工具":"tool","价格":"price","库存":"stock","维修":"repair","区别":"difference","充电":"charge","แบตเตอรี่":"battery","สว่าน":"drill","รับประกัน":"warranty","bảo hành":"warranty","khoan":"drill","마끼다":"makita competitor platform","밀워키":"milwaukee","플랫폼":"platform","微信":"wechat messaging channel","카카오":"kakao messaging channel"};
+function expand(q){let o=q.toLowerCase();for(const k in ALIAS)if(q.includes(k))o+=" "+ALIAS[k];return o;}
+function tok(s){return (s.toLowerCase().match(/[a-z0-9]{3,}/g)||[]);}
+function retrieve(q,n){
+  const qt=[...new Set(tok(expand(q)))];if(!qt.length||!KB.length)return[];
+  const N=KB.length,df={};
+  qt.forEach(t=>{df[t]=KB.filter(d=>d._tok.includes(t)).length||0.5;});
+  return KB.map(d=>{let s=0;
+    qt.forEach(t=>{const tf=d._tok.filter(x=>x===t).length;
+      if(tf)s+=(1+Math.log(tf))*Math.log(1+N/df[t]);
+      if(d.t.toLowerCase().includes(t))s+=1.6;});
+    return{d,s:s/Math.sqrt(d._tok.length||1)*10};})
+    .filter(x=>x.s>0.12).sort((a,b)=>b.s-a.s).slice(0,n||3);
+}
+async function loadKB(){
+  const saved=await sget('kb_custom')||[];
+  KB=[...SEED.map((d,i)=>({...d,id:'seed'+i,own:false})),...saved];
+  KB.forEach(d=>d._tok=tok(d.t+' '+d.b));
+  renderKB();
+}
+function renderKB(){
+  const w=KB.reduce((a,d)=>a+d.b.split(/\s+/).length,0);
+  setTxt('kbCount',KB.length);setTxt('kbWords',w>999?(w/1000).toFixed(1)+'k':w);
+  setTxt('kbPub',KB.filter(d=>d.s==='public').length);setTxt('kbOwn',KB.filter(d=>d.own).length);
+  document.getElementById('kbList').innerHTML=KB.map(d=>
+    `<div class="kbdoc" tabindex="0" onclick="this.classList.toggle('expanded')" onkeydown="if(event.key==='Enter')this.classList.toggle('expanded')">
+      <div style="display:flex;justify-content:space-between;gap:10px;align-items:start">
+        <h4>${esc(d.t)}</h4>
+        <div style="display:flex;gap:6px;flex-shrink:0;align-items:center">
+        <span class="tag ${d.own?'red':(d.s==='public'?'ok':'am')}">${d.own?'Your document':(d.s==='public'?'Verified public':'Project assumption')}</span>
+        ${d.own?`<button class="mini" onclick="event.stopPropagation();delDoc('${d.id}')">Remove</button>`:''}</div>
+      </div><p>${esc(d.b)}</p></div>`).join('');
+}
+async function addDoc(){
+  const t=document.getElementById('kbTitle').value.trim(),b=document.getElementById('kbBody').value.trim();
+  const e=document.getElementById('kbErr');e.classList.add('hidden');
+  if(!t||!b){e.textContent="Give the document a title and paste some text before indexing.";e.classList.remove('hidden');return;}
+  const saved=await sget('kb_custom')||[];
+  saved.push({t,b,s:'own',own:true,id:'own'+Date.now()});
+  await sset('kb_custom',saved);
+  document.getElementById('kbTitle').value='';document.getElementById('kbBody').value='';
+  await loadKB();emptyChat();
+}
+async function delDoc(id){
+  const saved=(await sget('kb_custom')||[]).filter(d=>d.id!==id);
+  await sset('kb_custom',saved);await loadKB();
+}
+function testRetrieve(){
+  const q=document.getElementById('kbQ').value.trim(),box=document.getElementById('kbTest');
+  if(!q){box.innerHTML='<div class="mono" style="color:var(--grey2)">Type a question to test.</div>';return;}
+  const r=retrieve(q,5);
+  box.innerHTML=r.length
+    ?r.map(x=>`<div class="rowline"><span>${esc(x.d.t)}</span><b style="color:var(--red)">${x.s.toFixed(2)}</b></div>`).join('')
+      +`<p class="note">Expanded query: <span class="mono">${esc(expand(q))}</span></p>`
+    :'<div class="mono" style="color:var(--red)">No documents matched. The assistant would say it does not know.</div>';
+}
+
+/* ═════ 02 CHANNEL BRIDGE ═════ */
+const SIM_SCRIPT=[
+ {ch:'kakao',from:'대성공구 · Daesung Tools',dist:'KR-0142',text:"사장님 안녕하세요, 부산 대성공구입니다.\nM18 FUEL 임팩트 렌치 15개랑 배터리 5.0Ah 30개 부탁드립니다.\n그리고 지난번에 온 그 작은 드릴 있잖아요, 그거 10개 더요.\n다음주 화요일까지 가능할까요?",
+  en:"Hello — this is Daesung Tools in Busan. We'd like 15 M18 FUEL impact wrenches and 30 of the 5.0Ah batteries. Also that small driver that came last time — another 10 of those. Can you make it by next Tuesday?"},
+ {ch:'wechat',from:'广州建业五金 · Jianye Hardware',dist:'CN-2210',text:"你好，我们要补货：\nM18 冲击扳手 20 台\nM12 起子机 15 台\n5.0Ah 电池 40 个\n另外上次那个 LED 工作灯还有货吗？要 8 个",
+  en:"Hello, we need to restock: 20 M18 impact wrenches, 15 M12 impact drivers, 40 of the 5.0Ah batteries. Also is that LED work light from last time still in stock? We want 8."},
+ {ch:'line',from:'ช่างทองสุพรรณ · Thongsuphan Tools',dist:'TH-0088',text:"สวัสดีครับ ต้องการสั่ง\nสว่านกระแทก M18 จำนวน 12 ตัว\nแบตเตอรี่ 5.0Ah 25 ก้อน\nส่งภายในสัปดาห์หน้าได้ไหมครับ",
+  en:"Hello, we'd like to order 12 M18 hammer drills and 25 of the 5.0Ah batteries. Could you deliver within next week?"},
+ {ch:'whatsapp',from:'Sharma Tools, Pune',dist:'IN-0341',text:"hi need restock — 20x m18 impact, some batteries (the big ones, maybe 30?), and can u check if the one-key trackers came in yet. also customer asking about the new mower, when landing korea?",
+  en:"Hi, need a restock — 20 M18 impact wrenches, some batteries (the large ones, maybe 30?), and can you check whether the ONE-KEY trackers have arrived. Also a customer is asking about the new mower — when does it land in Korea?"}
+];
+SIM_SCRIPT.forEach(m=>regDemo(m.text,m.en));
+
+let INBOX=[],SEL=null,UNSEEN=0,SIMIDX=0,SIMTIMER=null;
+const BUS={mode:'sim',room:'',client:null,bc:null,status:'off'};
+
+function busRoom(){if(!BUS.room)BUS.room=(Math.random().toString(36).toUpperCase().replace(/[^A-Z0-9]/g,'')+'XKPQ').slice(0,4);return BUS.room;}
+function phoneURL(){
+  const base=location.href.split('#')[0];
+  return base+'#phone='+busRoom();
+}
+function renderBusPill(){
+  const p=document.getElementById('pillBus');if(!p)return;
+  const label={off:'Channel off',sim:'Simulator',connecting:'Connecting…',live:'Channel live',error:'Channel error'}[BUS.status]||'Channel';
+  p.textContent=label+(UNSEEN?' · '+UNSEEN+' new':'');
+  p.className='pill link'+(BUS.status==='live'?' ok':BUS.status==='error'?' bad':BUS.status==='connecting'?' warn':'');
+  Object.keys(CHANNELS).forEach(id=>{const d=document.getElementById('d-'+id);
+    if(d)d.className='chdot'+(BUS.status==='live'||BUS.status==='sim'?'':' off');});
+}
+function busSetMode(m){
+  ['sim','paired','local'].forEach(x=>{const b=document.getElementById('bm-'+x);if(b)b.classList.toggle('on',x===m);});
+  busTeardown();BUS.mode=m;renderBusBody();
+  if(m==='local')busConnectLocal();
+  renderBusPill();
+}
+function busTeardown(){
+  if(SIMTIMER){clearTimeout(SIMTIMER);SIMTIMER=null;}
+  if(BUS.client){try{BUS.client.end(true);}catch(e){}BUS.client=null;}
+  if(BUS.bc){try{BUS.bc.close();}catch(e){}BUS.bc=null;}
+  BUS.status='off';
+}
+function renderBusBody(){
+  const b=document.getElementById('busBody');if(!b)return;
+  if(BUS.mode==='sim'){
+    b.innerHTML=`<div class="banner info" style="margin-bottom:14px"><b>Simulator.</b> Four real distributor messages in Korean, Chinese, Thai and English arrive on a timer, as if posted by the platform webhooks. No network, no phone, nothing to go wrong — this is your guaranteed demo path.</div>
+      <div style="display:flex;gap:9px;flex-wrap:wrap;align-items:center">
+        <button class="act" id="simBtn" onclick="simToggle()">Start inbound feed</button>
+        <button class="ghost" onclick="simOne()">Send one now</button>
+        <span class="mono" style="color:var(--grey2)" id="simState">Idle</span>
+      </div>`;
+  }else if(BUS.mode==='paired'){
+    b.innerHTML=`<div class="grid g2" style="gap:16px;align-items:start">
+        <div>
+          <h3>Room code</h3>
+          <div class="roomcode" style="margin:8px 0 4px">${esc(busRoom())}</div>
+          <p class="note" style="margin-top:0">Open the link below on a phone, enter this code, and every message it sends lands in the inbox — translated — within about a second. The drafted reply goes back to the phone in the sender's language.</p>
+          <div style="display:flex;gap:9px;margin-top:12px;flex-wrap:wrap">
+            <button class="act" id="pairBtn" onclick="busConnectPaired()">Connect bridge</button>
+            <button class="ghost" onclick="copyPhoneLink()">Copy phone link</button>
+          </div>
+          <div class="mono" style="margin-top:10px;word-break:break-all;color:var(--grey2)" id="phoneLink">${esc(phoneURL())}</div>
+        </div>
+        <div>
+          <h3>How it works</h3>
+          <div style="margin-top:9px;font-size:13px;color:var(--grey)">
+            <p style="margin-bottom:8px">The phone page is styled as WeChat or KakaoTalk. It publishes to a public message broker over a secure WebSocket; this desk subscribes to the same room. That is structurally what a real platform webhook does — it just isn't Tencent's server.</p>
+            <p style="margin-bottom:8px"><b style="color:var(--ink)">The file must be reachable by the phone.</b> A local file on your laptop is not. Drag this file onto app.netlify.com/drop for a free public URL, then open that URL on both devices.</p>
+            <p>If the venue blocks the broker, fall back to Simulator — it needs no network at all.</p>
+          </div>
+        </div>
+      </div>`;
+  }else{
+    b.innerHTML=`<div class="banner info" style="margin-bottom:12px"><b>Same browser.</b> Open the phone link in a second tab or window on this machine. Useful for rehearsing without wifi, and it never touches the internet.</div>
+      <div style="display:flex;gap:9px;flex-wrap:wrap;align-items:center">
+        <button class="act" onclick="window.open(phoneURL(),'_blank','width=430,height=780')">Open phone window</button>
+        <button class="ghost" onclick="copyPhoneLink()">Copy phone link</button>
+        <span class="mono" style="color:var(--grey2)">Room ${esc(busRoom())}</span>
+      </div>`;
+  }
+}
+function copyPhoneLink(){
+  const u=phoneURL();
+  if(navigator.clipboard)navigator.clipboard.writeText(u).catch(()=>{});
+  const e=document.getElementById('busErr');
+  e.textContent='Phone link copied: '+u;e.style.color='var(--ok)';e.classList.remove('hidden');
+}
+function busConnectLocal(){
+  try{
+    BUS.bc=new BroadcastChannel('onechannel-'+busRoom());
+    BUS.bc.onmessage=ev=>{if(ev.data&&ev.data.type==='msg')receiveMessage(ev.data);};
+    BUS.status='live';renderBusPill();
+  }catch(e){BUS.status='error';renderBusPill();}
+}
+async function busConnectPaired(){
+  const btn=document.getElementById('pairBtn'),err=document.getElementById('busErr');
+  err.classList.add('hidden');
+  if(btn){btn.disabled=true;btn.innerHTML='<span class="spin"></span>Connecting';}
+  BUS.status='connecting';renderBusPill();
+  try{
+    await loadScript('https://unpkg.com/mqtt@5.10.1/dist/mqtt.min.js');
+    const topic='milwaukee/onechannel/'+busRoom();
+    const c=window.mqtt.connect('wss://broker.emqx.io:8084/mqtt',
+      {clientId:'ocdesk_'+Math.random().toString(36).slice(2,10),connectTimeout:9000,reconnectPeriod:4000,keepalive:30});
+    BUS.client=c;
+    c.on('connect',()=>{c.subscribe(topic);BUS.status='live';renderBusPill();
+      if(btn){btn.disabled=false;btn.textContent='Bridge connected';}
+      err.textContent='Bridge live on room '+busRoom()+'. Open the phone link and join.';err.style.color='var(--ok)';err.classList.remove('hidden');});
+    c.on('message',(t,payload)=>{
+      try{const d=JSON.parse(payload.toString());if(d.type==='msg')receiveMessage(d);}catch(e){}});
+    c.on('error',e=>{BUS.status='error';renderBusPill();
+      err.textContent='Bridge error: '+e.message+'. The venue may block this broker — use Simulator instead.';
+      err.style.color='var(--red)';err.classList.remove('hidden');
+      if(btn){btn.disabled=false;btn.textContent='Connect bridge';}});
+  }catch(e){
+    BUS.status='error';renderBusPill();
+    err.textContent=e.message+' — use Simulator mode instead, it needs no network.';err.style.color='var(--red)';err.classList.remove('hidden');
+    if(btn){btn.disabled=false;btn.textContent='Connect bridge';}
+  }
+}
+function busPublish(obj){
+  if(BUS.client&&BUS.status==='live'){try{BUS.client.publish('milwaukee/onechannel/'+busRoom(),JSON.stringify(obj));}catch(e){}}
+  if(BUS.bc){try{BUS.bc.postMessage(obj);}catch(e){}}
+}
+function simToggle(){
+  const btn=document.getElementById('simBtn');
+  if(SIMTIMER){clearTimeout(SIMTIMER);SIMTIMER=null;BUS.status='off';
+    btn.textContent='Start inbound feed';setTxt('simState','Paused');renderBusPill();return;}
+  BUS.status='sim';btn.textContent='Pause inbound feed';renderBusPill();
+  const tick=()=>{simOne();SIMTIMER=setTimeout(tick,7000);};
+  setTxt('simState','Running — a message every 7 seconds');
+  tick();
+}
+function simOne(){
+  const m=SIM_SCRIPT[SIMIDX%SIM_SCRIPT.length];SIMIDX++;
+  receiveMessage({type:'msg',ch:m.ch,from:m.from,dist:m.dist,text:m.text,ts:Date.now()});
+}
+function receiveMessage(d){
+  const msg={id:'m'+Date.now()+Math.random().toString(36).slice(2,6),
+    ch:CHANNELS[d.ch]?d.ch:'wechat',from:d.from||'Unknown shop',dist:d.dist||'—',
+    text:d.text||'',ts:d.ts||Date.now(),time:nowHM(),state:'new',data:null};
+  INBOX.unshift(msg);
+  if(INBOX.length>40)INBOX.pop();
+  UNSEEN++;renderInbox();renderBusPill();
+  const onChannel=document.getElementById('v-channel').classList.contains('on');
+  if(onChannel)UNSEEN=0,renderBusPill();
+  if(document.getElementById('autoTr').checked)processMessage(msg.id,!SEL);
+}
+function renderInbox(){
+  const el=document.getElementById('inbox');
+  el.innerHTML=INBOX.length?INBOX.map(m=>{
+    const c=CHANNELS[m.ch];
+    const tr=m.data?m.data.english:(m.state==='working'?'translating…':'');
+    return `<div class="inbox-item ${SEL===m.id?'sel':''}" tabindex="0" onclick="selectMessage('${m.id}')" onkeydown="if(event.key==='Enter')selectMessage('${m.id}')">
+      ${m.state==='new'?'<span class="unread"></span>':''}
+      <div class="hdr"><span><span class="chip" style="background:${c.colour}"></span>${esc(c.name)} · ${esc(m.from)}</span><span>${m.time}</span></div>
+      <div class="orig">${esc(m.text.replace(/\n/g,' '))}</div>
+      <div class="tr">${esc(tr)}</div>
+    </div>`;}).join('')
+    :'<div style="padding:22px;text-align:center;color:var(--grey2);font-size:13px">Inbox empty. Start the simulator, or connect a phone.</div>';
+}
+function clearInbox(){INBOX=[];SEL=null;renderInbox();
+  document.getElementById('msgDetail').classList.add('hidden');
+  document.getElementById('msgEmpty').classList.remove('hidden');}
+const INTAKE_SYS=`Inbound message processor for MILWAUKEE Asia's distributor messaging channel (WeChat, KakaoTalk, LINE, WhatsApp, Zalo). Messages are informal, in Korean, Chinese, Thai, Vietnamese, Japanese or English.
+Platforms: M18 / M18 FUEL (18V), M12 / M12 FUEL (12V), MX FUEL, REDLITHIUM batteries, ONE-KEY, PACKOUT.
+Return ONLY JSON, no fences:
+{"language":"language name in English","english":"faithful natural English translation of the whole message","intent":"order|enquiry|complaint|other","confidence":0-100,"lines":[{"sku":"MILWAUKEE-style code","description":"short English","qty":int,"certain":bool}],"flags":["anything ambiguous or needing a human"],"reply":"short professional reply IN THE SENDER'S OWN LANGUAGE confirming and querying anything unclear"}
+certain=false where product or quantity was inferred. Never invent a line you cannot resolve — put it in flags.`;
+async function processMessage(id,autoSelect){
+  const m=INBOX.find(x=>x.id===id);if(!m||m.state==='working')return;
+  m.state='working';renderInbox();
+  if(autoSelect)SEL=m.id;
+  let cached=false;
+  const out=CFG.mode==='offline'?offlineParse(m.text):await withFallback(async()=>{
+    const r=await cachedCall('intake',m.text,[{role:"user",content:m.text}],INTAKE_SYS,800);
+    cached=r.cached;
+    const s=r.out.replace(/```json|```/g,'').trim(),a=s.indexOf('{'),b=s.lastIndexOf('}');
+    if(a<0||b<0)throw new Error("Model did not return JSON");
+    const j=JSON.parse(s.slice(a,b+1));if(!j.lines)j.lines=[];return j;
+  },()=>offlineParse(m.text),'channel intake');
+  m.data=out;m.cached=cached;m.state='ready';
+  renderInbox();
+  if(SEL===m.id)renderDetail();
+}
+function selectMessage(id){
+  SEL=id;const m=INBOX.find(x=>x.id===id);
+  if(m&&m.state==='new'&&!m.data)processMessage(id,true);
+  renderInbox();renderDetail();
+}
+function renderDetail(){
+  const m=INBOX.find(x=>x.id===SEL);
+  if(!m){document.getElementById('msgDetail').classList.add('hidden');
+    document.getElementById('msgEmpty').classList.remove('hidden');return;}
+  document.getElementById('msgEmpty').classList.add('hidden');
+  document.getElementById('msgDetail').classList.remove('hidden');
+  const c=CHANNELS[m.ch];
+  setTxt('mdCh',c.name+' · '+m.from);
+  setTxt('mdOrig',m.text);
+  document.getElementById('mdReplyWho').textContent='Outbound — '+c.name;
+  if(!m.data){setTxt('mdLang','detecting…');setTxt('mdIntent','—');setTxt('mdEng','Translating…');
+    document.getElementById('poRows').innerHTML='';setTxt('mdReply','…');return;}
+  const d=m.data;
+  setTxt('mdLang',d.language||'—');
+  setTxt('mdIntent',(d.intent||'order')+' · '+(d.confidence??'—')+'%');
+  document.getElementById('mdCache').classList.toggle('hidden',!m.cached);
+  setTxt('mdEng',d.english||'—');
+  const tb=document.getElementById('poRows');tb.innerHTML='';
+  d.lines.forEach((l,i)=>{
+    const tr=document.createElement('tr');tr.className='row-in';tr.style.animationDelay=(i*60)+'ms';
+    tr.innerHTML=`<td style="color:var(--grey2)">${String(i+1).padStart(2,'0')}</td>
+      <td style="color:var(--red)">${esc(l.sku)}</td>
+      <td>${esc(l.description)}${l.certain===false?' <span class="flag">⚠ assumed</span>':''}</td>
+      <td style="text-align:right"><input class="qty" type="number" min="0" value="${l.qty||0}" onchange="editQty(${i},this.value)" aria-label="Quantity"></td>
+      <td><button class="mini" onclick="dropLine(${i})">Drop</button></td>`;
+    tb.appendChild(tr);});
+  document.getElementById('poFlags').innerHTML=((d.flags&&d.flags.length)
+    ?'<h3>Needs a human</h3>'+d.flags.map(x=>`<div class="rowline"><span class="flag">⚠ ${esc(x)}</span></div>`).join('')
+    :'<div class="mono" style="color:var(--ok)">✓ No ambiguities — order can auto-confirm</div>')
+    +(d.offlineTr?'<p class="note" style="color:var(--amber)">⚠ Offline glossary rendering, not a full translation. Connect a model for real translation.</p>':'')
+    +degradedNote();
+  setTxt('mdReply',d.reply||'—');
+}
+function editQty(i,v){const m=INBOX.find(x=>x.id===SEL);if(!m||!m.data)return;
+  m.data.lines[i].qty=+v;m.data.lines[i].certain=true;renderDetail();}
+function dropLine(i){const m=INBOX.find(x=>x.id===SEL);if(!m||!m.data)return;
+  m.data.lines.splice(i,1);renderDetail();}
+function sendReply(){
+  const m=INBOX.find(x=>x.id===SEL);if(!m||!m.data)return;
+  busPublish({type:'reply',ch:m.ch,text:m.data.reply,ts:Date.now()});
+  document.getElementById('replyMsg').innerHTML='<span style="color:var(--ok)">✓ Reply sent to '+esc(CHANNELS[m.ch].name)+' in '+esc(m.data.language||'the sender\'s language')+'.</span>';
+}
+let LEDGER=[];
+function approvePO(){
+  const m=INBOX.find(x=>x.id===SEL);
+  if(!m||!m.data||!m.data.lines.length)return;
+  LEDGER.push({ref:'PO-'+(m.dist||'KR')+'-'+(Math.floor(Math.random()*9000)+1000),dist:m.dist,
+    units:m.data.lines.reduce((a,l)=>a+(+l.qty||0),0),lines:m.data.lines.length,lang:m.data.language,ch:m.ch});
+  INBOX=INBOX.filter(x=>x.id!==m.id);SEL=null;
+  renderInbox();renderDetail();renderLedger();drawChart();renderScore();
+}
+function renderLedger(){
+  document.getElementById('ledger').innerHTML=LEDGER.length
+    ?LEDGER.map(o=>`<div class="rowline"><span><span class="chip" style="background:${CHANNELS[o.ch]?CHANNELS[o.ch].colour:'#888'}"></span><b style="color:var(--red)">${esc(o.ref)}</b> · ${esc(o.dist)} · ${o.lines} lines · ${esc(o.lang||'')}</span><b>${o.units} units</b></div>`).join('')
+      +`<p class="note">Confidence uplift now applied to the forecast: <b style="color:var(--ok)">+${Math.min(9,LEDGER.length*3)}%</b></p>`
+    :'<div class="mono" style="color:var(--grey2)">No orders captured this session.</div>';
+}
+
+/* ═════ 03 forecast ═════ */
+const DISTS=[["KR-0142","대성공구",1.0,"Busan",71],["KR-0087","한양툴스",1.45,"Seoul",84],["KR-0231","제일산업",0.72,"Daegu",58],["KR-0356","광주기공",0.61,"Gwangju",47],["KR-0419","인천상사",0.93,"Incheon",66]];
+const SKUS=[["M18 FUEL™ impact wrench",34,0.30,289],["M18™ REDLITHIUM™ 5.0Ah",78,0.16,119],["M12 FUEL™ impact driver",21,0.24,165],["PACKOUT™ storage",13,0.41,210]];
+const MON=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+function seeded(s){let x=s*9301+49297;return()=>{x=(x*9301+49297)%233280;return x/233280;}}
+function series(di,si){
+  const scale=DISTS[di][2],base=SKUS[si][1],vol=SKUS[si][2];
+  const r=seeded((di+1)*73+(si+1)*197),hist=[];
+  for(let i=0;i<18;i++)hist.push(Math.max(1,Math.round(base*scale*(1+i*0.021)*(1+0.26*Math.sin((i+4)/12*2*Math.PI))*(1+(r()-0.5)*vol))));
+  const fc=[];for(let i=18;i<21;i++)fc.push(Math.round(base*scale*(1+i*0.021)*(1+0.26*Math.sin((i+4)/12*2*Math.PI))));
+  const pen=(scale<0.8?9:0)+(scale<0.7?4:0);
+  const conf=Math.round(97-vol*62)-pen+Math.min(9,LEDGER.length*3);
+  return{hist,fc,conf:Math.max(55,Math.min(97,conf))};
+}
+DISTS.forEach((d,i)=>{const o=document.createElement('option');o.value=i;o.textContent=d[0]+"  ·  "+d[1]+"  ·  "+d[3];document.getElementById('selDist').appendChild(o);});
+SKUS.forEach((s,i)=>{const o=document.createElement('option');o.value=i;o.textContent=s[0];document.getElementById('selSku').appendChild(o);});
+function renderNet(){
+  const cur=+document.getElementById('selDist').value;
+  document.getElementById('netRows').innerHTML=DISTS.map((d,i)=>
+    `<tr class="clickable ${i===cur?'sel':''}" onclick="pickDist(${i})">
+      <td style="color:var(--red)">${d[0]}</td><td>${d[1]}</td><td>${d[3]}</td>
+      <td><div class="bar" style="width:70px"><span style="width:${d[4]}%"></span></div></td>
+      <td style="text-align:right">${Math.round(28+d[2]*16)}d</td>
+      <td style="text-align:right;color:${LEDGER.some(o=>o.dist===d[0])?'var(--ok)':'var(--grey2)'}">${LEDGER.some(o=>o.dist===d[0])?'Yes':'No'}</td></tr>`).join('');
+}
+function pickDist(i){document.getElementById('selDist').value=i;drawChart();}
+function simFactor(){
+  const p=+document.getElementById('sPrice').value,m=+document.getElementById('sMkt').value,
+        t=+document.getElementById('sTrain').value,b=document.getElementById('sBuy').checked;
+  setTxt('lPrice',(p>0?'+':'')+p+'%');setTxt('lMkt',['None','Light','Standard','Heavy'][m]);setTxt('lTrain',t+'%');
+  return (1-p*0.018)*(1+m*0.055)*(1+t*0.0022)*(b?1.34:1);
+}
+let CUR=null;
+function drawChart(){
+  const di=+document.getElementById('selDist').value,si=+document.getElementById('selSku').value;
+  const d=series(di,si),f=simFactor();
+  CUR={di,si,...d,f};
+  const sc=d.fc.map(v=>Math.round(v*f));
+  const max=Math.max(...d.hist,...d.fc,...sc)*1.25;
+  const W=720,H=250,PL=44,PR=16,PT=16,PB=30,iw=W-PL-PR,ih=H-PT-PB;
+  const X=i=>PL+i*(iw/20),Y=v=>PT+ih-(v/max)*ih;
+  let g='';
+  for(let k=0;k<=4;k++){const y=PT+ih-(k/4)*ih;
+    g+=`<line x1="${PL}" y1="${y}" x2="${W-PR}" y2="${y}" stroke="#E8E8E8"/><text x="${PL-8}" y="${y+4}" fill="#8A8A8D" font-size="10" font-family="JetBrains Mono, monospace" text-anchor="end">${Math.round(max*k/4)}</text>`;}
+  const last=d.hist[17],w=(1-d.conf/100)*1.5;
+  const hp=d.hist.map((v,i)=>`${X(i)},${Y(v)}`).join(' ');
+  const fp=[`${X(17)},${Y(last)}`,...d.fc.map((v,i)=>`${X(18+i)},${Y(v)}`)].join(' ');
+  const scp=[`${X(17)},${Y(last)}`,...sc.map((v,i)=>`${X(18+i)},${Y(v)}`)].join(' ');
+  const band=[`${X(17)},${Y(last)}`,...d.fc.map((v,i)=>`${X(18+i)},${Y(v*(1+w))}`),...d.fc.map((v,i)=>`${X(18+i)},${Y(v*(1-w))}`).reverse()].join(' ');
+  let lbl='';for(let i=0;i<21;i+=3)lbl+=`<text x="${X(i)}" y="${H-10}" fill="#8A8A8D" font-size="10" font-family="JetBrains Mono, monospace" text-anchor="middle">${MON[i%12]}</text>`;
+  document.getElementById('chartWrap').innerHTML=
+   `<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="Order volume with forecast and scenario">${g}
+     <polygon points="${band}" fill="#F7CDD3"/>
+     <polyline points="${hp}" fill="none" stroke="#58585A" stroke-width="2"/>
+     <polyline points="${fp}" fill="none" stroke="#DB011C" stroke-width="2" stroke-dasharray="5 4"/>
+     ${Math.abs(f-1)>0.01?`<polyline points="${scp}" fill="none" stroke="#0A0A0A" stroke-width="2"/>`:''}
+     <line x1="${X(17)}" y1="${PT}" x2="${X(17)}" y2="${PT+ih}" stroke="#DB011C" stroke-dasharray="3 3" opacity=".45"/>
+     ${d.hist.map((v,i)=>`<circle cx="${X(i)}" cy="${Y(v)}" r="2.4" fill="#58585A"/>`).join('')}
+     ${d.fc.map((v,i)=>`<circle cx="${X(18+i)}" cy="${Y(v)}" r="3" fill="#DB011C"/>`).join('')}${lbl}</svg>`;
+  const sig=[["Own order history",42],["Seasonality",23],["Construction permits, region",18],["Competitor pricing moves",11],["Public holiday calendar",6]];
+  document.getElementById('signals').innerHTML=sig.map(s=>
+    `<div style="margin-bottom:10px"><div class="rowline" style="border:0;padding:0 0 5px"><span>${s[0]}</span><b>${s[1]}%</b></div><div class="bar"><span style="width:${s[1]*2.2}%"></span></div></div>`).join('')
+    +'<p class="note">Social sentiment sits here in phase two — regional API access is restricted enough that promising it now would be overclaiming.</p>';
+  const base=d.fc.reduce((a,b)=>a+b,0),scT=sc.reduce((a,b)=>a+b,0),trail=d.hist.slice(-3).reduce((a,b)=>a+b,0);
+  document.getElementById('fcStats').innerHTML=
+   `<div class="rowline"><span>Baseline, next 90 days</span><b style="color:var(--red)">${base} units</b></div>
+    <div class="rowline"><span>Confidence</span><b>${d.conf}%${LEDGER.length?' <span style="color:var(--ok)">↑</span>':''}</b></div>
+    <div class="rowline"><span>Trailing 3 months, actual</span><b>${trail}</b></div>
+    <div class="rowline"><span>Implied change</span><b style="color:${base>=trail?'var(--ok)':'var(--red)'}">${base>=trail?'+':''}${Math.round((base/trail-1)*100)}%</b></div>
+    <div class="rowline"><span>Underwriting gate</span><b>${d.conf>=78?'<span style="color:var(--ok)">Pass</span>':'<span style="color:var(--red)">Hold</span>'}</b></div>`;
+  setTxt('scDelta',(scT>=base?'+':'')+(scT-base)+' units ('+(scT>=base?'+':'')+Math.round((scT/base-1)*100)+'%)');
+  setTxt('scRev','US$'+((scT-base)*SKUS[si][3]).toLocaleString());
+  renderNet();updateOffer();
+}
+function resetSim(){document.getElementById('sPrice').value=0;document.getElementById('sMkt').value=0;
+  document.getElementById('sTrain').value=0;document.getElementById('sBuy').checked=false;drawChart();}
+
+/* ═════ 04 white space ═════ */
+const REGIONS=[['Seoul',100,95,78,2,34],['Gyeonggi',88,82,71,1,18],['Busan',71,74,66,1,22],['Incheon',58,63,69,1,16],['Daegu',47,55,62,1,12],['Daejeon',39,48,58,0,4],['Gwangju',35,44,55,1,9],['Ulsan',33,61,74,0,3],['Changwon',29,52,60,0,2],['Jeju',12,21,41,0,0]];
+function oppScore(r){return Math.round((r[1]*0.55+r[2]*0.45)*(1-r[5]/140)*(1-r[3]/260));}
+function oppAction(s){return s>=52?'Enter now':s>=34?'Build':'Hold';}
+let CURREGION=null;
+function renderMap(){
+  const ranked=REGIONS.map(r=>({r,s:oppScore(r)})).sort((a,b)=>b.s-a.s);
+  setTxt('mTop',ranked[0].r[0]);setTxt('mEnter',ranked.filter(x=>x.s>=52).length);
+  const totD=REGIONS.reduce((a,r)=>a+r[1],0),covD=REGIONS.reduce((a,r)=>a+r[1]*r[5]/100,0);
+  setTxt('mUncov',Math.round((1-covD/totD)*100)+'%');
+  setTxt('mDists',REGIONS.reduce((a,r)=>a+r[4],0));
+  document.getElementById('mapRows').innerHTML=ranked.map(x=>{
+    const a=oppAction(x.s);
+    return `<tr class="clickable ${CURREGION===x.r[0]?'sel':''}" onclick="pickRegion('${x.r[0]}')">
+      <td style="color:var(--red)">${x.r[0]}</td><td style="text-align:right">${x.r[1]}</td>
+      <td style="text-align:right">${x.r[3]}%</td><td style="text-align:right">${x.r[5]}%</td>
+      <td style="text-align:right"><b>${x.s}</b></td>
+      <td><span class="tag ${a==='Enter now'?'red':a==='Build'?'am':''}">${a}</span></td></tr>`;}).join('');
+  const W=720,H=300,PL=48,PR=20,PT=18,PB=36,iw=W-PL-PR,ih=H-PT-PB;
+  const X=v=>PL+(v/100)*iw,Y=v=>PT+(v/40)*ih;
+  let g='';
+  for(let k=0;k<=4;k++){const y=PT+(k/4)*ih;
+    g+=`<line x1="${PL}" y1="${y}" x2="${W-PR}" y2="${y}" stroke="#EDEDED"/><text x="${PL-8}" y="${y+4}" fill="#8A8A8D" font-size="10" font-family="JetBrains Mono, monospace" text-anchor="end">${Math.round(k/4*40)}%</text>`;}
+  for(let k=0;k<=5;k++){const x=PL+(k/5)*iw;
+    g+=`<line x1="${x}" y1="${PT}" x2="${x}" y2="${PT+ih}" stroke="#F5F5F5"/><text x="${x}" y="${H-12}" fill="#8A8A8D" font-size="10" font-family="JetBrains Mono, monospace" text-anchor="middle">${k*20}</text>`;}
+  const bubbles=REGIONS.map(r=>{const s=oppScore(r),rad=5+s/8,sel=CURREGION===r[0];
+    return `<circle cx="${X(r[1])}" cy="${Y(r[5])}" r="${rad}" fill="${s>=52?'#DB011C':s>=34?'#F0A0AA':'#D8D8D8'}" stroke="${sel?'#0A0A0A':'#fff'}" stroke-width="${sel?2.5:1.5}"/>
+      <text x="${X(r[1])}" y="${Y(r[5])-rad-5}" fill="#58585A" font-size="10" font-family="JetBrains Mono, monospace" text-anchor="middle">${r[0]}</text>`;}).join('');
+  document.getElementById('mapWrap').innerHTML=
+   `<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="Trade demand against coverage by region">
+      <rect x="${PL}" y="${PT}" width="${iw*0.55}" height="${ih*0.55}" fill="#FDEFF1" stroke="#F7CDD3" stroke-dasharray="4 3"/>${g}
+      <text x="${PL+8}" y="${PT+16}" fill="#DB011C" font-size="10" font-family="JetBrains Mono, monospace">TARGET QUADRANT</text>
+      ${bubbles}
+      <text x="${PL+iw/2}" y="${H-1}" fill="#8A8A8D" font-size="10" font-family="JetBrains Mono, monospace" text-anchor="middle">Trade demand index →</text></svg>`;
+}
+function pickRegion(name){
+  CURREGION=name;
+  const r=REGIONS.find(x=>x[0]===name),s=oppScore(r),a=oppAction(s);
+  setTxt('planFor',name+' · opportunity '+s+' · '+a);
+  document.getElementById('planOut').innerHTML=
+   `<div class="rowline"><span>Trade demand index</span><b>${r[1]} / 100</b></div>
+    <div class="rowline"><span>Trade density</span><b>${r[2]} / 100</b></div>
+    <div class="rowline"><span>Competitor grip</span><b>${r[3]}%</b></div>
+    <div class="rowline"><span>Authorised distributors</span><b>${r[4]}</b></div>
+    <div class="rowline"><span>MILWAUKEE® coverage</span><b>${r[5]}%</b></div>
+    <div class="rowline"><span>Opportunity score</span><b style="color:var(--red)">${s}</b></div>
+    <div class="rowline"><span>Recommendation</span><b>${a}</b></div>`;
+  document.getElementById('planText').classList.add('hidden');
+  renderMap();
+}
+function planPrompt(){
+  const r=REGIONS.find(x=>x[0]===CURREGION),s=oppScore(r);
+  return `Regional market entry brief for MILWAUKEE power tools in ${r[0]}, South Korea. Trade demand index ${r[1]}/100, trade density ${r[2]}/100, competitor grip ${r[3]}%, ${r[4]} authorised distributors, MILWAUKEE coverage ${r[5]}%, opportunity score ${s}/100, recommendation ${oppAction(s)}. Write a tight brief for a TTI regional manager: the entry thesis in one line, three sequenced moves with rough timing, the main risk, and one success metric. Under 180 words, plain prose, no headers.`;
+}
+async function writePlan(){
+  const err=document.getElementById('planErr'),btn=document.getElementById('planBtn');
+  err.classList.add('hidden');
+  if(!CURREGION){err.textContent="Select a region from the table first.";err.classList.remove('hidden');return;}
+  btn.disabled=true;btn.innerHTML='<span class="spin"></span>Drafting';
+  const r=REGIONS.find(x=>x[0]===CURREGION),s=oppScore(r);
+  try{
+    const p=planPrompt();
+    const t=CFG.mode==='offline'?offlinePlan(r,s,oppAction(s))
+      :await withFallback(async()=>(await cachedCall('plan',p,[{role:"user",content:p}],null,450)).out,
+        ()=>offlinePlan(r,s,oppAction(s)),'entry plan');
+    setTxt('planBody',t);document.getElementById('planText').classList.remove('hidden');
+  }catch(e){err.textContent=e.message;err.classList.remove('hidden');}
+  btn.disabled=false;btn.textContent='Draft the entry plan';
+}
+
+/* ═════ 05 offer ═════ */
+let EXPOSURE=[];
+function offerUnits(){return Math.round(Math.round(CUR.fc.reduce((a,b)=>a+b,0)*CUR.f)*(0.85+CUR.conf/500));}
+function facings(u){return Math.max(1,Math.round(u/22));}
+function updateOffer(){
+  if(!CUR)return;
+  const total=Math.round(CUR.fc.reduce((a,b)=>a+b,0)*CUR.f),units=offerUnits(),pass=CUR.conf>=78;
+  setTxt('offUnits',pass?units:'—');
+  setTxt('offSub',pass?units+' units of '+SKUS[CUR.si][0]+' to '+DISTS[CUR.di][0]:'Confidence below the 78% underwriting gate');
+  setTxt('offFc',total+' units');setTxt('offConf',CUR.conf+'%');
+  setTxt('offRisk',Math.round(units*0.35)+' units');
+  setTxt('offUnsold',Math.round(units*(1-CUR.conf/100)*0.6)+' units');
+  setTxt('offShelf',pass?facings(units)+' facings':'—');
+  document.getElementById('offDec').innerHTML=pass?'<span style="color:var(--ok)">Offer approved</span>':'<span style="color:var(--red)">Hold — gather two more cycles</span>';
+  document.getElementById('offerBtn').disabled=!pass;
+}
+function acceptOffer(){
+  if(!CUR||CUR.conf<78)return;
+  const units=offerUnits();
+  EXPOSURE=EXPOSURE.filter(e=>!(e.di===CUR.di&&e.si===CUR.si));
+  EXPOSURE.push({di:CUR.di,si:CUR.si,units,risk:Math.round(units*0.35),fac:facings(units)});
+  renderExposure();renderScore();
+}
+function renderExposure(){
+  const u=EXPOSURE.reduce((a,e)=>a+e.units,0),r=EXPOSURE.reduce((a,e)=>a+e.risk,0),f=EXPOSURE.reduce((a,e)=>a+e.fac,0);
+  setTxt('expUnits',u);setTxt('expRisk',r);setTxt('expShelf',f);
+  setTxt('expDists',new Set(EXPOSURE.map(e=>e.di)).size);
+  setTxt('expPct',Math.min(100,Math.round(u/1500*100))+'%');
+  document.getElementById('expBar').style.width=Math.min(100,Math.round(u/1500*100))+'%';
+  document.getElementById('expList').innerHTML=EXPOSURE.length
+    ?EXPOSURE.map(e=>`<div class="rowline"><span>${DISTS[e.di][0]} · ${SKUS[e.si][0]}</span><b>${e.units} units · ${e.fac} facings · ${e.risk} at risk</b></div>`).join('')
+    :'<div class="mono" style="color:var(--grey2)">No offers accepted yet.</div>';
+}
+function offerPrompt(){
+  return `KakaoTalk message in Korean from MILWAUKEE Korea to distributor ${DISTS[CUR.di][0]} (${DISTS[CUR.di][1]}, ${DISTS[CUR.di][3]}). Offer ${offerUnits()} units of ${SKUS[CUR.si][0]} with 90-day buy-back on unsold stock, priority allocation, better payment terms. Warm, direct, professional. Korean only, no preamble, under 80 words.`;
+}
+async function writeOffer(){
+  if(!CUR)return;
+  const btn=document.getElementById('offerBtn'),err=document.getElementById('offerErr');
+  err.classList.add('hidden');btn.disabled=true;btn.innerHTML='<span class="spin"></span>Drafting';
+  try{
+    const p=offerPrompt();
+    const t=CFG.mode==='offline'?offlineOffer(offerUnits(),DISTS[CUR.di][1],SKUS[CUR.si][0])
+      :await withFallback(async()=>(await cachedCall('offer',p,[{role:"user",content:p}],null,400)).out,
+        ()=>offlineOffer(offerUnits(),DISTS[CUR.di][1],SKUS[CUR.si][0]),'offer draft');
+    setTxt('offerText',t);document.getElementById('offerOut').classList.remove('hidden');
+  }catch(e){err.textContent=e.message;err.classList.remove('hidden');}
+  btn.disabled=false;btn.textContent='Draft offer in Korean';
+}
+
+/* ═════ 06 conversion ═════ */
+const COMPS=[
+ ['Makita 18V LXT',95,'Dominant across Korea and Japan; deepest line breadth and the default counter recommendation'],
+ ['Bosch 18V Professional',88,'Strong where European specification practice carries; solid in mechanical trades'],
+ ['Hilti 22V Nuron',140,'Entrenched via fleet-management contracts, so switching is a commercial exit not just a tool change'],
+ ['DeWalt 20V MAX',82,'Growing through e-commerce; weaker distributor service network in Korea'],
+ ['Local / unbranded',34,'Price-led with no platform loyalty — cheapest to convert, lowest ten-year value']
+];
+const TRADES=[['Electrical',1.35],['Mechanical and plumbing',1.28],['Concrete and demolition',1.62],['Carpentry and joinery',1.12],['Drywall and partitioning',0.94]];
+const MKTS=[['Korea','Korean','Write in Korean'],['China','Chinese','Write in Simplified Chinese'],['Japan','Japanese','Write in Japanese'],['Thailand','Thai','Write in Thai'],['Vietnam','Vietnamese','Write in Vietnamese']];
+const KITS={
+ 'Electrical':['M12 FUEL™ installation driver','M18 FUEL™ percussion drill','M12™ cable stripper','M18™ REDLITHIUM™ 5.0Ah × 2'],
+ 'Mechanical and plumbing':['M18 FUEL™ press tool','M12 FUEL™ copper tubing cutter','M18™ site light','M18™ REDLITHIUM™ 5.0Ah × 2'],
+ 'Concrete and demolition':['M18 FUEL™ SDS-Max rotary hammer','MX FUEL™ breaker','M18 FUEL™ angle grinder','M18™ FORGE™ HD12.0 × 2'],
+ 'Carpentry and joinery':['M18 FUEL™ circular saw','M18 FUEL™ impact driver','M18 FUEL™ multi-tool','M18™ REDLITHIUM™ 5.0Ah × 2'],
+ 'Drywall and partitioning':['M18 FUEL™ drywall screwdriver','M12™ cut-out tool','M18™ compact vacuum','M12™ REDLITHIUM™ 4.0Ah × 2']
+};
+COMPS.forEach((c,i)=>{const o=document.createElement('option');o.value=i;o.textContent=c[0];document.getElementById('cvComp').appendChild(o);});
+TRADES.forEach((t,i)=>{const o=document.createElement('option');o.value=i;o.textContent=t[0];document.getElementById('cvTrade').appendChild(o);});
+MKTS.forEach((m,i)=>{const o=document.createElement('option');o.value=i;o.textContent=m[0];document.getElementById('cvMkt').appendChild(o);});
+function convEcon(ci,ti,bat){
+  const c=COMPS[ci],t=TRADES[ti];
+  const strand=bat*c[1],switchCost=Math.round(strand*0.85);
+  const subsidy=Math.min(Math.round(switchCost*0.6),520);
+  const capture=Math.round(2400*t[1]),tenYear=Math.round(capture*3.1),margin=Math.round(capture*0.32);
+  const payback=Math.max(1,Math.round(subsidy/(margin/36)));
+  return{strand,switchCost,subsidy,capture,tenYear,margin,payback,worth:payback<=18};
+}
+let CURCONV=null;
+function calcConvert(){
+  const ci=+document.getElementById('cvComp').value,ti=+document.getElementById('cvTrade').value,
+        mi=+document.getElementById('cvMkt').value,bat=+document.getElementById('cvBat').value;
+  setTxt('lBat',bat);
+  const ec=convEcon(ci,ti,bat);CURCONV={ci,ti,mi,bat,ec};
+  setTxt('cvValue',usd(ec.tenYear));setTxt('cvStrand',usd(ec.strand));
+  setTxt('cvSwitch',usd(ec.switchCost));setTxt('cvSub',usd(ec.subsidy));
+  setTxt('cvCap',usd(ec.capture));setTxt('cvMargin',usd(ec.margin));
+  setTxt('cvPay',ec.payback+' months');
+  document.getElementById('cvVerdict').innerHTML=ec.worth
+    ?'<span style="color:var(--ok)">Convert — subsidy justified</span>'
+    :'<span style="color:var(--red)">Do not subsidise — win on service instead</span>';
+  document.getElementById('cvKit').innerHTML=(KITS[TRADES[ti][0]]||[]).map(k=>`<div class="rowline"><span>${esc(k)}</span></div>`).join('')
+    +`<p class="note">${esc(COMPS[ci][2])}</p>`;
+}
+function pitchPrompt(){
+  const c=COMPS[CURCONV.ci],t=TRADES[CURCONV.ti],m=MKTS[CURCONV.mi],ec=CURCONV.ec;
+  return `Counter sales pitch to convert a ${t[0]} tradesman in ${m[0]} from ${c[0]} to the MILWAUKEE M18 platform. He owns ${CURCONV.bat} competitor batteries worth about ${usd(ec.strand)}, which strand on switching. We can offer a ${usd(ec.subsidy)} trade-in. Expected capture over three years ${usd(ec.capture)}; ten-year platform value ${usd(ec.tenYear)}.
+${m[2]} only, no translation, no preamble. Argue from his ten-year platform decision and his stranded investment, not from specifications. Give the counter three short things to say. Under 140 words.`;
+}
+async function writePitch(){
+  if(!CURCONV)calcConvert();
+  const btn=document.getElementById('cvBtn'),err=document.getElementById('cvErr');
+  err.classList.add('hidden');btn.disabled=true;btn.innerHTML='<span class="spin"></span>Writing';
+  try{
+    const p=pitchPrompt();
+    const t=CFG.mode==='offline'?offlinePitch(COMPS[CURCONV.ci],TRADES[CURCONV.ti],MKTS[CURCONV.mi],CURCONV.bat,CURCONV.ec)
+      :await withFallback(async()=>(await cachedCall('pitch',p,[{role:"user",content:p}],null,450)).out,
+        ()=>offlinePitch(COMPS[CURCONV.ci],TRADES[CURCONV.ti],MKTS[CURCONV.mi],CURCONV.bat,CURCONV.ec),'conversion pitch');
+    setTxt('cvText',t);document.getElementById('cvOut').classList.remove('hidden');
+  }catch(e){err.textContent=e.message;err.classList.remove('hidden');}
+  btn.disabled=false;btn.textContent='Generate the pitch';
+}
+let CONVLOG=[];
+function logConversion(){
+  if(!CURCONV)return;
+  CONVLOG.push({from:COMPS[CURCONV.ci][0],trade:TRADES[CURCONV.ti][0],mkt:MKTS[CURCONV.mi][0],
+    value:CURCONV.ec.tenYear,sub:CURCONV.ec.subsidy});
+  renderConvLog();renderScore();
+}
+function renderConvLog(){
+  const v=CONVLOG.reduce((a,c)=>a+c.value,0),s=CONVLOG.reduce((a,c)=>a+c.sub,0);
+  document.getElementById('cvLog').innerHTML=CONVLOG.length
+    ?CONVLOG.map(c=>`<div class="rowline"><span>${esc(c.trade)} · ${esc(c.mkt)} · off ${esc(c.from)}</span><b>${usd(c.value)} ten-year</b></div>`).join('')
+      +`<div class="rowline" style="border-top:2px solid var(--red);border-bottom:0;margin-top:6px"><span><b>${CONVLOG.length} conversions</b></span><b style="color:var(--red)">${usd(v)} captured for ${usd(s)} of subsidy</b></div>`
+    :'<div class="mono" style="color:var(--grey2)">No conversions recorded yet.</div>';
+}
+function renderScore(){
+  const fac=EXPOSURE.reduce((a,e)=>a+e.fac,0);
+  setTxt('kShelf',Math.min(60,18+Math.round(fac*0.9))+'%');
+  setTxt('kInstall',CONVLOG.length);
+  setTxt('kVis',Math.min(100,LEDGER.length*17)+'%');
+}
+
+/* ═════ 07 counter ═════ */
+const COUNTER_SYS=`MILWAUKEE counter assistant for staff in independent tool distributors across Asia.
+RULES: Answer ONLY from the retrieved documents in the user turn — they are your sole source of product truth. If they do not contain the answer, say so plainly and name what the counter should check; never invent specs, prices, part numbers or warranty terms. If a document is marked PROJECT ASSUMPTION, say the answer is provisional. ALWAYS reply in the language of the question. Be concise and practical; when comparing a competitor be fair and focus on the customer's job and his long-term platform choice; for a fault give likely cause and next diagnostic step. Under 130 words, no markdown headers.`;
+const QUICKS=['마끼다 임팩트 드릴 쓰던 고객인데 밀워키로 뭐 추천해요?','M18 배터리가 충전이 안 됩니다. 보증 되나요?','客户问 M12 和 M18 有什么区别?','What is ONE-KEY and why should a contractor care?'];
+let HIST=[];
+function bubble(who,text,me){const d=document.createElement('div');d.className='bub'+(me?' me':'');
+  d.innerHTML='<div class="who">'+esc(who)+'</div><div>'+esc(text).replace(/\n/g,'<br>')+'</div>';
+  const c=document.getElementById('chat');c.appendChild(d);c.scrollTop=c.scrollHeight;return d;}
+function emptyChat(){document.getElementById('chat').innerHTML='<div class="mono" style="color:var(--grey2)">Counter assistant ready. Grounded on '+KB.length+' documents. Ask in any language.'
+  +(CFG.mode==='offline'?'<br><span style="color:var(--amber)">Offline mode — retrieval works, answers are extracted from source.</span>':'')+'</div>';}
+function clearChat(){HIST=[];emptyChat();}
+function quick(i){document.getElementById('q').value=QUICKS[i];askCounter();}
+function buildCtx(hits){
+  return hits.length?hits.map((h,i)=>`[DOC ${i+1}] ${h.d.t}${h.d.s==='assumption'?' (PROJECT ASSUMPTION)':''}\n${h.d.b.slice(0,620)}`).join('\n\n'):'NO DOCUMENTS MATCHED.';
+}
+async function askCounter(){
+  const inp=document.getElementById('q'),q=inp.value.trim();
+  const err=document.getElementById('chatErr'),btn=document.getElementById('askBtn');
+  err.classList.add('hidden');
+  if(!q){err.textContent="Type a question first.";err.classList.remove('hidden');return;}
+  if(!HIST.length)document.getElementById('chat').innerHTML='';
+  bubble('Counter staff',q,true);inp.value='';
+  btn.disabled=true;btn.innerHTML='<span class="spin"></span>';
+  const pending=bubble('MILWAUKEE assistant','Searching knowledge base…');
+  const hits=retrieve(q,3),ctx=buildCtx(hits);
+  let cached=false;
+  try{
+    const a=CFG.mode==='offline'?offlineAnswer(q,hits):await withFallback(async()=>{
+      const msgs=[...HIST.slice(-4),{role:"user",content:`RETRIEVED DOCUMENTS:\n${ctx}\n\nQUESTION:\n${q}`}];
+      const r=await cachedCall('counter',ctx+'|'+q+'|'+HIST.slice(-2).map(m=>m.content).join('|'),msgs,COUNTER_SYS,550);
+      cached=r.cached;return r.out;
+    },()=>offlineAnswer(q,hits),'counter assistant');
+    pending.innerHTML='<div class="who">MILWAUKEE assistant</div><div>'+esc(a).replace(/\n/g,'<br>')+'</div>'
+      +(hits.length?`<div class="cites">Grounded on <b>${hits.length}</b> document${hits.length>1?'s':''}: ${hits.map(h=>esc(h.d.t)).join(' · ')}${cached?' · cached':''}</div>`
+        :'<div class="cites" style="color:var(--red)">No documents matched — answer withheld by design</div>')+degradedNote();
+    HIST.push({role:"user",content:q});HIST.push({role:"assistant",content:a});
+    if(HIST.length>8)HIST=HIST.slice(-8);
+  }catch(e){pending.remove();err.textContent=e.message;err.classList.remove('hidden');}
+  btn.disabled=false;btn.textContent='Ask';
+}
+
+/* ═════ 09 setup ═════ */
+function syncModelUI(){
+  const i=document.getElementById('cfgGmodel');if(i)i.value=CFG.gmodel;
+  const s=document.getElementById('cfgGlist');
+  if(s&&[...s.options].some(o=>o.value===CFG.gmodel))s.value=CFG.gmodel;
+}
+function renderConn(){
+  const names={proxy:'Claude sandbox',anthropic:'Anthropic key',gemini:'Google AI Studio'};
+  const pill=document.getElementById('pillConn'),el=document.getElementById('connStatus');
+  let cls='pill link',txt,html;
+  if(CFG.mode==='offline'){cls+=' warn';txt='Offline mode';
+    html='<span class="tag am">Offline demo mode</span><p class="note">All modules working without a network.</p>';}
+  else if(LASTOK){cls+=' ok';txt='Connected';
+    html='<span class="tag ok">Connected — '+names[LASTOK]+'</span><p class="note">Last successful call used this provider.</p>';}
+  else{txt='Not verified';html='<span class="tag">Not yet verified</span><p class="note">Run a test, or just use a feature.</p>';}
+  if(pill){pill.className=cls;pill.textContent=txt;}
+  if(el)el.innerHTML=html;
+}
+function setMode(m){CFG.mode=m;const s=document.getElementById('cfgMode');if(s)s.value=m;saveCfg();renderConn();emptyChat();}
+function saveCfg(){
+  const g=document.getElementById('cfgGkey'),a=document.getElementById('cfgAkey'),gm=document.getElementById('cfgGmodel');
+  if(g)CFG.gkey=g.value.trim();
+  if(a)CFG.akey=a.value.trim();
+  if(gm)CFG.gmodel=gm.value.trim()||'gemini-2.5-flash';
+  sset('cfg',CFG);
+}
+async function loadCfg(){
+  const c=await sget('cfg');if(c)CFG={...CFG,...c};
+  const u=await sget('use');
+  USE=(u&&u.date===today())?u:{date:today(),calls:0,cached:0};
+  const cc=await sget('cache');
+  if(cc&&cc.v){CACHE=cc.v;CACHEKEYS=cc.k||Object.keys(cc.v);}
+  const set=(id,v)=>{const e=document.getElementById(id);if(e)e.value=v;};
+  set('cfgMode',CFG.mode);set('cfgGkey',CFG.gkey||'');set('cfgAkey',CFG.akey||'');
+  set('cfgGmodel',CFG.gmodel||'gemini-2.5-flash');set('sBudget',CFG.budget);
+  renderConn();renderUsage();
+}
+async function testConn(){
+  const btn=document.getElementById('testBtn'),el=document.getElementById('connStatus');
+  if(CFG.mode==='offline'){renderConn();return;}
+  btn.disabled=true;btn.innerHTML='<span class="spin"></span>Testing';
+  try{await callModel([{role:"user",content:"Reply with one word: ready"}],null,10);renderConn();}
+  catch(e){el.innerHTML='<span class="tag red">No connection</span><p class="err">'+esc(e.message)+'</p>';
+    const p=document.getElementById('pillConn');if(p){p.className='pill link bad';p.textContent='Check Setup';}}
+  btn.disabled=false;btn.textContent='Test connection';
+}
+async function fetchModels(){
+  const btn=document.getElementById('fetchBtn'),msg=document.getElementById('modelMsg'),sel=document.getElementById('cfgGlist');
+  saveCfg();
+  if(!CFG.gkey){msg.innerHTML='<span class="err">Paste your key above first.</span>';return;}
+  btn.disabled=true;btn.innerHTML='<span class="spin d"></span>Fetching';
+  try{
+    const r=await fetch("https://generativelanguage.googleapis.com/v1beta/models?pageSize=200",{headers:{"x-goog-api-key":CFG.gkey}});
+    if(!r.ok){let t='';try{const j=await r.json();t=(j.error&&j.error.message)||'';}catch(e){}
+      throw new Error("Google "+r.status+(t?" — "+t:""));}
+    const d=await r.json();
+    GMODELS=(d.models||[]).filter(m=>(m.supportedGenerationMethods||[]).includes('generateContent'))
+      .map(m=>m.name.replace(/^models\//,'')).filter(n=>!/embedding|aqa|imagen|veo|tts|image|gemma/i.test(n));
+    if(!GMODELS.length)throw new Error("No text models available on this key");
+    const free=GMODELS.filter(n=>/flash/i.test(n)&&!/pro/i.test(n));
+    sel.innerHTML='<option value="">— pick a model —</option>'
+      +(free.length?'<optgroup label="Flash — free tier">'+free.map(n=>`<option value="${esc(n)}">${esc(n)}</option>`).join('')+'</optgroup>':'')
+      +'<optgroup label="All available">'+GMODELS.map(n=>`<option value="${esc(n)}">${esc(n)}</option>`).join('')+'</optgroup>';
+    sel.classList.remove('hidden');
+    CFG.gpool=(free.length?free:GMODELS).slice(0,6);sset('cfg',CFG);
+    msg.innerHTML='Found <b style="color:var(--red)">'+GMODELS.length+'</b> models, '+free.length+' free-tier Flash. Now click <b style="color:var(--red)">Find one that works</b>.';
+  }catch(e){msg.innerHTML='<span class="err">'+esc(e.message)+'</span>';}
+  btn.disabled=false;btn.textContent='Fetch models';
+}
+function pickModel(n){if(!n)return;document.getElementById('cfgGmodel').value=n;saveCfg();}
+async function autoFix(){
+  const btn=document.getElementById('fixBtn'),msg=document.getElementById('modelMsg');
+  saveCfg();
+  if(!CFG.gkey){msg.innerHTML='<span class="err">Paste your key above first.</span>';return;}
+  btn.disabled=true;btn.innerHTML='<span class="spin"></span>Testing';
+  const pool=GMODELS.length?GMODELS:['gemini-2.5-flash','gemini-2.0-flash','gemini-flash-latest','gemini-2.5-flash-lite'];
+  const chosen=CFG.gmodel&&pool.includes(CFG.gmodel)?[CFG.gmodel]:[];
+  const flash=pool.filter(n=>/flash/i.test(n)&&!/pro/i.test(n)&&n!==CFG.gmodel);
+  const rest=pool.filter(n=>!flash.includes(n)&&n!==CFG.gmodel);
+  const order=[...chosen,...flash,...rest].slice(0,14),vers=['v1beta','v1','v1alpha'];
+  const log=[];let win=null;
+  outer:
+  for(const m of order){for(const v of vers){
+    try{await geminiCall(v,m,[{role:"user",content:"hi"}],null,5);win={m,v};break outer;}
+    catch(e){log.push(m+' @ '+v+' → '+e.message.slice(0,90));
+      if(e.status&&e.status!==404&&e.status!==400)break outer;}}}
+  if(win){
+    CFG.gmodel=win.m;CFG.gver=win.v;
+    CFG.gpool=[win.m,...order.filter(n=>n!==win.m&&/flash/i.test(n)&&!/pro/i.test(n))].slice(0,5);
+    sset('cfg',CFG);syncModelUI();LASTOK='gemini';renderConn();
+    msg.innerHTML='Working: <b style="color:var(--ok)">'+esc(win.m)+'</b> on <b style="color:var(--ok)">'+win.v+'</b>. Saved, with '+(CFG.gpool.length-1)+' backup model(s).';
+  }else{
+    msg.innerHTML='<span class="err">Nothing worked. Google said:</span><div class="mono" style="color:var(--grey2);margin-top:8px;max-height:150px;overflow:auto">'
+      +log.slice(0,8).map(l=>esc(l)).join('<br>')+'</div>';
+  }
+  btn.disabled=false;btn.textContent='Find one that works';
+}
+async function prewarm(){
+  const btn=document.getElementById('warmBtn'),msg=document.getElementById('warmMsg');
+  if(CFG.mode==='offline'){msg.innerHTML='<span class="err">Offline mode is on — switch to auto first.</span>';return;}
+  btn.disabled=true;
+  const jobs=[];
+  SIM_SCRIPT.forEach(m=>jobs.push(()=>cachedCall('intake',m.text,[{role:"user",content:m.text}],INTAKE_SYS,800)));
+  QUICKS.forEach(q=>{const hits=retrieve(q,3),ctx=buildCtx(hits);
+    jobs.push(()=>cachedCall('counter',ctx+'|'+q+'|',[{role:"user",content:`RETRIEVED DOCUMENTS:\n${ctx}\n\nQUESTION:\n${q}`}],COUNTER_SYS,550));});
+  if(CUR&&CUR.conf>=78){const p=offerPrompt();jobs.push(()=>cachedCall('offer',p,[{role:"user",content:p}],null,400));}
+  if(CURCONV){const p=pitchPrompt();jobs.push(()=>cachedCall('pitch',p,[{role:"user",content:p}],null,450));}
+  if(CURREGION){const p=planPrompt();jobs.push(()=>cachedCall('plan',p,[{role:"user",content:p}],null,450));}
+  let ok=0,fail=0,hit=0;
+  for(let i=0;i<jobs.length;i++){
+    btn.innerHTML='<span class="spin"></span>'+(i+1)+' / '+jobs.length;
+    try{const r=await jobs[i]();r.cached?hit++:ok++;}catch(e){fail++;}
+  }
+  msg.innerHTML='Pre-warm complete — <b style="color:var(--ok)">'+ok+'</b> newly cached, '+hit+' already cached'+
+    (fail?', <span style="color:var(--red)">'+fail+' failed</span>':'')+'. Those steps now cost zero calls today.';
+  btn.disabled=false;btn.textContent='Pre-warm the demo cache';
+}
+
+/* ═════ self-test ═════ */
+function selfTest(){
+  const T=[],ok=(n,c,d)=>T.push({n,c,d:d||''});
+  try{
+    const p=offlineParse(SIM_SCRIPT[0].text);
+    ok('Intake parser — Korean',p.lines.length===3&&p.lines[0].qty===15&&p.lines[1].qty===30&&p.lines[2].qty===10,p.lines.map(l=>l.qty).join('/'));
+    ok('Intake parser — Korean translation exact',p.english===SIM_SCRIPT[0].en&&!p.offlineTr);
+    const p2=offlineParse(SIM_SCRIPT[3].text);
+    const bat=p2.lines.find(l=>/batter/i.test(l.description));
+    ok('Intake parser — hedge detection',!!bat&&bat.certain===false&&p2.flags.length>=2,'flags '+p2.flags.length);
+    const p3=offlineParse(SIM_SCRIPT[2].text);
+    ok('Intake parser — Thai',p3.language==='Thai'&&p3.lines.length===2&&p3.lines[0].qty===12);
+    ok('Intake parser — Chinese translation exact',offlineParse(SIM_SCRIPT[1].text).english===SIM_SCRIPT[1].en);
+    const g=offlineTranslate('배터리 30개 부탁드립니다');
+    ok('Glossary fallback for unknown text',!g.exact&&/battery/i.test(g.english),g.english.slice(0,40));
+    ok('Language detection',detectLang('안녕')==='Korean'&&detectLang('你好')==='Chinese'&&detectLang('สวัสดี')==='Thai'&&detectLang('hello')==='English');
+    ok('All five channels defined',Object.keys(CHANNELS).length===5&&Object.values(CHANNELS).every(c=>c.colour&&c.name));
+    ok('Simulator script covers 4 languages',new Set(SIM_SCRIPT.map(m=>detectLang(m.text))).size===4);
+    ok('Room code is 4 characters',/^[A-Z0-9]{4}$/.test(busRoom()),busRoom());
+    ok('Phone link carries the room',phoneURL().indexOf('#phone='+busRoom())>0);
+    const r1=retrieve('배터리 보증',3);
+    ok('Retrieval — Korean alias',r1.length>0&&/warranty|battery/i.test(r1[0].d.t+r1[0].d.b),r1[0]?r1[0].d.t.slice(0,24):'none');
+    ok('Retrieval — rejects nonsense',retrieve('xylophone quantum bratwurst',3).length===0);
+    ok('Retrieval — messaging channel doc reachable',retrieve('wechat webhook official account',3).some(h=>/messaging channel/i.test(h.d.t)));
+    let bad=0;for(let d=0;d<DISTS.length;d++)for(let s=0;s<SKUS.length;s++){
+      const x=series(d,s);if(x.hist.length!==18||x.fc.length!==3||x.conf<55||x.conf>97)bad++;}
+    ok('Forecast — all 20 combinations valid',bad===0,bad+' invalid');
+    let pass=0;for(let d=0;d<DISTS.length;d++)for(let s=0;s<SKUS.length;s++)if(series(d,s).conf>=78)pass++;
+    ok('Underwriting gate has a real spread',pass>0&&pass<20,pass+'/20 pass');
+    const scored=REGIONS.map(r=>oppScore(r));
+    ok('White space — all regions scored',scored.every(s=>s>0&&s<=100));
+    ok('White space — coverage penalises Seoul',REGIONS.map(r=>({n:r[0],s:oppScore(r)})).sort((a,b)=>b.s-a.s)[0].n!=='Seoul');
+    ok('White space — actions across all bands',new Set(scored.map(oppAction)).size===3);
+    ok('Conversion — high-value case is subsidised',convEcon(0,2,6).worth===true);
+    ok('Conversion — heavy investment in low-buying trade refused',convEcon(0,3,12).worth===false,'payback '+convEcon(0,3,12).payback+'m');
+    ok('Conversion — subsidy capped',convEcon(2,2,12).subsidy<=520);
+    ok('Entry kit for every trade',TRADES.every(t=>(KITS[t[0]]||[]).length>=4));
+    ok('Offline offer renders Korean',/밀워키/.test(offlineOffer(40,'대성공구','M18')));
+    ok('Offline answer refuses when no match',/not covered/i.test(offlineAnswer('zzz',[])));
+    ok('Knowledge base seeded',KB.length>=13&&KB.some(d=>d.s==='assumption'),KB.length+' docs');
+    ok('Cache keys distinct',hash('abc')!==hash('abd'));
+  }catch(e){ok('Self-test crashed',false,e.message);}
+  const pass=T.filter(t=>t.c).length;
+  document.getElementById('testOut').innerHTML=
+    '<div class="rowline" style="border-bottom:3px solid var(--red)"><span><b>'+pass+' / '+T.length+' checks passed</b></span><b style="color:'+(pass===T.length?'var(--ok)':'var(--red)')+'">'+(pass===T.length?'ALL GOOD':'ATTENTION')+'</b></div>'
+    +T.map(t=>`<div class="rowline"><span style="color:${t.c?'var(--ok)':'var(--red)'}">${t.c?'✓':'✗'} ${esc(t.n)}</span><b style="color:var(--grey2);font-weight:400">${esc(t.d)}</b></div>`).join('');
+}
+
+/* ═════ PHONE APP ═════ */
+const PH={room:'',ch:'wechat',name:'',client:null,bc:null};
+const PH_QUICK=[
+ {ch:'wechat',label:'补货订单',text:"你好，我们要补货：\nM18 冲击扳手 20 台\nM12 起子机 15 台\n5.0Ah 电池 40 个"},
+ {ch:'wechat',label:'询问保修',text:"M18 电池充不进电，还在保修期内吗？"},
+ {ch:'kakao',label:'주문',text:"M18 FUEL 임팩트 렌치 15개랑 배터리 5.0Ah 30개 부탁드립니다"},
+ {ch:'line',label:'สั่งของ',text:"สว่านกระแทก M18 จำนวน 12 ตัว แบตเตอรี่ 5.0Ah 25 ก้อน"}
+];
+function phInit(){
+  const sel=document.getElementById('phCh');
+  Object.entries(CHANNELS).forEach(([id,c])=>{const o=document.createElement('option');o.value=id;o.textContent=c.name+' — '+c.region;sel.appendChild(o);});
+  const m=location.hash.match(/#phone=?([A-Z0-9]{0,6})/i);
+  if(m&&m[1])document.getElementById('phRoom').value=m[1].toUpperCase();
+  document.getElementById('phInput').addEventListener('keydown',e=>{
+    if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();phSend();}});
+}
+async function phJoin(){
+  const err=document.getElementById('phErr');err.classList.add('hidden');
+  PH.room=document.getElementById('phRoom').value.trim().toUpperCase();
+  PH.ch=document.getElementById('phCh').value;
+  PH.name=document.getElementById('phName').value.trim()||'Distributor';
+  if(!/^[A-Z0-9]{3,6}$/.test(PH.room)){err.textContent='Enter the room code shown on the desk.';err.classList.remove('hidden');return;}
+  const c=CHANNELS[PH.ch];
+  document.getElementById('phAv').textContent=c.short;
+  document.getElementById('phAv').style.background=c.colour;
+  document.getElementById('phAv').style.color=PH.ch==='kakao'?'#111':'#fff';
+  document.getElementById('phTitle').textContent='MILWAUKEE® — '+c.name;
+  document.getElementById('phSetup').classList.add('hidden');
+  document.getElementById('phChat').classList.remove('hidden');
+  document.getElementById('phQuick').innerHTML=PH_QUICK.map((q,i)=>`<button onclick="phQuick(${i})">${esc(q.label)}</button>`).join('');
+  phSys('Joined room '+PH.room);
+  // same-browser channel always on
+  try{PH.bc=new BroadcastChannel('onechannel-'+PH.room);
+    PH.bc.onmessage=ev=>{if(ev.data&&ev.data.type==='reply')phIn(ev.data.text);};}catch(e){}
+  phStatus('connecting…');
+  try{
+    await loadScript('https://unpkg.com/mqtt@5.10.1/dist/mqtt.min.js');
+    const topic='milwaukee/onechannel/'+PH.room;
+    const cl=window.mqtt.connect('wss://broker.emqx.io:8084/mqtt',
+      {clientId:'ocph_'+Math.random().toString(36).slice(2,10),connectTimeout:9000,reconnectPeriod:4000,keepalive:30});
+    PH.client=cl;
+    cl.on('connect',()=>{cl.subscribe(topic);phStatus('connected · '+PH.room);});
+    cl.on('message',(t,p)=>{try{const d=JSON.parse(p.toString());if(d.type==='reply')phIn(d.text);}catch(e){}});
+    cl.on('error',()=>phStatus('bridge unavailable — same-browser only'));
+  }catch(e){phStatus('bridge unavailable — same-browser only');}
+}
+function phLeave(){
+  if(PH.client){try{PH.client.end(true);}catch(e){}PH.client=null;}
+  if(PH.bc){try{PH.bc.close();}catch(e){}PH.bc=null;}
+  document.getElementById('phChat').classList.add('hidden');
+  document.getElementById('phSetup').classList.remove('hidden');
+  document.getElementById('phThread').innerHTML='';
+}
+function phStatus(s){setTxt('phStatus',s);}
+function phSys(t){const d=document.createElement('div');d.className='ph-sys';d.textContent=t;
+  const th=document.getElementById('phThread');th.appendChild(d);th.scrollTop=th.scrollHeight;}
+function phOut(t){const d=document.createElement('div');d.className='ph-msg out';
+  d.innerHTML=esc(t).replace(/\n/g,'<br>')+'<div class="meta">'+nowHM()+' · sent</div>';
+  const th=document.getElementById('phThread');th.appendChild(d);th.scrollTop=th.scrollHeight;}
+function phIn(t){const d=document.createElement('div');d.className='ph-msg in';
+  d.innerHTML=esc(t).replace(/\n/g,'<br>')+'<div class="meta">MILWAUKEE® · '+nowHM()+'</div>';
+  const th=document.getElementById('phThread');th.appendChild(d);th.scrollTop=th.scrollHeight;}
+function phQuick(i){document.getElementById('phInput').value=PH_QUICK[i].text;phSend();}
+function phSend(){
+  const inp=document.getElementById('phInput'),t=inp.value.trim();
+  if(!t)return;
+  phOut(t);inp.value='';
+  const payload={type:'msg',ch:PH.ch,from:PH.name,dist:'KR-0142',text:t,ts:Date.now()};
+  if(PH.client){try{PH.client.publish('milwaukee/onechannel/'+PH.room,JSON.stringify(payload));}catch(e){}}
+  if(PH.bc){try{PH.bc.postMessage(payload);}catch(e){}}
+}
+
+/* ═════ boot ═════ */
+function isPhone(){return /^#phone/i.test(location.hash);}
+(async()=>{
+  if(isPhone()){
+    document.getElementById('deskApp').classList.add('hidden');
+    document.getElementById('phoneApp').classList.remove('hidden');
+    document.body.style.background='#EDEDED';
+    phInit();return;
+  }
+  await loadCfg();
+  await loadKB();
+  emptyChat();renderLedger();drawChart();renderExposure();
+  renderMap();pickRegion('Gyeonggi');calcConvert();renderConvLog();renderScore();renderUsage();
+  busSetMode('sim');renderInbox();renderDetail();renderBusPill();
+})();
+</script>
